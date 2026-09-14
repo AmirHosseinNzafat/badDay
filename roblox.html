@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>روبلاکس‌سازان ایران | جامعه بازی‌سازان</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<title>روبلاکس‌سازان ایران | بازار کار و جامعه بازی‌سازان</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0f;
     --bg-2: #12121c;
-    --card: #1a1a2e;
-    --card-hover: #22223a;
+    --card: #16162a;
+    --card-hover: #1e1e35;
     --primary: #7c3aed;
     --primary-2: #a855f7;
     --accent: #06b6d4;
@@ -18,10 +18,14 @@
     --muted: #9ca3af;
     --border: #2a2a40;
     --success: #10b981;
+    --warning: #f59e0b;
     --danger: #ef4444;
+    --gold: #fbbf24;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Vazirmatn', sans-serif;
@@ -29,65 +33,73 @@
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
-  /* ===== Background Effects ===== */
   body::before {
     content: '';
     position: fixed;
     top: -50%; right: -50%;
     width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
     z-index: -1;
     pointer-events: none;
   }
+
+  /* ===== Scrollbar ===== */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg-2); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--primary-2); }
 
   /* ===== Navbar ===== */
   nav {
     position: sticky;
     top: 0;
-    background: rgba(10,10,15,0.85);
+    background: rgba(10,10,15,0.9);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
-    padding: 1rem 2rem;
+    padding: 0.9rem 2rem;
   }
 
   .nav-container {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 900;
     background: linear-gradient(135deg, var(--primary-2), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .logo-icon {
-    width: 38px; height: 38px;
+    width: 40px; height: 40px;
     background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: 10px;
+    border-radius: 11px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     -webkit-text-fill-color: white;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
   }
 
   .nav-links {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.3rem;
     list-style: none;
     flex-wrap: wrap;
   }
@@ -95,12 +107,13 @@
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    padding: 0.6rem 1rem;
+    padding: 0.55rem 0.9rem;
     border-radius: 8px;
     transition: all 0.2s;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .nav-links a:hover, .nav-links a.active {
@@ -108,20 +121,21 @@
     background: var(--card);
   }
 
-  .nav-actions { display: flex; gap: 0.6rem; align-items: center; }
+  .nav-actions { display: flex; gap: 0.5rem; align-items: center; }
 
   .btn {
-    padding: 0.6rem 1.3rem;
+    padding: 0.65rem 1.3rem;
     border-radius: 10px;
     border: none;
     font-family: inherit;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     transition: all 0.25s;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    white-space: nowrap;
   }
 
   .btn-primary {
@@ -141,16 +155,17 @@
     border: 1px solid var(--border);
   }
 
-  .btn-ghost:hover { background: var(--card); }
+  .btn-ghost:hover { background: var(--card); border-color: var(--primary); }
 
-  .btn-danger {
-    background: var(--danger);
-    color: white;
-  }
+  .btn-success { background: var(--success); color: white; }
+  .btn-warning { background: var(--warning); color: white; }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+  .btn-block { width: 100%; justify-content: center; }
 
-  /* ===== Main Container ===== */
+  /* ===== Main ===== */
   main {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 2rem;
   }
@@ -165,11 +180,11 @@
 
   /* ===== Hero ===== */
   .hero {
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
     text-align: center;
-    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1));
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.08));
     border-radius: 24px;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
@@ -180,8 +195,8 @@
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 40%);
-    animation: rotate 20s linear infinite;
+    background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 40%);
+    animation: rotate 25s linear infinite;
     pointer-events: none;
   }
 
@@ -191,7 +206,7 @@
   }
 
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 5vw, 3rem);
     font-weight: 900;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, #fff, var(--primary-2));
@@ -203,16 +218,16 @@
 
   .hero p {
     color: var(--muted);
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    max-width: 750px;
+    margin: 0 auto 1.8rem;
     position: relative;
     z-index: 1;
   }
 
   .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
@@ -222,49 +237,72 @@
   /* ===== Stats ===== */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   .stat-card {
     background: var(--card);
-    padding: 1.5rem;
+    padding: 1.3rem;
     border-radius: 16px;
     border: 1px solid var(--border);
     text-align: center;
     transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
   }
 
   .stat-card:hover {
     transform: translateY(-5px);
     border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(124,58,237,0.2);
   }
 
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, rgba(124,58,237,0.3), transparent);
+    border-radius: 50%;
+    transform: translate(20px, -20px);
+  }
+
+  .stat-icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
+
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 900;
     background: linear-gradient(135deg, var(--primary-2), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .stat-label { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem; }
 
   /* ===== Section Titles ===== */
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    margin: 2rem 0 1.5rem;
+    margin: 2.5rem 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .section-title-text {
     display: flex;
     align-items: center;
     gap: 0.7rem;
   }
 
-  .section-title::before {
+  .section-title-text::before {
     content: '';
     width: 5px;
-    height: 30px;
+    height: 28px;
     background: linear-gradient(180deg, var(--primary), var(--accent));
     border-radius: 3px;
   }
@@ -273,24 +311,28 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.3rem;
+    gap: 1.2rem;
   }
+
+  .grid-2 { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
 
   .card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.4rem;
     transition: all 0.3s;
-    cursor: pointer;
     position: relative;
     overflow: hidden;
   }
 
-  .card:hover {
+  .card.clickable { cursor: pointer; }
+
+  .card.clickable:hover {
     transform: translateY(-5px);
     border-color: var(--primary);
     background: var(--card-hover);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 
   .card-icon {
@@ -304,8 +346,11 @@
     margin-bottom: 1rem;
   }
 
-  .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .card p { color: var(--muted); font-size: 0.9rem; }
+  .card-icon.gold { background: linear-gradient(135deg, var(--gold), var(--warning)); }
+  .card-icon.success { background: linear-gradient(135deg, var(--success), var(--accent)); }
+
+  .card h3 { font-size: 1.08rem; margin-bottom: 0.4rem; }
+  .card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
 
   .badge {
     display: inline-block;
@@ -313,22 +358,40 @@
     background: rgba(124,58,237,0.2);
     color: var(--primary-2);
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    margin-top: 0.7rem;
+    margin-top: 0.5rem;
+    margin-left: 0.3rem;
   }
 
   .badge.green { background: rgba(16,185,129,0.2); color: var(--success); }
   .badge.cyan { background: rgba(6,182,212,0.2); color: var(--accent); }
+  .badge.gold { background: rgba(251,191,36,0.2); color: var(--gold); }
+  .badge.red { background: rgba(239,68,68,0.2); color: var(--danger); }
+  .badge.warning { background: rgba(245,158,11,0.2); color: var(--warning); }
+
+  /* ===== Empty State ===== */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    background: var(--card);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+  }
+
+  .empty-state .emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
+  .empty-state h3 { color: var(--text); margin-bottom: 0.5rem; font-size: 1.2rem; }
+  .empty-state p { font-size: 0.9rem; margin-bottom: 1.2rem; }
 
   /* ===== Forms ===== */
-  .form-group { margin-bottom: 1.2rem; }
+  .form-group { margin-bottom: 1.1rem; }
 
   .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .form-group input,
@@ -341,7 +404,7 @@
     border-radius: 10px;
     color: var(--text);
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     transition: all 0.2s;
   }
 
@@ -355,12 +418,18 @@
 
   .form-group textarea { resize: vertical; min-height: 100px; }
 
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
   /* ===== Modal ===== */
   .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.8);
     backdrop-filter: blur(6px);
     z-index: 2000;
     align-items: center;
@@ -374,12 +443,13 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 2rem;
-    max-width: 500px;
+    padding: 1.8rem;
+    max-width: 560px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     animation: modalIn 0.3s;
+    position: relative;
   }
 
   @keyframes modalIn {
@@ -387,7 +457,7 @@
     to { opacity: 1; transform: scale(1); }
   }
 
-  .modal h2 { margin-bottom: 1.5rem; font-size: 1.5rem; }
+  .modal h2 { margin-bottom: 1.3rem; font-size: 1.35rem; }
 
   .modal-close {
     position: absolute;
@@ -395,18 +465,26 @@
     background: transparent;
     border: none;
     color: var(--muted);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    transition: all 0.2s;
   }
 
-  /* ===== Post / Thread ===== */
+  .modal-close:hover { background: var(--bg-2); color: var(--text); }
+
+  /* ===== Post ===== */
   .post {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.3rem;
     margin-bottom: 1rem;
+    transition: all 0.3s;
   }
+
+  .post:hover { border-color: var(--primary); }
 
   .post-header {
     display: flex;
@@ -425,30 +503,45 @@
     font-weight: 700;
     color: white;
     flex-shrink: 0;
+    font-size: 1rem;
   }
 
-  .post-meta { color: var(--muted); font-size: 0.8rem; }
+  .avatar.sm { width: 32px; height: 32px; font-size: 0.8rem; }
+  .avatar.gold { background: linear-gradient(135deg, var(--gold), var(--warning)); }
+  .avatar.silver { background: linear-gradient(135deg, #9ca3af, #d1d5db); }
+  .avatar.bronze { background: linear-gradient(135deg, #b45309, #d97706); }
 
-  .post-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; }
-  .post-body { color: var(--muted); font-size: 0.92rem; }
+  .post-meta { color: var(--muted); font-size: 0.78rem; }
+
+  .post-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 0.4rem; }
+  .post-body { color: var(--muted); font-size: 0.9rem; }
 
   .post-footer {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
-    padding-top: 1rem;
+    padding-top: 0.9rem;
     border-top: 1px solid var(--border);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--muted);
+    flex-wrap: wrap;
   }
 
-  .post-footer span { cursor: pointer; transition: color 0.2s; }
+  .post-footer span {
+    cursor: pointer;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
   .post-footer span:hover { color: var(--primary-2); }
+  .post-footer span.liked { color: var(--danger); }
 
   /* ===== Tabs ===== */
   .tabs {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
@@ -456,7 +549,7 @@
   }
 
   .tab {
-    padding: 0.6rem 1.2rem;
+    padding: 0.55rem 1.1rem;
     background: transparent;
     border: none;
     color: var(--muted);
@@ -465,30 +558,76 @@
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .tab:hover { color: var(--text); background: var(--card); }
   .tab.active { color: white; background: var(--primary); }
+
+  /* ===== Search Bar ===== */
+  .search-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .search-bar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.8rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+
+  .search-bar input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  /* ===== User Chip ===== */
+  .user-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem 0.3rem 0.3rem;
+    background: var(--card);
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 0.83rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .user-chip:hover { border-color: var(--primary); }
 
   /* ===== Toast ===== */
   .toast {
     position: fixed;
     bottom: 2rem;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
+    transform: translateX(-50%) translateY(150px);
     background: var(--card);
     border: 1px solid var(--primary);
     color: var(--text);
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     border-radius: 12px;
     z-index: 3000;
     transition: transform 0.4s;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     font-weight: 600;
+    font-size: 0.9rem;
+    max-width: 90%;
   }
 
   .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.success { border-color: var(--success); }
+  .toast.error { border-color: var(--danger); }
 
   /* ===== Footer ===== */
   footer {
@@ -497,50 +636,178 @@
     text-align: center;
     color: var(--muted);
     border-top: 1px solid var(--border);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
-  /* ===== Search Bar ===== */
-  .search-bar {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .search-bar input {
-    flex: 1;
-    padding: 0.8rem 1rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: inherit;
-  }
-
-  /* ===== User Info in Nav ===== */
-  .user-chip {
+  /* ===== Leaderboard ===== */
+  .leaderboard-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.9rem 0.4rem 0.4rem;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
     background: var(--card);
-    border-radius: 30px;
     border: 1px solid var(--border);
-    cursor: pointer;
-    font-size: 0.85rem;
+    border-radius: 12px;
+    margin-bottom: 0.6rem;
+    transition: all 0.3s;
+  }
+
+  .leaderboard-item:hover {
+    border-color: var(--primary);
+    transform: translateX(-5px);
+  }
+
+  .leaderboard-item.top-1 { border-color: var(--gold); background: linear-gradient(90deg, rgba(251,191,36,0.1), transparent); }
+  .leaderboard-item.top-2 { border-color: #9ca3af; background: linear-gradient(90deg, rgba(156,163,175,0.08), transparent); }
+  .leaderboard-item.top-3 { border-color: #d97706; background: linear-gradient(90deg, rgba(217,119,6,0.08), transparent); }
+
+  .rank-badge {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .rank-badge.gold { background: linear-gradient(135deg, var(--gold), #f59e0b); color: #000; }
+  .rank-badge.silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color: #000; }
+  .rank-badge.bronze { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
+
+  .leaderboard-info { flex: 1; }
+  .leaderboard-name { font-weight: 700; font-size: 0.95rem; }
+  .leaderboard-stats { color: var(--muted); font-size: 0.78rem; }
+
+  .leaderboard-score {
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.1rem;
+  }
+
+  /* ===== Freelancer Card ===== */
+  .freelancer-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .freelancer-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .freelancer-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .freelancer-skills {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .skill-tag {
+    padding: 0.2rem 0.6rem;
+    background: rgba(6,182,212,0.15);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 0.72rem;
     font-weight: 600;
   }
 
-  .user-chip .avatar { width: 30px; height: 30px; font-size: 0.8rem; }
+  .freelancer-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .rating-stars { color: var(--gold); font-weight: 700; }
+
+  /* ===== Filter Chips ===== */
+  .chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.3rem;
+  }
+
+  .chip {
+    padding: 0.4rem 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .chip:hover { border-color: var(--primary); }
+  .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+  /* ===== Profile Modal ===== */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-avatar {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+  }
 
   /* ===== Responsive ===== */
   @media (max-width: 768px) {
-    nav { padding: 0.8rem 1rem; }
-    .nav-links { display: none; }
-    .nav-container { gap: 1rem; }
-    main { padding: 1rem; }
+    nav { padding: 0.7rem 1rem; }
+    .nav-links {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 0.6rem;
+      justify-content: space-around;
+      z-index: 999;
+      overflow-x: auto;
+    }
+    .nav-links a { font-size: 0.75rem; padding: 0.5rem; }
+    main { padding: 1rem; padding-bottom: 80px; }
     .hero { padding: 2.5rem 1.2rem; }
-    .section-title { font-size: 1.4rem; }
+    .section-title { font-size: 1.3rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .stat-number { font-size: 1.5rem; }
+    .grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -551,21 +818,20 @@
   <div class="nav-container">
     <div class="logo" onclick="navigate('home')">
       <div class="logo-icon">🎮</div>
-      روبلاکس‌سازان
+      <span>روبلاکس‌سازان</span>
     </div>
 
     <ul class="nav-links">
       <li><a onclick="navigate('home')" data-page="home" class="active">خانه</a></li>
       <li><a onclick="navigate('forum')" data-page="forum">انجمن</a></li>
-      <li><a onclick="navigate('tutorials')" data-page="tutorials">آموزش‌ها</a></li>
+      <li><a onclick="navigate('tutorials')" data-page="tutorials">آموزش</a></li>
       <li><a onclick="navigate('showcase')" data-page="showcase">پروژه‌ها</a></li>
       <li><a onclick="navigate('jobs')" data-page="jobs">بازار کار</a></li>
-      <li><a onclick="navigate('resources')" data-page="resources">منابع</a></li>
+      <li><a onclick="navigate('freelancers')" data-page="freelancers">فریلنسرها</a></li>
+      <li><a onclick="navigate('leaderboard')" data-page="leaderboard">🏆 برترین‌ها</a></li>
     </ul>
 
-    <div class="nav-actions" id="navActions">
-      <!-- توسط JS پر میشه -->
-    </div>
+    <div class="nav-actions" id="navActions"></div>
   </div>
 </nav>
 
@@ -575,47 +841,70 @@
   <!-- ===== HOME ===== -->
   <section class="page active" id="page-home">
     <div class="hero">
-      <h1>جامعه بازی‌سازان روبلاکس ایران 🚀</h1>
-      <p>جایی برای یادگیری، همکاری، و ساخت بازی‌های رویایی. به بزرگ‌ترین جامعه فارسی‌زبان روبلاکس استودیو بپیوند!</p>
+      <h1>جامعه حرفه‌ای بازی‌سازان روبلاکس ایران 🚀</h1>
+      <p>بزرگ‌ترین پلتفرم فارسی برای یادگیری، همکاری، فریلنسری و استخدام در حوزه روبلاکس استودیو. عضویت کاملاً رایگان!</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" onclick="openAuthModal()">عضویت رایگان</button>
-        <button class="btn btn-ghost" onclick="navigate('tutorials')">شروع یادگیری</button>
+        <button class="btn btn-primary" onclick="openAuthModal()">🚀 عضویت رایگان</button>
+        <button class="btn btn-ghost" onclick="navigate('freelancers')">💼 دیدن فریلنسرها</button>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat-card">
+        <div class="stat-icon">👥</div>
         <div class="stat-number" id="statUsers">0</div>
-        <div class="stat-label">عضو فعال</div>
+        <div class="stat-label">کاربر ثبت‌شده</div>
       </div>
       <div class="stat-card">
+        <div class="stat-icon">💬</div>
         <div class="stat-number" id="statPosts">0</div>
         <div class="stat-label">مطلب انجمن</div>
       </div>
       <div class="stat-card">
+        <div class="stat-icon">🎮</div>
         <div class="stat-number" id="statProjects">0</div>
         <div class="stat-label">پروژه ثبت‌شده</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">پشتیبانی انجمن</div>
+        <div class="stat-icon">💼</div>
+        <div class="stat-number" id="statJobs">0</div>
+        <div class="stat-label">آگهی کاری</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number" id="statFreelancers">0</div>
+        <div class="stat-label">فریلنسر فعال</div>
       </div>
     </div>
 
-    <h2 class="section-title">🔥 پروژه‌های برجسته</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">🏆 برترین مطلب‌نویس‌ها</span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('leaderboard')">مشاهده همه</button>
+    </h2>
+    <div id="homeLeaderboard"></div>
+
+    <h2 class="section-title">
+      <span class="section-title-text">🔥 جدیدترین پروژه‌ها</span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('showcase')">مشاهده همه</button>
+    </h2>
     <div class="grid" id="featuredProjects"></div>
 
-    <h2 class="section-title">📚 آخرین آموزش‌ها</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">📚 آموزش‌های پرطرفدار</span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('tutorials')">مشاهده همه</button>
+    </h2>
     <div class="grid" id="featuredTutorials"></div>
   </section>
 
   <!-- ===== FORUM ===== -->
   <section class="page" id="page-forum">
-    <h2 class="section-title">💬 انجمن گفتگو</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">💬 انجمن گفتگو</span>
+      <button class="btn btn-primary btn-sm" onclick="openNewPostModal()">✏️ موضوع جدید</button>
+    </h2>
 
     <div class="search-bar">
-      <input type="text" id="forumSearch" placeholder="جستجو در موضوعات..." oninput="renderPosts()">
-      <button class="btn btn-primary" onclick="openNewPostModal()">✏️ موضوع جدید</button>
+      <input type="text" id="forumSearch" placeholder="🔍 جستجو در موضوعات..." oninput="renderPosts()">
     </div>
 
     <div class="tabs" id="forumTabs">
@@ -625,6 +914,7 @@
       <button class="tab" onclick="filterForum('script', this)">📜 اسکریپت</button>
       <button class="tab" onclick="filterForum('team', this)">🤝 هم‌تیمی</button>
       <button class="tab" onclick="filterForum('money', this)">💰 درآمد</button>
+      <button class="tab" onclick="filterForum('showcase', this)">🎮 نمایش پروژه</button>
     </div>
 
     <div id="postsList"></div>
@@ -632,7 +922,10 @@
 
   <!-- ===== TUTORIALS ===== -->
   <section class="page" id="page-tutorials">
-    <h2 class="section-title">📚 آموزش‌های روبلاکس استودیو</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">📚 آموزش‌های روبلاکس استودیو</span>
+      <button class="btn btn-primary btn-sm" onclick="openNewTutorialModal()">➕ افزودن آموزش</button>
+    </h2>
 
     <div class="tabs">
       <button class="tab active" onclick="filterTutorials('all', this)">همه</button>
@@ -646,11 +939,13 @@
 
   <!-- ===== SHOWCASE ===== -->
   <section class="page" id="page-showcase">
-    <h2 class="section-title">🎮 گالری پروژه‌ها</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">🎮 گالری پروژه‌ها</span>
+      <button class="btn btn-primary btn-sm" onclick="openNewProjectModal()">➕ افزودن پروژه</button>
+    </h2>
 
     <div class="search-bar">
-      <input type="text" id="projectSearch" placeholder="جستجوی پروژه..." oninput="renderProjects()">
-      <button class="btn btn-primary" onclick="openNewProjectModal()">➕ افزودن پروژه</button>
+      <input type="text" id="projectSearch" placeholder="🔍 جستجوی پروژه..." oninput="renderProjects()">
     </div>
 
     <div class="grid" id="projectsGrid"></div>
@@ -658,7 +953,10 @@
 
   <!-- ===== JOBS ===== -->
   <section class="page" id="page-jobs">
-    <h2 class="section-title">💼 بازار کار و همکاری</h2>
+    <h2 class="section-title">
+      <span class="section-title-text">💼 بازار کار و استخدام</span>
+      <button class="btn btn-primary btn-sm" onclick="openNewJobModal()">➕ ثبت آگهی</button>
+    </h2>
 
     <div class="tabs" id="jobsTabs">
       <button class="tab active" onclick="filterJobs('all', this)">همه</button>
@@ -669,72 +967,71 @@
     <div class="grid" id="jobsGrid"></div>
   </section>
 
-  <!-- ===== RESOURCES ===== -->
-  <section class="page" id="page-resources">
-    <h2 class="section-title">🧰 منابع و ابزارها</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="card-icon">📜</div>
-        <h3>کتابخانه اسکریپت‌های Lua</h3>
-        <p>مجموعه‌ای از اسکریپت‌های آماده برای استفاده در پروژه‌ها</p>
-        <span class="badge">به‌زودی</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">🎨</div>
-        <h3>مدل‌ها و Asset های رایگان</h3>
-        <p>مدل‌های سه‌بعدی و منابع بصری آماده</p>
-        <span class="badge">به‌زودی</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">🖼️</div>
-        <h3>قالب‌های UI</h3>
-        <p>قالب‌های رابط کاربری آماده برای بازی‌ها</p>
-        <span class="badge">به‌زودی</span>
-      </div>
-      <div class="card">
-        <div class="card-icon">🔗</div>
-        <h3>مستندات رسمی روبلاکس</h3>
-        <p>لینک به منابع و مستندات رسمی</p>
-        <span class="badge cyan">لینک</span>
-      </div>
+  <!-- ===== FREELANCERS ===== -->
+  <section class="page" id="page-freelancers">
+    <h2 class="section-title">
+      <span class="section-title-text">⚡ فریلنسرهای حرفه‌ای</span>
+      <button class="btn btn-primary btn-sm" onclick="openFreelancerProfileModal()">➕ پروفایل فریلنسری</button>
+    </h2>
+
+    <div class="chips" id="freelancerSkills"></div>
+
+    <div class="grid grid-2" id="freelancersGrid"></div>
+  </section>
+
+  <!-- ===== LEADERBOARD ===== -->
+  <section class="page" id="page-leaderboard">
+    <h2 class="section-title">
+      <span class="section-title-text">🏆 برترین‌های جامعه</span>
+    </h2>
+
+    <div class="tabs" id="lbTabs">
+      <button class="tab active" onclick="filterLeaderboard('writers', this)">✍️ مطلب‌نویس‌ها</button>
+      <button class="tab" onclick="filterLeaderboard('helpful', this)">🤝 کمک‌کننده‌ها</button>
+      <button class="tab" onclick="filterLeaderboard('freelancers', this)">⚡ فریلنسرها</button>
+      <button class="tab" onclick="filterLeaderboard('projects', this)">🎮 پروژه‌سازها</button>
     </div>
+
+    <div id="leaderboardContent"></div>
   </section>
 
 </main>
 
 <footer>
-  <p>🎮 روبلاکس‌سازان ایران | ساخته‌شده با ❤️ برای جامعه بازی‌سازان</p>
-  <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2025 - تمامی حقوق محفوظ است</p>
+  <p>🎮 روبلاکس‌سازان ایران | پلتفرم جامعه بازی‌سازان</p>
+  <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
+    © 2025 - اطلاعات در مرورگر شما ذخیره می‌شود · <span id="footerStats"></span>
+  </p>
 </footer>
 
 <!-- ========== AUTH MODAL ========== -->
 <div class="modal-overlay" id="authModal">
-  <div class="modal" style="position: relative;">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('authModal')">✕</button>
-    <h2 id="authTitle">ورود / ثبت‌نام</h2>
+    <h2 id="authTitle">🚀 ورود / ثبت‌نام</h2>
     <div class="form-group">
       <label>نام کاربری</label>
-      <input type="text" id="authUsername" placeholder="مثلاً: RobloxMaster">
+      <input type="text" id="authUsername" placeholder="مثلاً: RobloxMaster" autocomplete="off">
     </div>
     <div class="form-group">
       <label>رمز عبور</label>
       <input type="password" id="authPassword" placeholder="حداقل ۴ کاراکتر">
     </div>
-    <button class="btn btn-primary" style="width: 100%;" onclick="handleAuth()">ادامه</button>
+    <button class="btn btn-primary btn-block" onclick="handleAuth()">ادامه</button>
     <p style="text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 1rem;">
-      بدون دیتابیس واقعی - اطلاعات در مرورگر شما ذخیره می‌شود
+      🔒 اطلاعات فقط در مرورگر شما ذخیره می‌شود
     </p>
   </div>
 </div>
 
 <!-- ========== NEW POST MODAL ========== -->
 <div class="modal-overlay" id="postModal">
-  <div class="modal" style="position: relative;">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('postModal')">✕</button>
-    <h2>موضوع جدید</h2>
+    <h2>✏️ موضوع جدید</h2>
     <div class="form-group">
-      <label>عنوان</label>
-      <input type="text" id="postTitle" placeholder="عنوان موضوع...">
+      <label>عنوان *</label>
+      <input type="text" id="postTitle" placeholder="عنوان جذاب بنویس...">
     </div>
     <div class="form-group">
       <label>دسته‌بندی</label>
@@ -744,45 +1041,195 @@
         <option value="script">📜 اسکریپت</option>
         <option value="team">🤝 هم‌تیمی</option>
         <option value="money">💰 درآمد</option>
+        <option value="showcase">🎮 نمایش پروژه</option>
       </select>
     </div>
     <div class="form-group">
-      <label>متن</label>
-      <textarea id="postBody" placeholder="متن موضوع را بنویسید..."></textarea>
+      <label>متن *</label>
+      <textarea id="postBody" placeholder="متن موضوع..."></textarea>
     </div>
-    <button class="btn btn-primary" style="width: 100%;" onclick="createPost()">ثبت موضوع</button>
+    <button class="btn btn-primary btn-block" onclick="createPost()">ثبت موضوع</button>
   </div>
 </div>
 
 <!-- ========== NEW PROJECT MODAL ========== -->
 <div class="modal-overlay" id="projectModal">
-  <div class="modal" style="position: relative;">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('projectModal')">✕</button>
-    <h2>افزودن پروژه</h2>
+    <h2>🎮 افزودن پروژه</h2>
     <div class="form-group">
-      <label>نام پروژه</label>
-      <input type="text" id="projectTitle" placeholder="مثلاً: بازی شبیه‌ساز مزرعه">
+      <label>نام پروژه *</label>
+      <input type="text" id="projectTitle" placeholder="مثلاً: شبیه‌ساز مزرعه">
     </div>
-    <div class="form-group">
-      <label>ژانر</label>
-      <select id="projectGenre">
-        <option>Obby</option>
-        <option>Simulator</option>
-        <option>RPG</option>
-        <option>Tycoon</option>
-        <option>Shooter</option>
-        <option>Adventure</option>
-      </select>
+    <div class="form-row">
+      <div class="form-group">
+        <label>ژانر</label>
+        <select id="projectGenre">
+          <option>Obby</option>
+          <option>Simulator</option>
+          <option>RPG</option>
+          <option>Tycoon</option>
+          <option>Shooter</option>
+          <option>Adventure</option>
+          <option>Horror</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>وضعیت</label>
+        <select id="projectStatus">
+          <option value="released">✅ منتشر شده</option>
+          <option value="development">🔧 در حال ساخت</option>
+          <option value="concept">💡 ایده</option>
+        </select>
+      </div>
     </div>
     <div class="form-group">
       <label>لینک روبلاکس (اختیاری)</label>
       <input type="text" id="projectLink" placeholder="https://www.roblox.com/games/...">
     </div>
     <div class="form-group">
-      <label>توضیحات</label>
-      <textarea id="projectDesc" placeholder="درباره پروژه بنویسید..."></textarea>
+      <label>توضیحات *</label>
+      <textarea id="projectDesc" placeholder="درباره پروژه بنویس..."></textarea>
     </div>
-    <button class="btn btn-primary" style="width: 100%;" onclick="createProject()">ثبت پروژه</button>
+    <button class="btn btn-primary btn-block" onclick="createProject()">ثبت پروژه</button>
+  </div>
+</div>
+
+<!-- ========== NEW TUTORIAL MODAL ========== -->
+<div class="modal-overlay" id="tutorialModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tutorialModal')">✕</button>
+    <h2>📚 افزودن آموزش</h2>
+    <div class="form-group">
+      <label>عنوان *</label>
+      <input type="text" id="tutorialTitle" placeholder="عنوان آموزش...">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>سطح</label>
+        <select id="tutorialLevel">
+          <option value="beginner">🌱 مبتدی</option>
+          <option value="intermediate">⚡ متوسط</option>
+          <option value="advanced">🚀 پیشرفته</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>مدت زمان</label>
+        <input type="text" id="tutorialDuration" placeholder="مثلاً: 30 دقیقه">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>لینک (اختیاری)</label>
+      <input type="text" id="tutorialLink" placeholder="https://...">
+    </div>
+    <div class="form-group">
+      <label>توضیحات *</label>
+      <textarea id="tutorialDesc" placeholder="درباره آموزش بنویس..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="createTutorial()">ثبت آموزش</button>
+  </div>
+</div>
+
+<!-- ========== NEW JOB MODAL ========== -->
+<div class="modal-overlay" id="jobModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('jobModal')">✕</button>
+    <h2>💼 ثبت آگهی کار</h2>
+    <div class="form-group">
+      <label>عنوان *</label>
+      <input type="text" id="jobTitle" placeholder="مثلاً: استخدام اسکریپتر حرفه‌ای">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>نوع</label>
+        <select id="jobType">
+          <option value="hiring">📢 استخدام می‌کنم</option>
+          <option value="available">🙋 آماده همکاری هستم</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>دسته‌بندی</label>
+        <select id="jobTag">
+          <option>اسکریپت (Scripting)</option>
+          <option>بیلد (Building)</option>
+          <option>UI / UX</option>
+          <option>انیمیشن</option>
+          <option>مدلینگ (3D)</option>
+          <option>صداگذاری</option>
+          <option>مدیریت پروژه</option>
+          <option>GFX</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>بودجه</label>
+        <input type="text" id="jobBudget" placeholder="مثلاً: 5 میلیون تومان">
+      </div>
+      <div class="form-group">
+        <label>نوع پرداخت</label>
+        <select id="jobPayType">
+          <option>مقطوعی</option>
+          <option>ساعتی</option>
+          <option>درصد از سود</option>
+          <option>توافقی</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>توضیحات *</label>
+      <textarea id="jobDesc" placeholder="جزئیات بیشتر..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="createJob()">ثبت آگهی</button>
+  </div>
+</div>
+
+<!-- ========== FREELANCER PROFILE MODAL ========== -->
+<div class="modal-overlay" id="freelancerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('freelancerModal')">✕</button>
+    <h2>⚡ پروفایل فریلنسری</h2>
+    <div class="form-group">
+      <label>عنوان تخصص *</label>
+      <input type="text" id="flTitle" placeholder="مثلاً: اسکریپتر حرفه‌ای Lua">
+    </div>
+    <div class="form-group">
+      <label>مهارت‌ها (با کاما جدا کن) *</label>
+      <input type="text" id="flSkills" placeholder="Lua, DataStore, UI, Multiplayer">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>نرخ ساعتی</label>
+        <input type="text" id="flRate" placeholder="مثلاً: 500 هزار تومان">
+      </div>
+      <div class="form-group">
+        <label>سابقه کار</label>
+        <select id="flExp">
+          <option>تازه‌کار (زیر ۱ سال)</option>
+          <option>متوسط (۱-۳ سال)</option>
+          <option>حرفه‌ای (۳-۵ سال)</option>
+          <option>ارشد (۵+ سال)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>درباره من *</label>
+      <textarea id="flBio" placeholder="تجربه‌ها، پروژه‌های قبلی، تخصص‌ها..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>راه ارتباطی (تلگرام/دیسکورد/ایمیل)</label>
+      <input type="text" id="flContact" placeholder="@username یا ایمیل">
+    </div>
+    <button class="btn btn-primary btn-block" onclick="createFreelancer()">ثبت پروفایل</button>
+  </div>
+</div>
+
+<!-- ========== PROFILE MODAL ========== -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
+    <div id="profileContent"></div>
   </div>
 </div>
 
@@ -791,14 +1238,17 @@
 
 <script>
 /* ============================================================
-   LOCAL STORAGE - "شبه دیتابیس"
+   DATABASE - localStorage
    ============================================================ */
 const DB = {
   get(key, def = []) {
-    try { return JSON.parse(localStorage.getItem(key)) ?? def; }
-    catch { return def; }
+    try {
+      const val = localStorage.getItem('rblx_' + key);
+      return val ? JSON.parse(val) : def;
+    } catch { return def; }
   },
-  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+  set(key, val) { localStorage.setItem('rblx_' + key, JSON.stringify(val)); },
+  remove(key) { localStorage.removeItem('rblx_' + key); }
 };
 
 // ===== State =====
@@ -806,72 +1256,16 @@ let currentUser = DB.get('currentUser', null);
 let forumFilter = 'all';
 let tutorialFilter = 'all';
 let jobFilter = 'all';
-
-/* ============================================================
-   DEFAULT DATA (اگه لیست خالی بود، اینا اضافه میشن)
-   ============================================================ */
-function initDefaults() {
-  // کاربران نمونه
-  if (!DB.get('users', null)) {
-    DB.set('users', [
-      { username: 'AliDev', password: '1234', joined: '1403/01/15' },
-      { username: 'SaraBuilder', password: '1234', joined: '1403/02/20' },
-      { username: 'RezaScripter', password: '1234', joined: '1403/03/10' }
-    ]);
-  }
-
-  // پست‌های انجمن
-  if (!DB.get('posts', null)) {
-    DB.set('posts', [
-      { id: 1, title: 'چطور شروع کنم به یادگیری اسکریپت‌نویسی؟', body: 'سلام دوستان، من تازه‌کار هستم و می‌خوام Lua یاد بگیرم. از کجا شروع کنم؟', author: 'AliDev', category: 'help', likes: 12, date: '1403/05/12', comments: 5 },
-      { id: 2, title: 'به دنبال اسکریپتر برای پروژه RPG', body: 'یه پروژه RPG داریم و به یه اسکریپتر حرفه‌ای نیاز داریم. درآمد تضمینی.', author: 'SaraBuilder', category: 'team', likes: 8, date: '1403/05/10', comments: 3 },
-      { id: 3, title: 'روش‌های درآمدزایی از روبلاکس در ایران', body: 'دوستان چه راه‌هایی برای دریافت درآمد از DevEx وجود داره؟ تجربه‌هاتون رو بگید.', author: 'RezaScripter', category: 'money', likes: 34, date: '1403/05/08', comments: 12 },
-      { id: 4, title: 'بهترین روش بهینه‌سازی بازی', body: 'بازی من لگ داره. چطور می‌تونم بهینه‌ش کنم؟', author: 'AliDev', category: 'script', likes: 15, date: '1403/05/05', comments: 7 },
-      { id: 5, title: 'معرفی بازی خودم: شبیه‌ساز فروشگاه', body: 'بعد از ۳ ماه کار، بازی اولم رو منتشر کردم! خوشحال می‌شم نظر بدید.', author: 'SaraBuilder', category: 'general', likes: 45, date: '1403/05/01', comments: 20 }
-    ]);
-  }
-
-  // آموزش‌ها
-  if (!DB.get('tutorials', null)) {
-    DB.set('tutorials', [
-      { id: 1, title: 'نصب و آشنایی با Roblox Studio', desc: 'قدم اول برای شروع کار با استودیو', level: 'beginner', icon: '🚀', duration: '15 دقیقه' },
-      { id: 2, title: 'ساخت اولین بازی Obby', desc: 'یک بازی پلتفرمر ساده بساز', level: 'beginner', icon: '🏃', duration: '30 دقیقه' },
-      { id: 3, title: 'مقدمه‌ای بر اسکریپت‌نویسی Lua', desc: 'متغیرها، توابع و حلقه‌ها', level: 'beginner', icon: '📜', duration: '45 دقیقه' },
-      { id: 4, title: 'ساخت رابط کاربری (UI)', desc: 'طراحی GUI جذاب برای بازی', level: 'intermediate', icon: '🎨', duration: '1 ساعت' },
-      { id: 5, title: 'انیمیشن‌سازی کاراکتر', desc: 'انیمیشن‌های حرفه‌ای بساز', level: 'intermediate', icon: '🎬', duration: '1.5 ساعت' },
-      { id: 6, title: 'DataStore و ذخیره‌سازی اطلاعات', desc: 'داده‌های بازیکنان رو ذخیره کن', level: 'intermediate', icon: '💾', duration: '1 ساعت' },
-      { id: 7, title: 'بهینه‌سازی عملکرد بازی', desc: 'کاهش لگ و افزایش FPS', level: 'advanced', icon: '⚡', duration: '2 ساعت' },
-      { id: 8, title: 'سیستم Multiplayer پیشرفته', desc: 'همگام‌سازی حرفه‌ای بین بازیکنان', level: 'advanced', icon: '🌐', duration: '2.5 ساعت' }
-    ]);
-  }
-
-  // پروژه‌ها
-  if (!DB.get('projects', null)) {
-    DB.set('projects', [
-      { id: 1, title: 'شبیه‌ساز مزرعه ایرانی', desc: 'کشاورزی و دامداری در فضای ایرانی', author: 'SaraBuilder', genre: 'Simulator', rating: 4.8, link: '#' },
-      { id: 2, title: 'دنیای مخفی', desc: 'بازی ماجراجویی با معماهای جذاب', author: 'AliDev', genre: 'Adventure', rating: 4.5, link: '#' },
-      { id: 3, title: 'تایکون شهر', desc: 'شهر خودت رو بساز و مدیریت کن', author: 'RezaScripter', genre: 'Tycoon', rating: 4.9, link: '#' },
-      { id: 4, title: 'اوبی چالشی', desc: '100 مرحله سخت برای حرفه‌ای‌ها', author: 'AliDev', genre: 'Obby', rating: 4.2, link: '#' }
-    ]);
-  }
-
-  // مشاغل
-  if (!DB.get('jobs', null)) {
-    DB.set('jobs', [
-      { id: 1, title: 'استخدام اسکریپتر حرفه‌ای', desc: 'برای پروژه RPG - حقوق توافقی', author: 'SaraBuilder', type: 'hiring', tag: 'اسکریپت' },
-      { id: 2, title: 'بیلدر ماهر برای پروژه تایکون', desc: 'ساخت مپ و محیط بازی', author: 'AliDev', type: 'hiring', tag: 'بیلد' },
-      { id: 3, title: 'اسکریپتر آماده همکاری', desc: 'تخصص در DataStore و Multiplayer', author: 'RezaScripter', type: 'available', tag: 'اسکریپت' },
-      { id: 4, title: 'طراح UI آماده کار', desc: 'طراحی رابط کاربری حرفه‌ای', author: 'AliDev', type: 'available', tag: 'UI' }
-    ]);
-  }
-}
+let freelancerFilter = 'all';
+let leaderboardType = 'writers';
 
 /* ============================================================
    NAVIGATION
    ============================================================ */
 function navigate(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
 
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === page);
@@ -896,7 +1290,7 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
    AUTH
    ============================================================ */
 function openAuthModal() {
-  if (currentUser) return;
+  if (currentUser) return showProfile();
   openModal('authModal');
 }
 
@@ -904,19 +1298,31 @@ function handleAuth() {
   const username = document.getElementById('authUsername').value.trim();
   const password = document.getElementById('authPassword').value.trim();
 
-  if (username.length < 3) return showToast('❌ نام کاربری حداقل ۳ کاراکتر');
-  if (password.length < 4) return showToast('❌ رمز حداقل ۴ کاراکتر');
+  if (username.length < 3) return showToast('❌ نام کاربری حداقل ۳ کاراکتر', 'error');
+  if (!/^[a-zA-Z0-9_آ-ی]+$/.test(username)) return showToast('❌ نام کاربری فقط حروف و عدد', 'error');
+  if (password.length < 4) return showToast('❌ رمز حداقل ۴ کاراکتر', 'error');
 
   let users = DB.get('users', []);
   let user = users.find(u => u.username === username);
 
   if (user) {
-    if (user.password !== password) return showToast('❌ رمز اشتباه است');
-    showToast(`✅ خوش برگشتی ${username}!`);
+    if (user.password !== password) return showToast('❌ رمز اشتباه است', 'error');
+    showToast(`✅ خوش برگشتی ${username}!`, 'success');
   } else {
-    users.push({ username, password, joined: new Date().toLocaleDateString('fa-IR') });
+    users.push({
+      username,
+      password,
+      joined: new Date().toLocaleDateString('fa-IR'),
+      posts: 0,
+      likes: 0,
+      projects: 0,
+      tutorials: 0,
+      jobs: 0,
+      helpful: 0,
+      isFreelancer: false
+    });
     DB.set('users', users);
-    showToast(`🎉 خوش اومدی ${username}!`);
+    showToast(`🎉 خوش اومدی ${username}!`, 'success');
   }
 
   currentUser = { username };
@@ -934,32 +1340,78 @@ function logout() {
   DB.set('currentUser', null);
   renderAuthState();
   renderAll();
-  showToast('👋 خارج شدی');
+  showToast('👋 خارج شدی', 'success');
 }
 
 function renderAuthState() {
   const el = document.getElementById('navActions');
   if (currentUser) {
     el.innerHTML = `
-      <div class="user-chip">
-        <div class="avatar">${currentUser.username[0].toUpperCase()}</div>
+      <div class="user-chip" onclick="showProfile()">
+        <div class="avatar sm">${currentUser.username[0].toUpperCase()}</div>
         <span>${currentUser.username}</span>
       </div>
-      <button class="btn btn-ghost" onclick="logout()">خروج</button>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">خروج</button>
     `;
   } else {
-    el.innerHTML = `<button class="btn btn-primary" onclick="openAuthModal()">ورود / ثبت‌نام</button>`;
+    el.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openAuthModal()">ورود / ثبت‌نام</button>`;
+  }
+}
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+function showProfile() {
+  if (!currentUser) return;
+  const users = DB.get('users', []);
+  const user = users.find(u => u.username === currentUser.username);
+  if (!user) return;
+
+  const posts = DB.get('posts', []).filter(p => p.author === currentUser.username).length;
+  const projects = DB.get('projects', []).filter(p => p.author === currentUser.username).length;
+  const tutorials = DB.get('tutorials', []).filter(t => t.author === currentUser.username).length;
+
+  document.getElementById('profileContent').innerHTML = `
+    <div class="profile-header">
+      <div class="profile-avatar">${currentUser.username[0].toUpperCase()}</div>
+      <div>
+        <h2 style="margin: 0;">${currentUser.username}</h2>
+        <p style="color: var(--muted); font-size: 0.85rem;">عضو از ${user.joined}</p>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.5rem;">
+      <div class="stat-card"><div class="stat-number">${posts}</div><div class="stat-label">مطلب</div></div>
+      <div class="stat-card"><div class="stat-number">${projects}</div><div class="stat-label">پروژه</div></div>
+      <div class="stat-card"><div class="stat-number">${tutorials}</div><div class="stat-label">آموزش</div></div>
+      <div class="stat-card"><div class="stat-number">${user.likes || 0}</div><div class="stat-label">لایک دریافتی</div></div>
+    </div>
+    <button class="btn btn-danger btn-block" onclick="logout(); closeModal('profileModal')">🚪 خروج از حساب</button>
+  `;
+  openModal('profileModal');
+}
+
+/* ============================================================
+   USER STAT UPDATE
+   ============================================================ */
+function updateUserStat(username, field, delta = 1) {
+  const users = DB.get('users', []);
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user[field] = (user[field] || 0) + delta;
+    DB.set('users', users);
   }
 }
 
 /* ============================================================
    TOAST
    ============================================================ */
-function showToast(msg) {
+let toastTimer;
+function showToast(msg, type = '') {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
 /* ============================================================
@@ -984,10 +1436,7 @@ function renderPosts() {
 
   const container = document.getElementById('postsList');
   if (!filtered.length) {
-    container.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--muted);">
-      <p style="font-size: 2rem;">📭</p>
-      <p>هیچ موضوعی پیدا نشد</p>
-    </div>`;
+    container.innerHTML = emptyState('📭', 'هنوز موضوعی ثبت نشده', 'اولین نفری باش که موضوع ایجاد می‌کنه!', 'openNewPostModal()', '✏️ ایجاد موضوع');
     return;
   }
 
@@ -1000,30 +1449,51 @@ function renderPosts() {
           <div class="post-meta">${p.date} · ${getCategoryName(p.category)}</div>
         </div>
       </div>
-      <div class="post-title">${p.title}</div>
-      <div class="post-body">${p.body}</div>
+      <div class="post-title">${escapeHtml(p.title)}</div>
+      <div class="post-body">${escapeHtml(p.body)}</div>
       <div class="post-footer">
-        <span onclick="likePost(${p.id})">❤️ ${p.likes} لایک</span>
-        <span>💬 ${p.comments} کامنت</span>
+        <span onclick="likePost(${p.id})" class="${p.likedBy?.includes(currentUser?.username) ? 'liked' : ''}">❤️ ${p.likes || 0} لایک</span>
+        <span>💬 ${p.comments || 0} کامنت</span>
       </div>
     </div>
   `).join('');
 }
 
 function getCategoryName(cat) {
-  const map = { general: '💬 عمومی', help: '🛠️ کمک فنی', script: '📜 اسکریپت', team: '🤝 هم‌تیمی', money: '💰 درآمد' };
+  const map = {
+    general: '💬 عمومی',
+    help: '🛠️ کمک فنی',
+    script: '📜 اسکریپت',
+    team: '🤝 هم‌تیمی',
+    money: '💰 درآمد',
+    showcase: '🎮 نمایش پروژه'
+  };
   return map[cat] || cat;
 }
 
 function likePost(id) {
-  if (!currentUser) return showToast('❌ اول وارد شو');
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
   const posts = DB.get('posts', []);
   const p = posts.find(x => x.id === id);
-  if (p) { p.likes++; DB.set('posts', posts); renderPosts(); }
+  if (!p) return;
+  p.likedBy = p.likedBy || [];
+
+  if (p.likedBy.includes(currentUser.username)) {
+    p.likedBy = p.likedBy.filter(u => u !== currentUser.username);
+    p.likes = Math.max(0, (p.likes || 0) - 1);
+    updateUserStat(p.author, 'likes', -1);
+  } else {
+    p.likedBy.push(currentUser.username);
+    p.likes = (p.likes || 0) + 1;
+    updateUserStat(p.author, 'likes', 1);
+    updateUserStat(p.author, 'helpful', 1);
+  }
+  DB.set('posts', posts);
+  renderPosts();
 }
 
 function openNewPostModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو');
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
   openModal('postModal');
 }
 
@@ -1032,7 +1502,8 @@ function createPost() {
   const body = document.getElementById('postBody').value.trim();
   const category = document.getElementById('postCategory').value;
 
-  if (!title || !body) return showToast('❌ همه فیلدها را پر کن');
+  if (!title || !body) return showToast('❌ همه فیلدها را پر کن', 'error');
+  if (title.length < 5) return showToast('❌ عنوان حداقل ۵ کاراکتر', 'error');
 
   const posts = DB.get('posts', []);
   posts.unshift({
@@ -1040,16 +1511,18 @@ function createPost() {
     title, body, category,
     author: currentUser.username,
     likes: 0, comments: 0,
+    likedBy: [],
     date: new Date().toLocaleDateString('fa-IR')
   });
   DB.set('posts', posts);
+  updateUserStat(currentUser.username, 'posts', 1);
 
   document.getElementById('postTitle').value = '';
   document.getElementById('postBody').value = '';
   closeModal('postModal');
   renderPosts();
   renderStats();
-  showToast('✅ موضوع ثبت شد');
+  showToast('✅ موضوع ثبت شد', 'success');
 }
 
 /* ============================================================
@@ -1065,20 +1538,62 @@ function filterTutorials(level, btn) {
 function renderTutorials() {
   const tuts = DB.get('tutorials', []);
   const filtered = tutorialFilter === 'all' ? tuts : tuts.filter(t => t.level === tutorialFilter);
+  const container = document.getElementById('tutorialsGrid');
+
+  if (!filtered.length) {
+    container.innerHTML = emptyState('📚', 'هنوز آموزشی ثبت نشده', 'اولین آموزش رو تو اضافه کن!', 'openNewTutorialModal()', '➕ افزودن آموزش');
+    return;
+  }
 
   const levelNames = { beginner: '🌱 مبتدی', intermediate: '⚡ متوسط', advanced: '🚀 پیشرفته' };
 
-  document.getElementById('tutorialsGrid').innerHTML = filtered.map(t => `
+  container.innerHTML = filtered.map(t => `
     <div class="card">
-      <div class="card-icon">${t.icon}</div>
-      <h3>${t.title}</h3>
-      <p>${t.desc}</p>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.8rem;">
+      <div class="card-icon">📖</div>
+      <h3>${escapeHtml(t.title)}</h3>
+      <p>${escapeHtml(t.desc)}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.8rem; flex-wrap: wrap; gap: 0.4rem;">
         <span class="badge">${levelNames[t.level]}</span>
-        <span style="color: var(--muted); font-size: 0.8rem;">⏱ ${t.duration}</span>
+        ${t.duration ? `<span style="color: var(--muted); font-size: 0.78rem;">⏱ ${t.duration}</span>` : ''}
       </div>
+      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">👤 ${t.author}</p>
     </div>
   `).join('');
+}
+
+function openNewTutorialModal() {
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  openModal('tutorialModal');
+}
+
+function createTutorial() {
+  const title = document.getElementById('tutorialTitle').value.trim();
+  const desc = document.getElementById('tutorialDesc').value.trim();
+  const level = document.getElementById('tutorialLevel').value;
+  const duration = document.getElementById('tutorialDuration').value.trim();
+  const link = document.getElementById('tutorialLink').value.trim();
+
+  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
+
+  const tuts = DB.get('tutorials', []);
+  tuts.unshift({
+    id: Date.now(),
+    title, desc, level, duration, link,
+    author: currentUser.username,
+    date: new Date().toLocaleDateString('fa-IR')
+  });
+  DB.set('tutorials', tuts);
+  updateUserStat(currentUser.username, 'tutorials', 1);
+
+  document.getElementById('tutorialTitle').value = '';
+  document.getElementById('tutorialDesc').value = '';
+  document.getElementById('tutorialDuration').value = '';
+  document.getElementById('tutorialLink').value = '';
+  closeModal('tutorialModal');
+  renderTutorials();
+  renderStats();
+  renderFeatured();
+  showToast('✅ آموزش ثبت شد', 'success');
 }
 
 /* ============================================================
@@ -1091,22 +1606,30 @@ function renderProjects() {
     !search || p.title.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search)
   );
 
-  document.getElementById('projectsGrid').innerHTML = filtered.map(p => `
+  const container = document.getElementById('projectsGrid');
+  if (!filtered.length) {
+    container.innerHTML = emptyState('🎮', 'هنوز پروژه‌ای ثبت نشده', 'اولین پروژه‌ت رو معرفی کن!', 'openNewProjectModal()', '➕ افزودن پروژه');
+    return;
+  }
+
+  const statusNames = { released: '✅ منتشر شده', development: '🔧 در حال ساخت', concept: '💡 ایده' };
+
+  container.innerHTML = filtered.map(p => `
     <div class="card">
-      <div class="card-icon">🎮</div>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      <div style="margin-top: 0.8rem;">
+      <div class="card-icon success">🎮</div>
+      <h3>${escapeHtml(p.title)}</h3>
+      <p>${escapeHtml(p.desc)}</p>
+      <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
         <span class="badge cyan">${p.genre}</span>
-        <span class="badge green">⭐ ${p.rating}</span>
+        <span class="badge green">${statusNames[p.status] || ''}</span>
       </div>
-      <p style="color: var(--muted); font-size: 0.8rem; margin-top: 0.6rem;">👤 ${p.author}</p>
+      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">👤 ${p.author}</p>
     </div>
   `).join('');
 }
 
 function openNewProjectModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو');
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
   openModal('projectModal');
 }
 
@@ -1114,18 +1637,20 @@ function createProject() {
   const title = document.getElementById('projectTitle').value.trim();
   const desc = document.getElementById('projectDesc').value.trim();
   const genre = document.getElementById('projectGenre').value;
+  const status = document.getElementById('projectStatus').value;
   const link = document.getElementById('projectLink').value.trim() || '#';
 
-  if (!title || !desc) return showToast('❌ همه فیلدها را پر کن');
+  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
 
   const projects = DB.get('projects', []);
   projects.unshift({
     id: Date.now(),
-    title, desc, genre, link,
+    title, desc, genre, status, link,
     author: currentUser.username,
-    rating: 'جدید'
+    date: new Date().toLocaleDateString('fa-IR')
   });
   DB.set('projects', projects);
+  updateUserStat(currentUser.username, 'projects', 1);
 
   document.getElementById('projectTitle').value = '';
   document.getElementById('projectDesc').value = '';
@@ -1133,7 +1658,8 @@ function createProject() {
   closeModal('projectModal');
   renderProjects();
   renderStats();
-  showToast('✅ پروژه ثبت شد');
+  renderFeatured();
+  showToast('✅ پروژه ثبت شد', 'success');
 }
 
 /* ============================================================
@@ -1149,19 +1675,262 @@ function filterJobs(type, btn) {
 function renderJobs() {
   const jobs = DB.get('jobs', []);
   const filtered = jobFilter === 'all' ? jobs : jobs.filter(j => j.type === jobFilter);
+  const container = document.getElementById('jobsGrid');
 
-  document.getElementById('jobsGrid').innerHTML = filtered.map(j => `
+  if (!filtered.length) {
+    container.innerHTML = emptyState('💼', 'هنوز آگهی‌ای ثبت نشده', 'اولین آگهی استخدام یا همکاری رو ثبت کن!', 'openNewJobModal()', '➕ ثبت آگهی');
+    return;
+  }
+
+  container.innerHTML = filtered.map(j => `
     <div class="card">
-      <div class="card-icon">${j.type === 'hiring' ? '📢' : '🙋'}</div>
-      <h3>${j.title}</h3>
-      <p>${j.desc}</p>
-      <div style="margin-top: 0.8rem;">
+      <div class="card-icon ${j.type === 'hiring' ? 'gold' : 'success'}">${j.type === 'hiring' ? '📢' : '🙋'}</div>
+      <h3>${escapeHtml(j.title)}</h3>
+      <p>${escapeHtml(j.desc)}</p>
+      <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
         <span class="badge ${j.type === 'hiring' ? '' : 'green'}">${j.type === 'hiring' ? 'استخدام' : 'آماده همکاری'}</span>
         <span class="badge cyan">${j.tag}</span>
+        ${j.budget ? `<span class="badge gold">💰 ${j.budget}</span>` : ''}
       </div>
-      <p style="color: var(--muted); font-size: 0.8rem; margin-top: 0.6rem;">👤 ${j.author}</p>
+      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">
+        👤 ${j.author} · 📅 ${j.date}
+      </p>
     </div>
   `).join('');
+}
+
+function openNewJobModal() {
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  openModal('jobModal');
+}
+
+function createJob() {
+  const title = document.getElementById('jobTitle').value.trim();
+  const desc = document.getElementById('jobDesc').value.trim();
+  const type = document.getElementById('jobType').value;
+  const tag = document.getElementById('jobTag').value;
+  const budget = document.getElementById('jobBudget').value.trim();
+  const payType = document.getElementById('jobPayType').value;
+
+  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
+
+  const jobs = DB.get('jobs', []);
+  jobs.unshift({
+    id: Date.now(),
+    title, desc, type, tag, budget, payType,
+    author: currentUser.username,
+    date: new Date().toLocaleDateString('fa-IR')
+  });
+  DB.set('jobs', jobs);
+  updateUserStat(currentUser.username, 'jobs', 1);
+
+  document.getElementById('jobTitle').value = '';
+  document.getElementById('jobDesc').value = '';
+  document.getElementById('jobBudget').value = '';
+  closeModal('jobModal');
+  renderJobs();
+  renderStats();
+  showToast('✅ آگهی ثبت شد', 'success');
+}
+
+/* ============================================================
+   FREELANCERS
+   ============================================================ */
+const FREELANCER_SKILLS = ['همه', 'Lua', 'DataStore', 'UI', 'بیلد', 'انیمیشن', 'مدلینگ', 'GFX', 'صداگذاری', 'Multiplayer'];
+
+function renderFreelancerSkills() {
+  const container = document.getElementById('freelancerSkills');
+  container.innerHTML = FREELANCER_SKILLS.map(s => `
+    <div class="chip ${freelancerFilter === s ? 'active' : ''}" onclick="filterFreelancers('${s}')">${s}</div>
+  `).join('');
+}
+
+function filterFreelancers(skill) {
+  freelancerFilter = skill;
+  renderFreelancerSkills();
+  renderFreelancers();
+}
+
+function renderFreelancers() {
+  const freelancers = DB.get('freelancers', []);
+  let filtered = freelancers;
+
+  if (freelancerFilter !== 'همه') {
+    filtered = freelancers.filter(f =>
+      f.skills.some(s => s.toLowerCase().includes(freelancerFilter.toLowerCase()))
+    );
+  }
+
+  const container = document.getElementById('freelancersGrid');
+  if (!filtered.length) {
+    container.innerHTML = emptyState('⚡', 'هنوز فریلنسری ثبت نشده', 'اولین پروفایل فریلنسری رو ایجاد کن!', 'openFreelancerProfileModal()', '➕ ایجاد پروفایل');
+    return;
+  }
+
+  container.innerHTML = filtered.map(f => `
+    <div class="freelancer-card">
+      <div class="freelancer-header">
+        <div class="avatar">${f.author[0].toUpperCase()}</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 700;">${f.author}</div>
+          <div style="color: var(--muted); font-size: 0.8rem;">${escapeHtml(f.title)}</div>
+        </div>
+        <div style="text-align: left;">
+          <div class="rating-stars">⭐ ${f.rating || 'جدید'}</div>
+          <div style="color: var(--muted); font-size: 0.72rem;">${f.exp}</div>
+        </div>
+      </div>
+      <p style="color: var(--muted); font-size: 0.85rem;">${escapeHtml(f.bio)}</p>
+      <div class="freelancer-skills">
+        ${f.skills.map(s => `<span class="skill-tag">${escapeHtml(s.trim())}</span>`).join('')}
+      </div>
+      <div class="freelancer-stats">
+        <span>💰 ${f.rate || 'توافقی'}</span>
+        ${f.contact ? `<span style="color: var(--accent); font-weight: 600;">📩 ${escapeHtml(f.contact)}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function openFreelancerProfileModal() {
+  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  openModal('freelancerModal');
+}
+
+function createFreelancer() {
+  const title = document.getElementById('flTitle').value.trim();
+  const skillsStr = document.getElementById('flSkills').value.trim();
+  const rate = document.getElementById('flRate').value.trim();
+  const exp = document.getElementById('flExp').value;
+  const bio = document.getElementById('flBio').value.trim();
+  const contact = document.getElementById('flContact').value.trim();
+
+  if (!title || !skillsStr || !bio) return showToast('❌ همه فیلدهای ستاره‌دار الزامی', 'error');
+
+  const skills = skillsStr.split(',').map(s => s.trim()).filter(Boolean);
+  const freelancers = DB.get('freelancers', []);
+  const existing = freelancers.findIndex(f => f.author === currentUser.username);
+
+  const freelancer = {
+    id: Date.now(),
+    author: currentUser.username,
+    title, skills, rate, exp, bio, contact,
+    rating: 'جدید',
+    date: new Date().toLocaleDateString('fa-IR')
+  };
+
+  if (existing >= 0) {
+    freelancer.rating = freelancers[existing].rating;
+    freelancers[existing] = freelancer;
+    showToast('✅ پروفایل به‌روز شد', 'success');
+  } else {
+    freelancers.unshift(freelancer);
+    showToast('✅ پروفایل ثبت شد', 'success');
+  }
+
+  DB.set('freelancers', freelancers);
+  updateUserStat(currentUser.username, 'isFreelancer', 1);
+
+  document.getElementById('flTitle').value = '';
+  document.getElementById('flSkills').value = '';
+  document.getElementById('flRate').value = '';
+  document.getElementById('flBio').value = '';
+  document.getElementById('flContact').value = '';
+  closeModal('freelancerModal');
+  renderFreelancers();
+  renderStats();
+}
+
+/* ============================================================
+   LEADERBOARD
+   ============================================================ */
+function filterLeaderboard(type, btn) {
+  leaderboardType = type;
+  document.querySelectorAll('#lbTabs .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const users = DB.get('users', []);
+  const freelancers = DB.get('freelancers', []);
+
+  let data = [];
+
+  if (leaderboardType === 'writers') {
+    data = users
+      .map(u => ({ name: u.username, score: u.posts || 0, extra: `${u.likes || 0} لایک` }))
+      .filter(u => u.score > 0)
+      .sort((a, b) => b.score - a.score);
+  } else if (leaderboardType === 'helpful') {
+    data = users
+      .map(u => ({ name: u.username, score: u.helpful || 0, extra: `${u.posts || 0} مطلب` }))
+      .filter(u => u.score > 0)
+      .sort((a, b) => b.score - a.score);
+  } else if (leaderboardType === 'freelancers') {
+    data = freelancers
+      .map(f => ({ name: f.author, score: f.skills?.length || 0, extra: f.title }))
+      .sort((a, b) => b.score - a.score);
+  } else if (leaderboardType === 'projects') {
+    data = users
+      .map(u => ({ name: u.username, score: u.projects || 0, extra: `${u.tutorials || 0} آموزش` }))
+      .filter(u => u.score > 0)
+      .sort((a, b) => b.score - a.score);
+  }
+
+  const container = document.getElementById('leaderboardContent');
+  if (!data.length) {
+    container.innerHTML = emptyState('🏆', 'هنوز داده‌ای وجود ندارد', 'با فعالیت در جامعه، در این لیست ظاهر شو!', null, null);
+    return;
+  }
+
+  container.innerHTML = data.slice(0, 20).map((item, i) => {
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+    const itemClass = i === 0 ? 'top-1' : i === 1 ? 'top-2' : i === 2 ? 'top-3' : '';
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
+    return `
+      <div class="leaderboard-item ${itemClass}">
+        <div class="rank-badge ${rankClass}">${medal}</div>
+        <div class="avatar sm ${rankClass}">${item.name[0].toUpperCase()}</div>
+        <div class="leaderboard-info">
+          <div class="leaderboard-name">${item.name}</div>
+          <div class="leaderboard-stats">${item.extra}</div>
+        </div>
+        <div class="leaderboard-score">${toPersianNum(item.score)}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderHomeLeaderboard() {
+  const users = DB.get('users', []);
+  const data = users
+    .map(u => ({ name: u.username, score: u.posts || 0, likes: u.likes || 0 }))
+    .filter(u => u.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  const container = document.getElementById('homeLeaderboard');
+  if (!data.length) {
+    container.innerHTML = emptyState('🏆', 'هنوز کسی فعال نشده', 'اولین مطلب‌نویس جامعه باش!', 'openNewPostModal()', '✏️ نوشتن مطلب');
+    return;
+  }
+
+  container.innerHTML = data.map((item, i) => {
+    const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : 'bronze';
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉';
+    return `
+      <div class="leaderboard-item top-${i + 1}">
+        <div class="rank-badge ${rankClass}">${medal}</div>
+        <div class="avatar sm ${rankClass}">${item.name[0].toUpperCase()}</div>
+        <div class="leaderboard-info">
+          <div class="leaderboard-name">${item.name}</div>
+          <div class="leaderboard-stats">${item.score} مطلب · ${item.likes} لایک</div>
+        </div>
+        <div class="leaderboard-score">${toPersianNum(item.score)}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 /* ============================================================
@@ -1169,24 +1938,36 @@ function renderJobs() {
    ============================================================ */
 function renderFeatured() {
   const projects = DB.get('projects', []).slice(0, 3);
-  document.getElementById('featuredProjects').innerHTML = projects.map(p => `
-    <div class="card" onclick="navigate('showcase')">
-      <div class="card-icon">🎮</div>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      <span class="badge cyan">${p.genre}</span>
-    </div>
-  `).join('');
+  const projEl = document.getElementById('featuredProjects');
+
+  if (!projects.length) {
+    projEl.innerHTML = emptyState('🎮', 'هنوز پروژه‌ای نیست', 'اولین پروژه رو ثبت کن!', 'openNewProjectModal()', '➕ افزودن پروژه');
+  } else {
+    projEl.innerHTML = projects.map(p => `
+      <div class="card clickable" onclick="navigate('showcase')">
+        <div class="card-icon success">🎮</div>
+        <h3>${escapeHtml(p.title)}</h3>
+        <p>${escapeHtml(p.desc)}</p>
+        <span class="badge cyan">${p.genre}</span>
+      </div>
+    `).join('');
+  }
 
   const tuts = DB.get('tutorials', []).slice(0, 3);
-  document.getElementById('featuredTutorials').innerHTML = tuts.map(t => `
-    <div class="card" onclick="navigate('tutorials')">
-      <div class="card-icon">${t.icon}</div>
-      <h3>${t.title}</h3>
-      <p>${t.desc}</p>
-      <span class="badge">⏱ ${t.duration}</span>
-    </div>
-  `).join('');
+  const tutEl = document.getElementById('featuredTutorials');
+
+  if (!tuts.length) {
+    tutEl.innerHTML = emptyState('📚', 'هنوز آموزشی نیست', 'اولین آموزش رو ثبت کن!', 'openNewTutorialModal()', '➕ افزودن آموزش');
+  } else {
+    tutEl.innerHTML = tuts.map(t => `
+      <div class="card clickable" onclick="navigate('tutorials')">
+        <div class="card-icon">📖</div>
+        <h3>${escapeHtml(t.title)}</h3>
+        <p>${escapeHtml(t.desc)}</p>
+        ${t.duration ? `<span class="badge">⏱ ${t.duration}</span>` : ''}
+      </div>
+    `).join('');
+  }
 }
 
 /* ============================================================
@@ -1196,22 +1977,60 @@ function renderStats() {
   const users = DB.get('users', []).length;
   const posts = DB.get('posts', []).length;
   const projects = DB.get('projects', []).length;
+  const jobs = DB.get('jobs', []).length;
+  const freelancers = DB.get('freelancers', []).length;
 
   animateNumber('statUsers', users);
   animateNumber('statPosts', posts);
   animateNumber('statProjects', projects);
+  animateNumber('statJobs', jobs);
+  animateNumber('statFreelancers', freelancers);
+
+  const total = users + posts + projects + jobs;
+  const footerEl = document.getElementById('footerStats');
+  if (footerEl) footerEl.textContent = `${toPersianNum(total)} فعالیت ثبت شده`;
 }
 
 function animateNumber(id, target) {
   const el = document.getElementById(id);
   if (!el) return;
   let current = 0;
-  const step = Math.max(1, Math.ceil(target / 25));
-  const timer = setInterval(() => {
+  if (target === 0) { el.textContent = '۰'; return; }
+  const step = Math.max(1, Math.ceil(target / 20));
+  clearInterval(el._timer);
+  el._timer = setInterval(() => {
     current += step;
-    if (current >= target) { current = target; clearInterval(timer); }
-    el.textContent = current.toLocaleString('fa-IR');
+    if (current >= target) { current = target; clearInterval(el._timer); }
+    el.textContent = toPersianNum(current);
   }, 40);
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function toPersianNum(n) {
+  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function emptyState(emoji, title, desc, btnAction, btnText) {
+  return `
+    <div class="empty-state" style="grid-column: 1 / -1;">
+      <span class="emoji">${emoji}</span>
+      <h3>${title}</h3>
+      <p>${desc}</p>
+      ${btnAction ? `<button class="btn btn-primary" onclick="${btnAction}">${btnText}</button>` : ''}
+    </div>
+  `;
 }
 
 /* ============================================================
@@ -1222,6 +2041,10 @@ function renderAll() {
   renderTutorials();
   renderProjects();
   renderJobs();
+  renderFreelancerSkills();
+  renderFreelancers();
+  renderLeaderboard();
+  renderHomeLeaderboard();
   renderFeatured();
   renderStats();
 }
@@ -1229,13 +2052,15 @@ function renderAll() {
 /* ============================================================
    INIT
    ============================================================ */
-initDefaults();
 renderAuthState();
 renderAll();
 
 // Enter key for auth
 document.getElementById('authPassword').addEventListener('keydown', e => {
   if (e.key === 'Enter') handleAuth();
+});
+document.getElementById('authUsername').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('authPassword').focus();
 });
 </script>
 </body>
