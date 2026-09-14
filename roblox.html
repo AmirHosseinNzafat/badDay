@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>روبلاکس‌سازان ایران | جامعه بازی‌سازان</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #12121c;
+    --card: #1a1a2e;
+    --card-hover: #22223a;
+    --primary: #7c3aed;
+    --primary-2: #a855f7;
+    --accent: #06b6d4;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #2a2a40;
+    --success: #10b981;
+    --danger: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== Background Effects ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%; right: -50%;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* ===== Navbar ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 1rem 2rem;
+  }
+
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+  }
+
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    -webkit-text-fill-color: white;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--text);
+    background: var(--card);
+  }
+
+  .nav-actions { display: flex; gap: 0.6rem; align-items: center; }
+
+  .btn {
+    padding: 0.6rem 1.3rem;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: white;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(124,58,237,0.6);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover { background: var(--card); }
+
+  .btn-danger {
+    background: var(--danger);
+    color: white;
+  }
+
+  /* ===== Main Container ===== */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page { display: none; animation: fadeIn 0.4s; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1));
+    border-radius: 24px;
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 40%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, var(--primary-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Stats ===== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  /* ===== Section Titles ===== */
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 2rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 5px;
+    height: 30px;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 3px;
+  }
+
+  /* ===== Cards Grid ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.3rem;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    background: var(--card-hover);
+  }
+
+  .card-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .card p { color: var(--muted); font-size: 0.9rem; }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.7rem;
+    background: rgba(124,58,237,0.2);
+    color: var(--primary-2);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+  }
+
+  .badge.green { background: rgba(16,185,129,0.2); color: var(--success); }
+  .badge.cyan { background: rgba(6,182,212,0.2); color: var(--accent); }
+
+  /* ===== Forms ===== */
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  /* ===== Modal ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalIn 0.3s;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal h2 { margin-bottom: 1.5rem; font-size: 1.5rem; }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* ===== Post / Thread ===== */
+  .post {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .post-meta { color: var(--muted); font-size: 0.8rem; }
+
+  .post-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .post-body { color: var(--muted); font-size: 0.92rem; }
+
+  .post-footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .post-footer span { cursor: pointer; transition: color 0.2s; }
+  .post-footer span:hover { color: var(--primary-2); }
+
+  /* ===== Tabs ===== */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .tab {
+    padding: 0.6rem 1.2rem;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+  }
+
+  .tab:hover { color: var(--text); background: var(--card); }
+  .tab.active { color: white; background: var(--primary); }
+
+  /* ===== Toast ===== */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--card);
+    border: 1px solid var(--primary);
+    color: var(--text);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    z-index: 3000;
+    transition: transform 0.4s;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    font-weight: 600;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ===== Footer ===== */
+  footer {
+    margin-top: 4rem;
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  /* ===== Search Bar ===== */
+  .search-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-bar input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+  }
+
+  /* ===== User Info in Nav ===== */
+  .user-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem 0.4rem 0.4rem;
+    background: var(--card);
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .user-chip .avatar { width: 30px; height: 30px; font-size: 0.8rem; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-links { display: none; }
+    .nav-container { gap: 1rem; }
+    main { padding: 1rem; }
+    .hero { padding: 2.5rem 1.2rem; }
+    .section-title { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav>
+  <div class="nav-container">
+    <div class="logo" onclick="navigate('home')">
+      <div class="logo-icon">🎮</div>
+      روبلاکس‌سازان
+    </div>
+
+    <ul class="nav-links">
+      <li><a onclick="navigate('home')" data-page="home" class="active">خانه</a></li>
+      <li><a onclick="navigate('forum')" data-page="forum">انجمن</a></li>
+      <li><a onclick="navigate('tutorials')" data-page="tutorials">آموزش‌ها</a></li>
+      <li><a onclick="navigate('showcase')" data-page="showcase">پروژه‌ها</a></li>
+      <li><a onclick="navigate('jobs')" data-page="jobs">بازار کار</a></li>
+      <li><a onclick="navigate('resources')" data-page="resources">منابع</a></li>
+    </ul>
+
+    <div class="nav-actions" id="navActions">
+      <!-- توسط JS پر میشه -->
+    </div>
+  </div>
+</nav>
+
+<!-- ========== MAIN ========== -->
+<main>
+
+  <!-- ===== HOME ===== -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <h1>جامعه بازی‌سازان روبلاکس ایران 🚀</h1>
+      <p>جایی برای یادگیری، همکاری، و ساخت بازی‌های رویایی. به بزرگ‌ترین جامعه فارسی‌زبان روبلاکس استودیو بپیوند!</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="openAuthModal()">عضویت رایگان</button>
+        <button class="btn btn-ghost" onclick="navigate('tutorials')">شروع یادگیری</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number" id="statUsers">0</div>
+        <div class="stat-label">عضو فعال</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statPosts">0</div>
+        <div class="stat-label">مطلب انجمن</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="statProjects">0</div>
+        <div class="stat-label">پروژه ثبت‌شده</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">پشتیبانی انجمن</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">🔥 پروژه‌های برجسته</h2>
+    <div class="grid" id="featuredProjects"></div>
+
+    <h2 class="section-title">📚 آخرین آموزش‌ها</h2>
+    <div class="grid" id="featuredTutorials"></div>
+  </section>
+
+  <!-- ===== FORUM ===== -->
+  <section class="page" id="page-forum">
+    <h2 class="section-title">💬 انجمن گفتگو</h2>
+
+    <div class="search-bar">
+      <input type="text" id="forumSearch" placeholder="جستجو در موضوعات..." oninput="renderPosts()">
+      <button class="btn btn-primary" onclick="openNewPostModal()">✏️ موضوع جدید</button>
+    </div>
+
+    <div class="tabs" id="forumTabs">
+      <button class="tab active" onclick="filterForum('all', this)">همه</button>
+      <button class="tab" onclick="filterForum('general', this)">💬 عمومی</button>
+      <button class="tab" onclick="filterForum('help', this)">🛠️ کمک فنی</button>
+      <button class="tab" onclick="filterForum('script', this)">📜 اسکریپت</button>
+      <button class="tab" onclick="filterForum('team', this)">🤝 هم‌تیمی</button>
+      <button class="tab" onclick="filterForum('money', this)">💰 درآمد</button>
+    </div>
+
+    <div id="postsList"></div>
+  </section>
+
+  <!-- ===== TUTORIALS ===== -->
+  <section class="page" id="page-tutorials">
+    <h2 class="section-title">📚 آموزش‌های روبلاکس استودیو</h2>
+
+    <div class="tabs">
+      <button class="tab active" onclick="filterTutorials('all', this)">همه</button>
+      <button class="tab" onclick="filterTutorials('beginner', this)">🌱 مبتدی</button>
+      <button class="tab" onclick="filterTutorials('intermediate', this)">⚡ متوسط</button>
+      <button class="tab" onclick="filterTutorials('advanced', this)">🚀 پیشرفته</button>
+    </div>
+
+    <div class="grid" id="tutorialsGrid"></div>
+  </section>
+
+  <!-- ===== SHOWCASE ===== -->
+  <section class="page" id="page-showcase">
+    <h2 class="section-title">🎮 گالری پروژه‌ها</h2>
+
+    <div class="search-bar">
+      <input type="text" id="projectSearch" placeholder="جستجوی پروژه..." oninput="renderProjects()">
+      <button class="btn btn-primary" onclick="openNewProjectModal()">➕ افزودن پروژه</button>
+    </div>
+
+    <div class="grid" id="projectsGrid"></div>
+  </section>
+
+  <!-- ===== JOBS ===== -->
+  <section class="page" id="page-jobs">
+    <h2 class="section-title">💼 بازار کار و همکاری</h2>
+
+    <div class="tabs" id="jobsTabs">
+      <button class="tab active" onclick="filterJobs('all', this)">همه</button>
+      <button class="tab" onclick="filterJobs('hiring', this)">📢 استخدام</button>
+      <button class="tab" onclick="filterJobs('available', this)">🙋 آماده همکاری</button>
+    </div>
+
+    <div class="grid" id="jobsGrid"></div>
+  </section>
+
+  <!-- ===== RESOURCES ===== -->
+  <section class="page" id="page-resources">
+    <h2 class="section-title">🧰 منابع و ابزارها</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">📜</div>
+        <h3>کتابخانه اسکریپت‌های Lua</h3>
+        <p>مجموعه‌ای از اسکریپت‌های آماده برای استفاده در پروژه‌ها</p>
+        <span class="badge">به‌زودی</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>مدل‌ها و Asset های رایگان</h3>
+        <p>مدل‌های سه‌بعدی و منابع بصری آماده</p>
+        <span class="badge">به‌زودی</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🖼️</div>
+        <h3>قالب‌های UI</h3>
+        <p>قالب‌های رابط کاربری آماده برای بازی‌ها</p>
+        <span class="badge">به‌زودی</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <h3>مستندات رسمی روبلاکس</h3>
+        <p>لینک به منابع و مستندات رسمی</p>
+        <span class="badge cyan">لینک</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🎮 روبلاکس‌سازان ایران | ساخته‌شده با ❤️ برای جامعه بازی‌سازان</p>
+  <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2025 - تمامی حقوق محفوظ است</p>
+</footer>
+
+<!-- ========== AUTH MODAL ========== -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal" style="position: relative;">
+    <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    <h2 id="authTitle">ورود / ثبت‌نام</h2>
+    <div class="form-group">
+      <label>نام کاربری</label>
+      <input type="text" id="authUsername" placeholder="مثلاً: RobloxMaster">
+    </div>
+    <div class="form-group">
+      <label>رمز عبور</label>
+      <input type="password" id="authPassword" placeholder="حداقل ۴ کاراکتر">
+    </div>
+    <button class="btn btn-primary" style="width: 100%;" onclick="handleAuth()">ادامه</button>
+    <p style="text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 1rem;">
+      بدون دیتابیس واقعی - اطلاعات در مرورگر شما ذخیره می‌شود
+    </p>
+  </div>
+</div>
+
+<!-- ========== NEW POST MODAL ========== -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal" style="position: relative;">
+    <button class="modal-close" onclick="closeModal('postModal')">✕</button>
+    <h2>موضوع جدید</h2>
+    <div class="form-group">
+      <label>عنوان</label>
+      <input type="text" id="postTitle" placeholder="عنوان موضوع...">
+    </div>
+    <div class="form-group">
+      <label>دسته‌بندی</label>
+      <select id="postCategory">
+        <option value="general">💬 عمومی</option>
+        <option value="help">🛠️ کمک فنی</option>
+        <option value="script">📜 اسکریپت</option>
+        <option value="team">🤝 هم‌تیمی</option>
+        <option value="money">💰 درآمد</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>متن</label>
+      <textarea id="postBody" placeholder="متن موضوع را بنویسید..."></textarea>
+    </div>
+    <button class="btn btn-primary" style="width: 100%;" onclick="createPost()">ثبت موضوع</button>
+  </div>
+</div>
+
+<!-- ========== NEW PROJECT MODAL ========== -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal" style="position: relative;">
+    <button class="modal-close" onclick="closeModal('projectModal')">✕</button>
+    <h2>افزودن پروژه</h2>
+    <div class="form-group">
+      <label>نام پروژه</label>
+      <input type="text" id="projectTitle" placeholder="مثلاً: بازی شبیه‌ساز مزرعه">
+    </div>
+    <div class="form-group">
+      <label>ژانر</label>
+      <select id="projectGenre">
+        <option>Obby</option>
+        <option>Simulator</option>
+        <option>RPG</option>
+        <option>Tycoon</option>
+        <option>Shooter</option>
+        <option>Adventure</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>لینک روبلاکس (اختیاری)</label>
+      <input type="text" id="projectLink" placeholder="https://www.roblox.com/games/...">
+    </div>
+    <div class="form-group">
+      <label>توضیحات</label>
+      <textarea id="projectDesc" placeholder="درباره پروژه بنویسید..."></textarea>
+    </div>
+    <button class="btn btn-primary" style="width: 100%;" onclick="createProject()">ثبت پروژه</button>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   LOCAL STORAGE - "شبه دیتابیس"
+   ============================================================ */
+const DB = {
+  get(key, def = []) {
+    try { return JSON.parse(localStorage.getItem(key)) ?? def; }
+    catch { return def; }
+  },
+  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+};
+
+// ===== State =====
+let currentUser = DB.get('currentUser', null);
+let forumFilter = 'all';
+let tutorialFilter = 'all';
+let jobFilter = 'all';
+
+/* ============================================================
+   DEFAULT DATA (اگه لیست خالی بود، اینا اضافه میشن)
+   ============================================================ */
+function initDefaults() {
+  // کاربران نمونه
+  if (!DB.get('users', null)) {
+    DB.set('users', [
+      { username: 'AliDev', password: '1234', joined: '1403/01/15' },
+      { username: 'SaraBuilder', password: '1234', joined: '1403/02/20' },
+      { username: 'RezaScripter', password: '1234', joined: '1403/03/10' }
+    ]);
+  }
+
+  // پست‌های انجمن
+  if (!DB.get('posts', null)) {
+    DB.set('posts', [
+      { id: 1, title: 'چطور شروع کنم به یادگیری اسکریپت‌نویسی؟', body: 'سلام دوستان، من تازه‌کار هستم و می‌خوام Lua یاد بگیرم. از کجا شروع کنم؟', author: 'AliDev', category: 'help', likes: 12, date: '1403/05/12', comments: 5 },
+      { id: 2, title: 'به دنبال اسکریپتر برای پروژه RPG', body: 'یه پروژه RPG داریم و به یه اسکریپتر حرفه‌ای نیاز داریم. درآمد تضمینی.', author: 'SaraBuilder', category: 'team', likes: 8, date: '1403/05/10', comments: 3 },
+      { id: 3, title: 'روش‌های درآمدزایی از روبلاکس در ایران', body: 'دوستان چه راه‌هایی برای دریافت درآمد از DevEx وجود داره؟ تجربه‌هاتون رو بگید.', author: 'RezaScripter', category: 'money', likes: 34, date: '1403/05/08', comments: 12 },
+      { id: 4, title: 'بهترین روش بهینه‌سازی بازی', body: 'بازی من لگ داره. چطور می‌تونم بهینه‌ش کنم؟', author: 'AliDev', category: 'script', likes: 15, date: '1403/05/05', comments: 7 },
+      { id: 5, title: 'معرفی بازی خودم: شبیه‌ساز فروشگاه', body: 'بعد از ۳ ماه کار، بازی اولم رو منتشر کردم! خوشحال می‌شم نظر بدید.', author: 'SaraBuilder', category: 'general', likes: 45, date: '1403/05/01', comments: 20 }
+    ]);
+  }
+
+  // آموزش‌ها
+  if (!DB.get('tutorials', null)) {
+    DB.set('tutorials', [
+      { id: 1, title: 'نصب و آشنایی با Roblox Studio', desc: 'قدم اول برای شروع کار با استودیو', level: 'beginner', icon: '🚀', duration: '15 دقیقه' },
+      { id: 2, title: 'ساخت اولین بازی Obby', desc: 'یک بازی پلتفرمر ساده بساز', level: 'beginner', icon: '🏃', duration: '30 دقیقه' },
+      { id: 3, title: 'مقدمه‌ای بر اسکریپت‌نویسی Lua', desc: 'متغیرها، توابع و حلقه‌ها', level: 'beginner', icon: '📜', duration: '45 دقیقه' },
+      { id: 4, title: 'ساخت رابط کاربری (UI)', desc: 'طراحی GUI جذاب برای بازی', level: 'intermediate', icon: '🎨', duration: '1 ساعت' },
+      { id: 5, title: 'انیمیشن‌سازی کاراکتر', desc: 'انیمیشن‌های حرفه‌ای بساز', level: 'intermediate', icon: '🎬', duration: '1.5 ساعت' },
+      { id: 6, title: 'DataStore و ذخیره‌سازی اطلاعات', desc: 'داده‌های بازیکنان رو ذخیره کن', level: 'intermediate', icon: '💾', duration: '1 ساعت' },
+      { id: 7, title: 'بهینه‌سازی عملکرد بازی', desc: 'کاهش لگ و افزایش FPS', level: 'advanced', icon: '⚡', duration: '2 ساعت' },
+      { id: 8, title: 'سیستم Multiplayer پیشرفته', desc: 'همگام‌سازی حرفه‌ای بین بازیکنان', level: 'advanced', icon: '🌐', duration: '2.5 ساعت' }
+    ]);
+  }
+
+  // پروژه‌ها
+  if (!DB.get('projects', null)) {
+    DB.set('projects', [
+      { id: 1, title: 'شبیه‌ساز مزرعه ایرانی', desc: 'کشاورزی و دامداری در فضای ایرانی', author: 'SaraBuilder', genre: 'Simulator', rating: 4.8, link: '#' },
+      { id: 2, title: 'دنیای مخفی', desc: 'بازی ماجراجویی با معماهای جذاب', author: 'AliDev', genre: 'Adventure', rating: 4.5, link: '#' },
+      { id: 3, title: 'تایکون شهر', desc: 'شهر خودت رو بساز و مدیریت کن', author: 'RezaScripter', genre: 'Tycoon', rating: 4.9, link: '#' },
+      { id: 4, title: 'اوبی چالشی', desc: '100 مرحله سخت برای حرفه‌ای‌ها', author: 'AliDev', genre: 'Obby', rating: 4.2, link: '#' }
+    ]);
+  }
+
+  // مشاغل
+  if (!DB.get('jobs', null)) {
+    DB.set('jobs', [
+      { id: 1, title: 'استخدام اسکریپتر حرفه‌ای', desc: 'برای پروژه RPG - حقوق توافقی', author: 'SaraBuilder', type: 'hiring', tag: 'اسکریپت' },
+      { id: 2, title: 'بیلدر ماهر برای پروژه تایکون', desc: 'ساخت مپ و محیط بازی', author: 'AliDev', type: 'hiring', tag: 'بیلد' },
+      { id: 3, title: 'اسکریپتر آماده همکاری', desc: 'تخصص در DataStore و Multiplayer', author: 'RezaScripter', type: 'available', tag: 'اسکریپت' },
+      { id: 4, title: 'طراح UI آماده کار', desc: 'طراحی رابط کاربری حرفه‌ای', author: 'AliDev', type: 'available', tag: 'UI' }
+    ]);
+  }
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === page);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ============================================================
+   MODALS
+   ============================================================ */
+function openModal(id) { document.getElementById(id).classList.add('active'); }
+function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('active');
+  });
+});
+
+/* ============================================================
+   AUTH
+   ============================================================ */
+function openAuthModal() {
+  if (currentUser) return;
+  openModal('authModal');
+}
+
+function handleAuth() {
+  const username = document.getElementById('authUsername').value.trim();
+  const password = document.getElementById('authPassword').value.trim();
+
+  if (username.length < 3) return showToast('❌ نام کاربری حداقل ۳ کاراکتر');
+  if (password.length < 4) return showToast('❌ رمز حداقل ۴ کاراکتر');
+
+  let users = DB.get('users', []);
+  let user = users.find(u => u.username === username);
+
+  if (user) {
+    if (user.password !== password) return showToast('❌ رمز اشتباه است');
+    showToast(`✅ خوش برگشتی ${username}!`);
+  } else {
+    users.push({ username, password, joined: new Date().toLocaleDateString('fa-IR') });
+    DB.set('users', users);
+    showToast(`🎉 خوش اومدی ${username}!`);
+  }
+
+  currentUser = { username };
+  DB.set('currentUser', currentUser);
+
+  closeModal('authModal');
+  document.getElementById('authUsername').value = '';
+  document.getElementById('authPassword').value = '';
+  renderAuthState();
+  renderAll();
+}
+
+function logout() {
+  currentUser = null;
+  DB.set('currentUser', null);
+  renderAuthState();
+  renderAll();
+  showToast('👋 خارج شدی');
+}
+
+function renderAuthState() {
+  const el = document.getElementById('navActions');
+  if (currentUser) {
+    el.innerHTML = `
+      <div class="user-chip">
+        <div class="avatar">${currentUser.username[0].toUpperCase()}</div>
+        <span>${currentUser.username}</span>
+      </div>
+      <button class="btn btn-ghost" onclick="logout()">خروج</button>
+    `;
+  } else {
+    el.innerHTML = `<button class="btn btn-primary" onclick="openAuthModal()">ورود / ثبت‌نام</button>`;
+  }
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+/* ============================================================
+   FORUM
+   ============================================================ */
+function filterForum(cat, btn) {
+  forumFilter = cat;
+  document.querySelectorAll('#forumTabs .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderPosts();
+}
+
+function renderPosts() {
+  const posts = DB.get('posts', []);
+  const search = (document.getElementById('forumSearch')?.value || '').toLowerCase();
+
+  let filtered = posts.filter(p => {
+    const matchCat = forumFilter === 'all' || p.category === forumFilter;
+    const matchSearch = !search || p.title.toLowerCase().includes(search) || p.body.toLowerCase().includes(search);
+    return matchCat && matchSearch;
+  });
+
+  const container = document.getElementById('postsList');
+  if (!filtered.length) {
+    container.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--muted);">
+      <p style="font-size: 2rem;">📭</p>
+      <p>هیچ موضوعی پیدا نشد</p>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(p => `
+    <div class="post">
+      <div class="post-header">
+        <div class="avatar">${p.author[0].toUpperCase()}</div>
+        <div>
+          <div style="font-weight: 600;">${p.author}</div>
+          <div class="post-meta">${p.date} · ${getCategoryName(p.category)}</div>
+        </div>
+      </div>
+      <div class="post-title">${p.title}</div>
+      <div class="post-body">${p.body}</div>
+      <div class="post-footer">
+        <span onclick="likePost(${p.id})">❤️ ${p.likes} لایک</span>
+        <span>💬 ${p.comments} کامنت</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getCategoryName(cat) {
+  const map = { general: '💬 عمومی', help: '🛠️ کمک فنی', script: '📜 اسکریپت', team: '🤝 هم‌تیمی', money: '💰 درآمد' };
+  return map[cat] || cat;
+}
+
+function likePost(id) {
+  if (!currentUser) return showToast('❌ اول وارد شو');
+  const posts = DB.get('posts', []);
+  const p = posts.find(x => x.id === id);
+  if (p) { p.likes++; DB.set('posts', posts); renderPosts(); }
+}
+
+function openNewPostModal() {
+  if (!currentUser) return showToast('❌ اول وارد شو');
+  openModal('postModal');
+}
+
+function createPost() {
+  const title = document.getElementById('postTitle').value.trim();
+  const body = document.getElementById('postBody').value.trim();
+  const category = document.getElementById('postCategory').value;
+
+  if (!title || !body) return showToast('❌ همه فیلدها را پر کن');
+
+  const posts = DB.get('posts', []);
+  posts.unshift({
+    id: Date.now(),
+    title, body, category,
+    author: currentUser.username,
+    likes: 0, comments: 0,
+    date: new Date().toLocaleDateString('fa-IR')
+  });
+  DB.set('posts', posts);
+
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postBody').value = '';
+  closeModal('postModal');
+  renderPosts();
+  renderStats();
+  showToast('✅ موضوع ثبت شد');
+}
+
+/* ============================================================
+   TUTORIALS
+   ============================================================ */
+function filterTutorials(level, btn) {
+  tutorialFilter = level;
+  document.querySelectorAll('#page-tutorials .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTutorials();
+}
+
+function renderTutorials() {
+  const tuts = DB.get('tutorials', []);
+  const filtered = tutorialFilter === 'all' ? tuts : tuts.filter(t => t.level === tutorialFilter);
+
+  const levelNames = { beginner: '🌱 مبتدی', intermediate: '⚡ متوسط', advanced: '🚀 پیشرفته' };
+
+  document.getElementById('tutorialsGrid').innerHTML = filtered.map(t => `
+    <div class="card">
+      <div class="card-icon">${t.icon}</div>
+      <h3>${t.title}</h3>
+      <p>${t.desc}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.8rem;">
+        <span class="badge">${levelNames[t.level]}</span>
+        <span style="color: var(--muted); font-size: 0.8rem;">⏱ ${t.duration}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+function renderProjects() {
+  const projects = DB.get('projects', []);
+  const search = (document.getElementById('projectSearch')?.value || '').toLowerCase();
+  const filtered = projects.filter(p =>
+    !search || p.title.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search)
+  );
+
+  document.getElementById('projectsGrid').innerHTML = filtered.map(p => `
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <div style="margin-top: 0.8rem;">
+        <span class="badge cyan">${p.genre}</span>
+        <span class="badge green">⭐ ${p.rating}</span>
+      </div>
+      <p style="color: var(--muted); font-size: 0.8rem; margin-top: 0.6rem;">👤 ${p.author}</p>
+    </div>
+  `).join('');
+}
+
+function openNewProjectModal() {
+  if (!currentUser) return showToast('❌ اول وارد شو');
+  openModal('projectModal');
+}
+
+function createProject() {
+  const title = document.getElementById('projectTitle').value.trim();
+  const desc = document.getElementById('projectDesc').value.trim();
+  const genre = document.getElementById('projectGenre').value;
+  const link = document.getElementById('projectLink').value.trim() || '#';
+
+  if (!title || !desc) return showToast('❌ همه فیلدها را پر کن');
+
+  const projects = DB.get('projects', []);
+  projects.unshift({
+    id: Date.now(),
+    title, desc, genre, link,
+    author: currentUser.username,
+    rating: 'جدید'
+  });
+  DB.set('projects', projects);
+
+  document.getElementById('projectTitle').value = '';
+  document.getElementById('projectDesc').value = '';
+  document.getElementById('projectLink').value = '';
+  closeModal('projectModal');
+  renderProjects();
+  renderStats();
+  showToast('✅ پروژه ثبت شد');
+}
+
+/* ============================================================
+   JOBS
+   ============================================================ */
+function filterJobs(type, btn) {
+  jobFilter = type;
+  document.querySelectorAll('#jobsTabs .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderJobs();
+}
+
+function renderJobs() {
+  const jobs = DB.get('jobs', []);
+  const filtered = jobFilter === 'all' ? jobs : jobs.filter(j => j.type === jobFilter);
+
+  document.getElementById('jobsGrid').innerHTML = filtered.map(j => `
+    <div class="card">
+      <div class="card-icon">${j.type === 'hiring' ? '📢' : '🙋'}</div>
+      <h3>${j.title}</h3>
+      <p>${j.desc}</p>
+      <div style="margin-top: 0.8rem;">
+        <span class="badge ${j.type === 'hiring' ? '' : 'green'}">${j.type === 'hiring' ? 'استخدام' : 'آماده همکاری'}</span>
+        <span class="badge cyan">${j.tag}</span>
+      </div>
+      <p style="color: var(--muted); font-size: 0.8rem; margin-top: 0.6rem;">👤 ${j.author}</p>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   HOME - FEATURED
+   ============================================================ */
+function renderFeatured() {
+  const projects = DB.get('projects', []).slice(0, 3);
+  document.getElementById('featuredProjects').innerHTML = projects.map(p => `
+    <div class="card" onclick="navigate('showcase')">
+      <div class="card-icon">🎮</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <span class="badge cyan">${p.genre}</span>
+    </div>
+  `).join('');
+
+  const tuts = DB.get('tutorials', []).slice(0, 3);
+  document.getElementById('featuredTutorials').innerHTML = tuts.map(t => `
+    <div class="card" onclick="navigate('tutorials')">
+      <div class="card-icon">${t.icon}</div>
+      <h3>${t.title}</h3>
+      <p>${t.desc}</p>
+      <span class="badge">⏱ ${t.duration}</span>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+function renderStats() {
+  const users = DB.get('users', []).length;
+  const posts = DB.get('posts', []).length;
+  const projects = DB.get('projects', []).length;
+
+  animateNumber('statUsers', users);
+  animateNumber('statPosts', posts);
+  animateNumber('statProjects', projects);
+}
+
+function animateNumber(id, target) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let current = 0;
+  const step = Math.max(1, Math.ceil(target / 25));
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = current.toLocaleString('fa-IR');
+  }, 40);
+}
+
+/* ============================================================
+   RENDER ALL
+   ============================================================ */
+function renderAll() {
+  renderPosts();
+  renderTutorials();
+  renderProjects();
+  renderJobs();
+  renderFeatured();
+  renderStats();
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+initDefaults();
+renderAuthState();
+renderAll();
+
+// Enter key for auth
+document.getElementById('authPassword').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleAuth();
+});
+</script>
+</body>
+</html>
