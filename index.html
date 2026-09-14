@@ -21,25 +21,6 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-  <!-- ===== Notification Popup ===== -->
-<div class="notif-overlay" id="notifOverlay">
-  <div class="notif-box">
-    <div class="notif-icon">🎮</div>
-    <h3 class="notif-title">به دنیای روبلاکس‌سازان خوش اومدی!</h3>
-    <p class="notif-text">
-      می‌خوای وارد بخش <strong>بازی‌سازان روبلاکس ایران</strong> بشی؟
-    </p>
-    <div class="notif-buttons">
-      <button class="notif-btn notif-btn-yes" onclick="goToRoblox()">
-        ✨ بله، بریم!
-      </button>
-      <button class="notif-btn notif-btn-no" onclick="closeNotif()">
-        📖 خیر، همین‌جا بمونم
-      </button>
-    </div>
-    <button class="notif-close" onclick="closeNotif()" title="بستن">✕</button>
-  </div>
-</div>
 body{
   font-family:'Vazirmatn',sans-serif;
   background:var(--bg);
@@ -318,6 +299,347 @@ body.light .char-img::after{background:linear-gradient(180deg,transparent 50%,rg
   transition:all .8s cubic-bezier(.16,1,.3,1);
 }
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============================================================
+   NOTIFICATION POPUP - اعلان ورود به سایت روبلاکس
+   ============================================================ */
+.notif-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s ease,visibility .4s ease;
+}
+.notif-overlay.show{opacity:1;visibility:visible}
+
+.notif-box{
+  background:linear-gradient(145deg,var(--card),var(--bg2));
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:2.5rem 2rem 2rem;
+  max-width:480px;width:100%;
+  text-align:center;
+  position:relative;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.7),
+    0 0 0 1px rgba(196,30,58,.15),
+    0 0 80px rgba(196,30,58,.15);
+  transform:scale(.85) translateY(20px);
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;
+}
+.notif-overlay.show .notif-box{transform:scale(1) translateY(0)}
+
+.notif-box::before{
+  content:'';position:absolute;top:0;right:0;left:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--gold),var(--accent));
+  background-size:200% 100%;
+  animation:gradientMove 3s linear infinite;
+}
+@keyframes gradientMove{
+  0%{background-position:0% 0%}
+  100%{background-position:200% 0%}
+}
+
+.notif-icon{
+  font-size:3.5rem;margin-bottom:1rem;display:inline-block;
+  animation:notifPulse 2s ease-in-out infinite;
+}
+@keyframes notifPulse{
+  0%,100%{transform:scale(1) rotate(0deg)}
+  50%{transform:scale(1.12) rotate(-6deg)}
+}
+
+.notif-title{
+  font-size:1.4rem;font-weight:800;
+  margin-bottom:.8rem;
+  background:linear-gradient(135deg,#fff,var(--gold),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.notif-text{
+  color:var(--muted);font-size:1rem;
+  margin-bottom:1.8rem;line-height:1.9;
+}
+.notif-text strong{color:var(--gold);font-weight:700}
+
+.notif-buttons{
+  display:flex;gap:.8rem;justify-content:center;
+  flex-wrap:wrap;
+}
+.notif-btn{
+  font-family:inherit;font-size:.95rem;font-weight:700;
+  padding:.85rem 1.5rem;border-radius:12px;
+  border:none;cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  display:inline-flex;align-items:center;gap:.4rem;
+  flex:1;min-width:140px;justify-content:center;
+}
+.notif-btn-yes{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;
+  box-shadow:0 6px 20px rgba(196,30,58,.5);
+}
+.notif-btn-yes:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(196,30,58,.7);
+  filter:brightness(1.1);
+}
+.notif-btn-yes:active{transform:translateY(-1px)}
+
+.notif-btn-no{
+  background:transparent;color:var(--muted);
+  border:1px solid var(--border);
+}
+.notif-btn-no:hover{
+  color:var(--text);border-color:var(--muted);
+  background:rgba(255,255,255,.03);
+  transform:translateY(-3px);
+}
+.notif-btn-no:active{transform:translateY(-1px)}
+
+.notif-close{
+  position:absolute;top:1rem;left:1rem;
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-size:.9rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-family:inherit;
+}
+.notif-close:hover{
+  color:var(--accent);border-color:var(--accent);
+  background:rgba(196,30,58,.1);
+  transform:rotate(90deg);
+}
+
+/* آمار داخل اعلان */
+.notif-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:.5rem;
+  margin-top:1.5rem;
+  padding-top:1.2rem;
+  border-top:1px solid var(--border);
+}
+.notif-stat-item{
+  text-align:center;
+  padding:.5rem .25rem;
+  border-radius:8px;
+  transition:.3s;
+}
+.notif-stat-item:hover{background:rgba(196,30,58,.08)}
+.notif-stat-num{
+  font-size:1.1rem;font-weight:800;
+  background:linear-gradient(135deg,var(--gold),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.notif-stat-label{
+  font-size:.7rem;color:var(--muted);margin-top:.15rem;
+}
+
+/* Light theme */
+body.light .notif-box{
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.25),
+    0 0 0 1px rgba(196,30,58,.2),
+    0 0 80px rgba(196,30,58,.1);
+}
+body.light .notif-btn-no:hover{background:rgba(0,0,0,.03)}
+
+/* Responsive */
+@media (max-width:500px){
+  .notif-box{padding:2rem 1.5rem 1.5rem}
+  .notif-title{font-size:1.15rem}
+  .notif-text{font-size:.9rem}
+  .notif-icon{font-size:2.8rem}
+  .notif-btn{padding:.75rem 1rem;font-size:.85rem;min-width:120px}
+  .notif-stat-num{font-size:.95rem}
+  .notif-stat-label{font-size:.65rem}
+}
+
+/* ============================================================
+   VISIT COUNTER BADGE - نشانگر آمار بازدید گوشه صفحه
+   ============================================================ */
+.visit-badge{
+  position:fixed;
+  bottom:1.5rem;
+  right:1.5rem;
+  background:linear-gradient(135deg,var(--card),var(--bg2));
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:.7rem 1rem;
+  display:flex;align-items:center;gap:.6rem;
+  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  z-index:998;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  font-size:.85rem;
+  font-family:inherit;
+}
+.visit-badge:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+  box-shadow:0 12px 35px rgba(196,30,58,.3);
+}
+.visit-badge-icon{
+  font-size:1.2rem;
+  animation:notifPulse 3s ease-in-out infinite;
+}
+.visit-badge-info{
+  display:flex;flex-direction:column;
+  line-height:1.2;
+}
+.visit-badge-num{
+  font-weight:800;
+  background:linear-gradient(135deg,var(--gold),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  font-size:1rem;
+}
+.visit-badge-label{
+  font-size:.7rem;color:var(--muted);
+}
+@media(max-width:500px){
+  .visit-badge{bottom:1rem;right:1rem;padding:.5rem .8rem}
+  .visit-badge-icon{font-size:1rem}
+  .visit-badge-num{font-size:.9rem}
+}
+
+/* ============================================================
+   STATS PANEL MODAL - پنل آمار کامل
+   ============================================================ */
+.stats-panel-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  z-index:9998;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease,visibility .3s ease;
+}
+.stats-panel-overlay.show{opacity:1;visibility:visible}
+
+.stats-panel{
+  background:linear-gradient(145deg,var(--card),var(--bg2));
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem;
+  max-width:520px;width:100%;
+  max-height:85vh;
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 25px 70px rgba(0,0,0,.7);
+  transform:scale(.9);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.stats-panel-overlay.show .stats-panel{transform:scale(1)}
+
+.stats-panel h2{
+  font-size:1.4rem;margin-bottom:.5rem;
+  background:linear-gradient(135deg,var(--gold),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-align:center;
+}
+.stats-panel-sub{
+  text-align:center;color:var(--muted);
+  font-size:.85rem;margin-bottom:1.5rem;
+}
+
+.stats-panel-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.8rem;
+  margin-bottom:1.5rem;
+}
+.stats-panel-item{
+  background:rgba(0,0,0,.25);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem .8rem;
+  text-align:center;
+  transition:.3s;
+}
+.stats-panel-item:hover{
+  border-color:var(--accent);
+  transform:translateY(-2px);
+}
+.stats-panel-num{
+  font-size:1.5rem;font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stats-panel-label{
+  font-size:.8rem;color:var(--muted);margin-top:.3rem;
+}
+
+.stats-panel-close{
+  position:absolute;top:1rem;left:1rem;
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-family:inherit;
+}
+.stats-panel-close:hover{
+  color:var(--accent);border-color:var(--accent);
+  background:rgba(196,30,58,.1);
+  transform:rotate(90deg);
+}
+
+.stats-reset-btn{
+  width:100%;
+  padding:.7rem;
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--muted);
+  border-radius:10px;
+  font-family:inherit;
+  font-size:.85rem;
+  cursor:pointer;
+  transition:.3s;
+}
+.stats-reset-btn:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+  background:rgba(196,30,58,.05);
+}
+
+/* Progress bar آمار */
+.stats-bar{
+  height:8px;background:rgba(0,0,0,.3);
+  border-radius:10px;overflow:hidden;
+  margin-top:.5rem;
+}
+.stats-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  transition:width .8s cubic-bezier(.16,1,.3,1);
+  border-radius:10px;
+}
+
+.stats-progress-section{
+  margin-bottom:1.2rem;
+}
+.stats-progress-label{
+  display:flex;justify-content:space-between;
+  font-size:.8rem;color:var(--muted);
+  margin-bottom:.3rem;
+}
+.stats-progress-label strong{color:var(--text)}
+
+body.light .stats-panel-item{background:rgba(0,0,0,.05)}
+body.light .stats-bar{background:rgba(0,0,0,.1)}
 </style>
 </head>
 <body>
@@ -550,7 +872,116 @@ body.light .char-img::after{background:linear-gradient(180deg,transparent 50%,rg
   <p style="margin-top:1rem">ساخته‌شده با <span class="heart">♥</span></p>
 </footer>
 
+<!-- ===== Visit Badge ===== -->
+<div class="visit-badge" onclick="openStatsPanel()" title="مشاهده آمار بازدید">
+  <span class="visit-badge-icon">👁️</span>
+  <div class="visit-badge-info">
+    <span class="visit-badge-num" id="badgeVisitNum">0</span>
+    <span class="visit-badge-label">بازدید</span>
+  </div>
+</div>
+
+<!-- ===== Notification Popup ===== -->
+<div class="notif-overlay" id="notifOverlay">
+  <div class="notif-box">
+    <div class="notif-icon">🎮</div>
+    <h3 class="notif-title">به دنیای روبلاکس‌سازان خوش اومدی!</h3>
+    <p class="notif-text">
+      می‌خوای وارد بخش <strong>بازی‌سازان روبلاکس ایران</strong> بشی؟
+    </p>
+    <div class="notif-buttons">
+      <button class="notif-btn notif-btn-yes" onclick="goToRoblox()">
+        ✨ بله، بریم!
+      </button>
+      <button class="notif-btn notif-btn-no" onclick="closeNotif()">
+        📖 خیر، همین‌جا بمونم
+      </button>
+    </div>
+
+    <!-- آمار داخل اعلان -->
+    <div class="notif-stats">
+      <div class="notif-stat-item">
+        <div class="notif-stat-num" id="notifStatVisits">0</div>
+        <div class="notif-stat-label">بازدید کل</div>
+      </div>
+      <div class="notif-stat-item">
+        <div class="notif-stat-num" id="notifStatYes">0</div>
+        <div class="notif-stat-label">رفتن به روبلاکس</div>
+      </div>
+      <div class="notif-stat-item">
+        <div class="notif-stat-num" id="notifStatNo">0</div>
+        <div class="notif-stat-label">موندن اینجا</div>
+      </div>
+    </div>
+
+    <button class="notif-close" onclick="closeNotif()" title="بستن">✕</button>
+  </div>
+</div>
+
+<!-- ===== Stats Panel Modal ===== -->
+<div class="stats-panel-overlay" id="statsPanelOverlay">
+  <div class="stats-panel">
+    <button class="stats-panel-close" onclick="closeStatsPanel()" title="بستن">✕</button>
+    <h2>📊 آمار بازدید سایت</h2>
+    <p class="stats-panel-sub">اطلاعات در مرورگر شما ذخیره می‌شود (localStorage)</p>
+
+    <div class="stats-panel-grid">
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelVisits">0</div>
+        <div class="stats-panel-label">👁️ بازدید کل</div>
+      </div>
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelUnique">0</div>
+        <div class="stats-panel-label">🧑 کاربر یکتا</div>
+      </div>
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelYes">0</div>
+        <div class="stats-panel-label">✅ رفتن به روبلاکس</div>
+      </div>
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelNo">0</div>
+        <div class="stats-panel-label">📖 موندن اینجا</div>
+      </div>
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelToday">0</div>
+        <div class="stats-panel-label">📅 بازدید امروز</div>
+      </div>
+      <div class="stats-panel-item">
+        <div class="stats-panel-num" id="panelFirstVisit">-</div>
+        <div class="stats-panel-label">🎉 اولین بازدید</div>
+      </div>
+    </div>
+
+    <!-- نوار پیشرفت کلیک روی "بله" -->
+    <div class="stats-progress-section">
+      <div class="stats-progress-label">
+        <span>نرخ رفتن به روبلاکس</span>
+        <strong id="progressRate">0%</strong>
+      </div>
+      <div class="stats-bar">
+        <div class="stats-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- نوار پیشرفت کلیک روی "خیر" -->
+    <div class="stats-progress-section">
+      <div class="stats-progress-label">
+        <span>نرخ موندن در این صفحه</span>
+        <strong id="progressRateNo">0%</strong>
+      </div>
+      <div class="stats-bar">
+        <div class="stats-bar-fill" id="progressFillNo" style="width:0%"></div>
+      </div>
+    </div>
+
+    <button class="stats-reset-btn" onclick="resetStats()">🗑️ ریست آمار</button>
+  </div>
+</div>
+
 <script>
+/* ============================================================
+   PROGRESS BAR + TOC + REVEAL + THEME (کد اصلی)
+   ============================================================ */
 const progress = document.getElementById('progress');
 window.addEventListener('scroll', () => {
   const h = document.documentElement;
@@ -589,6 +1020,267 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   });
+});
+
+/* ============================================================
+   STATS SYSTEM - سیستم آمار بازدید (localStorage)
+   ============================================================ */
+
+const STATS_KEY = 'korush_stats_v1';
+const SESSION_KEY = 'korush_session_id';
+const TODAY_KEY = 'korush_today_date';
+
+// ساختار پیش‌فرض آمار
+const DEFAULT_STATS = {
+  visits: 0,          // کل بازدیدها
+  unique: 0,          // بازدیدکننده یکتا
+  yes: 0,             // تعداد کلیک روی "بله"
+  no: 0,              // تعداد کلیک روی "خیر"
+  todayVisits: 0,     // بازدید امروز
+  firstVisit: null,   // تاریخ اولین بازدید
+  lastVisit: null     // آخرین بازدید
+};
+
+// خواندن آمار
+function getStats() {
+  try {
+    const raw = localStorage.getItem(STATS_KEY);
+    if (!raw) return { ...DEFAULT_STATS };
+    return { ...DEFAULT_STATS, ...JSON.parse(raw) };
+  } catch (e) {
+    return { ...DEFAULT_STATS };
+  }
+}
+
+// ذخیره آمار
+function saveStats(stats) {
+  try {
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  } catch (e) {}
+}
+
+// گرفتن تاریخ امروز به صورت YYYY-MM-DD
+function getToday() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// تبدیل تاریخ میلادی به شمسی (خلاصه)
+function toPersianDate(iso) {
+  if (!iso) return '-';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('fa-IR');
+  } catch (e) {
+    return '-';
+  }
+}
+
+// ===== ثبت بازدید جدید =====
+function recordVisit() {
+  const stats = getStats();
+  const today = getToday();
+  const sessionId = sessionStorage.getItem(SESSION_KEY);
+
+  // بررسی سشن (برای شمارش یکتا)
+  const isNewSession = !sessionId;
+  if (isNewSession) {
+    try {
+      sessionStorage.setItem(SESSION_KEY, '1');
+    } catch (e) {}
+    stats.unique++;
+  }
+
+  // افزایش بازدید کل
+  stats.visits++;
+
+  // بررسی امروز
+  const lastToday = localStorage.getItem(TODAY_KEY);
+  if (lastToday !== today) {
+    // روز جدید - ریست بازدید امروز
+    localStorage.setItem(TODAY_KEY, today);
+    stats.todayVisits = 1;
+  } else {
+    stats.todayVisits++;
+  }
+
+  // ثبت اولین و آخرین بازدید
+  const nowISO = new Date().toISOString();
+  if (!stats.firstVisit) stats.firstVisit = nowISO;
+  stats.lastVisit = nowISO;
+
+  saveStats(stats);
+  return stats;
+}
+
+// ===== به‌روزرسانی همه UI آمار =====
+function updateAllStatsUI() {
+  const stats = getStats();
+
+  // بج گوشه
+  const badge = document.getElementById('badgeVisitNum');
+  if (badge) badge.textContent = stats.visits.toLocaleString('fa-IR');
+
+  // آمار داخل اعلان
+  const nsv = document.getElementById('notifStatVisits');
+  const nsy = document.getElementById('notifStatYes');
+  const nsn = document.getElementById('notifStatNo');
+  if (nsv) nsv.textContent = stats.visits.toLocaleString('fa-IR');
+  if (nsy) nsy.textContent = stats.yes.toLocaleString('fa-IR');
+  if (nsn) nsn.textContent = stats.no.toLocaleString('fa-IR');
+
+  // پنل کامل
+  const pv = document.getElementById('panelVisits');
+  const pu = document.getElementById('panelUnique');
+  const py = document.getElementById('panelYes');
+  const pn = document.getElementById('panelNo');
+  const pt = document.getElementById('panelToday');
+  const pf = document.getElementById('panelFirstVisit');
+
+  if (pv) pv.textContent = stats.visits.toLocaleString('fa-IR');
+  if (pu) pu.textContent = stats.unique.toLocaleString('fa-IR');
+  if (py) py.textContent = stats.yes.toLocaleString('fa-IR');
+  if (pn) pn.textContent = stats.no.toLocaleString('fa-IR');
+  if (pt) pt.textContent = stats.todayVisits.toLocaleString('fa-IR');
+  if (pf) pf.textContent = toPersianDate(stats.firstVisit);
+
+  // نوار پیشرفت
+  const totalChoices = stats.yes + stats.no;
+  const yesRate = totalChoices ? Math.round((stats.yes / totalChoices) * 100) : 0;
+  const noRate = totalChoices ? Math.round((stats.no / totalChoices) * 100) : 0;
+
+  const pRate = document.getElementById('progressRate');
+  const pFill = document.getElementById('progressFill');
+  const pRateNo = document.getElementById('progressRateNo');
+  const pFillNo = document.getElementById('progressFillNo');
+
+  if (pRate) pRate.textContent = yesRate + '%';
+  if (pFill) pFill.style.width = yesRate + '%';
+  if (pRateNo) pRateNo.textContent = noRate + '%';
+  if (pFillNo) pFillNo.style.width = noRate + '%';
+}
+
+// ===== پنل آمار =====
+function openStatsPanel() {
+  updateAllStatsUI();
+  const panel = document.getElementById('statsPanelOverlay');
+  if (panel) panel.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeStatsPanel() {
+  const panel = document.getElementById('statsPanelOverlay');
+  if (panel) panel.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ===== ریست آمار =====
+function resetStats() {
+  if (!confirm('آیا مطمئنی می‌خوای همه آمار پاک بشه؟')) return;
+  saveStats({ ...DEFAULT_STATS });
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(TODAY_KEY);
+  } catch (e) {}
+  updateAllStatsUI();
+  alert('✅ آمار با موفقیت ریست شد');
+}
+
+/* ============================================================
+   NOTIFICATION POPUP
+   ============================================================ */
+
+const NOTIF_KEY = 'korush_notif_seen';
+const NOTIF_DELAY = 1500; // ۱.۵ ثانیه
+
+function showNotif() {
+  const overlay = document.getElementById('notifOverlay');
+  if (!overlay) return;
+  updateAllStatsUI(); // آمار رو آپدیت کن قبل از نمایش
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNotif() {
+  const overlay = document.getElementById('notifOverlay');
+  if (!overlay) return;
+  overlay.classList.remove('show');
+  document.body.style.overflow = '';
+
+  // ثبت کلیک روی "خیر"
+  const stats = getStats();
+  stats.no++;
+  saveStats(stats);
+  updateAllStatsUI();
+
+  try {
+    sessionStorage.setItem(NOTIF_KEY, '1');
+  } catch (e) {}
+}
+
+function goToRoblox() {
+  // ثبت کلیک روی "بله"
+  const stats = getStats();
+  stats.yes++;
+  saveStats(stats);
+  updateAllStatsUI();
+
+  // انیمیشن خروج
+  const overlay = document.getElementById('notifOverlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.4s ease';
+  }
+
+  setTimeout(() => {
+    window.location.href = 'roblox.html';
+  }, 350);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+
+window.addEventListener('load', () => {
+  // ثبت بازدید
+  recordVisit();
+  updateAllStatsUI();
+
+  // بررسی که تو این سشن قبلاً نشون نداده باشه
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem(NOTIF_KEY) === '1';
+  } catch (e) {}
+
+  if (!seen) {
+    setTimeout(showNotif, NOTIF_DELAY);
+  }
+});
+
+// بستن با کلید Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('notifOverlay');
+    if (overlay && overlay.classList.contains('show')) {
+      closeNotif();
+    }
+    const panel = document.getElementById('statsPanelOverlay');
+    if (panel && panel.classList.contains('show')) {
+      closeStatsPanel();
+    }
+  }
+});
+
+// بستن با کلیک روی پس‌زمینه
+document.addEventListener('click', (e) => {
+  const overlay = document.getElementById('notifOverlay');
+  if (overlay && e.target === overlay) {
+    closeNotif();
+  }
+  const panel = document.getElementById('statsPanelOverlay');
+  if (panel && e.target === panel) {
+    closeStatsPanel();
+  }
 });
 </script>
 
