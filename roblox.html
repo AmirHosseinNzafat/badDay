@@ -3,24 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>روبلاکس‌سازان ایران | بازار کار و جامعه بازی‌سازان</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>RobloxDevs IR | روبلاکس‌سازان ایران</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+  /* ========== THEME VARIABLES ========== */
   :root {
     --bg: #0a0a0f;
     --bg-2: #12121c;
     --card: #16162a;
     --card-hover: #1e1e35;
+    --card-2: #1c1c30;
     --primary: #7c3aed;
     --primary-2: #a855f7;
+    --primary-soft: rgba(124,58,237,0.15);
     --accent: #06b6d4;
     --text: #e5e7eb;
+    --text-strong: #ffffff;
     --muted: #9ca3af;
     --border: #2a2a40;
+    --border-soft: #1e1e30;
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
     --gold: #fbbf24;
+    --shadow: 0 10px 40px rgba(0,0,0,0.4);
+    --shadow-sm: 0 4px 15px rgba(0,0,0,0.2);
+    --glass: rgba(22,22,42,0.7);
+    --gradient: linear-gradient(135deg, #7c3aed, #06b6d4);
+  }
+
+  [data-theme="light"] {
+    --bg: #f5f5fa;
+    --bg-2: #ebebf5;
+    --card: #ffffff;
+    --card-hover: #f9f9ff;
+    --card-2: #f0f0fa;
+    --primary: #7c3aed;
+    --primary-2: #9333ea;
+    --primary-soft: rgba(124,58,237,0.1);
+    --accent: #0891b2;
+    --text: #1f2937;
+    --text-strong: #0f172a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --border-soft: #f0f0f5;
+    --shadow: 0 10px 40px rgba(0,0,0,0.08);
+    --shadow-sm: 0 4px 15px rgba(0,0,0,0.05);
+    --glass: rgba(255,255,255,0.8);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,39 +57,58 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Vazirmatn', sans-serif;
+    font-family: 'Vazirmatn', 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
     min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
   }
+
+  [dir="ltr"] body { font-family: 'Inter', 'Vazirmatn', sans-serif; }
 
   body::before {
     content: '';
     position: fixed;
     top: -50%; right: -50%;
     width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--primary-soft) 0%, transparent 70%);
     z-index: -1;
     pointer-events: none;
   }
 
-  /* ===== Scrollbar ===== */
-  ::-webkit-scrollbar { width: 10px; }
+  /* ========== SCROLLBAR ========== */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: var(--bg-2); }
   ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--primary-2); }
 
-  /* ===== Navbar ===== */
+  /* ========== SVG ICONS ========== */
+  .icon {
+    width: 18px; height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    vertical-align: middle;
+    stroke-width: 2;
+  }
+  .icon-sm { width: 14px; height: 14px; }
+  .icon-lg { width: 24px; height: 24px; }
+  .icon-xl { width: 32px; height: 32px; }
+
+  /* ========== NAVBAR ========== */
   nav {
     position: sticky;
     top: 0;
-    background: rgba(10,10,15,0.9);
+    background: var(--glass);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
-    padding: 0.9rem 2rem;
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s;
   }
 
   .nav-container {
@@ -69,16 +117,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .logo {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
@@ -86,20 +134,22 @@
   }
 
   .logo-icon {
-    width: 40px; height: 40px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: 11px;
+    width: 38px; height: 38px;
+    background: var(--gradient);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    -webkit-text-fill-color: white;
-    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    color: white;
+    box-shadow: 0 4px 15px rgba(124,58,237,0.4);
+    flex-shrink: 0;
   }
+
+  .logo-icon svg { width: 22px; height: 22px; stroke: white; }
 
   .nav-links {
     display: flex;
-    gap: 0.3rem;
+    gap: 0.2rem;
     list-style: none;
     flex-wrap: wrap;
   }
@@ -107,13 +157,16 @@
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    padding: 0.55rem 0.9rem;
+    padding: 0.5rem 0.85rem;
     border-radius: 8px;
     transition: all 0.2s;
-    font-size: 0.9rem;
+    font-size: 0.87rem;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .nav-links a:hover, .nav-links a.active {
@@ -121,32 +174,41 @@
     background: var(--card);
   }
 
-  .nav-actions { display: flex; gap: 0.5rem; align-items: center; }
+  .nav-links a.active { color: var(--primary-2); }
 
+  .nav-actions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  /* ========== BUTTONS ========== */
   .btn {
-    padding: 0.65rem 1.3rem;
+    padding: 0.6rem 1.1rem;
     border-radius: 10px;
     border: none;
     font-family: inherit;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     transition: all 0.25s;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.45rem;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    background: var(--gradient);
     color: white;
-    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    box-shadow: 0 4px 15px rgba(124,58,237,0.35);
   }
-
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(124,58,237,0.6);
+    box-shadow: 0 6px 20px rgba(124,58,237,0.5);
   }
 
   .btn-ghost {
@@ -154,37 +216,67 @@
     color: var(--text);
     border: 1px solid var(--border);
   }
-
   .btn-ghost:hover { background: var(--card); border-color: var(--primary); }
 
-  .btn-success { background: var(--success); color: white; }
-  .btn-warning { background: var(--warning); color: white; }
-  .btn-danger { background: var(--danger); color: white; }
-  .btn-sm { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
-  .btn-block { width: 100%; justify-content: center; }
+  .btn-icon {
+    padding: 0.55rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-icon:hover { border-color: var(--primary); color: var(--primary-2); }
 
-  /* ===== Main ===== */
+  .btn-success { background: var(--success); color: white; }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-block { width: 100%; }
+  .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.78rem; }
+  .btn-sm.btn-icon { width: 32px; height: 32px; padding: 0; }
+
+  /* ========== BADGE / NOTIFICATION ========== */
+  .notif-btn { position: relative; }
+
+  .notif-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--danger);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg);
+  }
+
+  /* ========== MAIN ========== */
   main {
     max-width: 1500px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1.8rem;
   }
 
-  .page { display: none; animation: fadeIn 0.4s; }
+  .page { display: none; animation: fadeIn 0.35s; }
   .page.active { display: block; }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== Hero ===== */
+  /* ========== HERO ========== */
   .hero {
     padding: 3.5rem 2rem;
     text-align: center;
-    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.08));
+    background: linear-gradient(135deg, var(--primary-soft), rgba(6,182,212,0.06));
     border-radius: 24px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
@@ -195,7 +287,7 @@
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 40%);
+    background: radial-gradient(circle, var(--primary-soft) 0%, transparent 40%);
     animation: rotate 25s linear infinite;
     pointer-events: none;
   }
@@ -206,10 +298,10 @@
   }
 
   .hero h1 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-size: clamp(1.7rem, 4.5vw, 2.8rem);
     font-weight: 900;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #fff, var(--primary-2));
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, var(--text-strong), var(--primary-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -218,34 +310,34 @@
 
   .hero p {
     color: var(--muted);
-    font-size: 1.05rem;
-    max-width: 750px;
-    margin: 0 auto 1.8rem;
+    font-size: 1rem;
+    max-width: 700px;
+    margin: 0 auto 1.6rem;
     position: relative;
     z-index: 1;
   }
 
   .hero-buttons {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.7rem;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
     z-index: 1;
   }
 
-  /* ===== Stats ===== */
+  /* ========== STATS ========== */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 2rem;
   }
 
   .stat-card {
     background: var(--card);
-    padding: 1.3rem;
-    border-radius: 16px;
+    padding: 1.2rem;
+    border-radius: 14px;
     border: 1px solid var(--border);
     text-align: center;
     transition: all 0.3s;
@@ -254,73 +346,75 @@
   }
 
   .stat-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--primary);
-    box-shadow: 0 10px 30px rgba(124,58,237,0.2);
+    box-shadow: var(--shadow-sm);
   }
 
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 60px; height: 60px;
-    background: radial-gradient(circle, rgba(124,58,237,0.3), transparent);
-    border-radius: 50%;
-    transform: translate(20px, -20px);
+  .stat-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--primary-soft);
+    color: var(--primary-2);
+    margin-bottom: 0.5rem;
   }
-
-  .stat-icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
 
   .stat-number {
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    line-height: 1.2;
   }
 
-  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem; }
+  .stat-label { color: var(--muted); font-size: 0.8rem; margin-top: 0.15rem; }
 
-  /* ===== Section Titles ===== */
+  /* ========== SECTION TITLES ========== */
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 800;
-    margin: 2.5rem 0 1.2rem;
+    margin: 2rem 0 1rem;
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
     justify-content: space-between;
     flex-wrap: wrap;
+    color: var(--text-strong);
   }
 
   .section-title-text {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
   }
 
   .section-title-text::before {
     content: '';
-    width: 5px;
-    height: 28px;
-    background: linear-gradient(180deg, var(--primary), var(--accent));
+    width: 4px;
+    height: 24px;
+    background: var(--gradient);
     border-radius: 3px;
   }
 
-  /* ===== Cards Grid ===== */
+  /* ========== GRID ========== */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.2rem;
+    gap: 1.1rem;
   }
 
   .grid-2 { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
 
+  /* ========== CARD ========== */
   .card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 1.4rem;
+    padding: 1.3rem;
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
@@ -329,82 +423,102 @@
   .card.clickable { cursor: pointer; }
 
   .card.clickable:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--primary);
     background: var(--card-hover);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-sm);
   }
 
   .card-icon {
-    width: 50px; height: 50px;
+    width: 46px; height: 46px;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    background: var(--primary-soft);
+    color: var(--primary-2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
-  .card-icon.gold { background: linear-gradient(135deg, var(--gold), var(--warning)); }
-  .card-icon.success { background: linear-gradient(135deg, var(--success), var(--accent)); }
+  .card-icon svg { width: 22px; height: 22px; }
 
-  .card h3 { font-size: 1.08rem; margin-bottom: 0.4rem; }
-  .card p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+  .card-icon.gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .card-icon.success { background: rgba(16,185,129,0.15); color: var(--success); }
+  .card-icon.cyan { background: rgba(6,182,212,0.15); color: var(--accent); }
+  .card-icon.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
 
+  .card h3 { font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--text-strong); }
+  .card p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+
+  /* ========== BADGE ========== */
   .badge {
-    display: inline-block;
-    padding: 0.25rem 0.7rem;
-    background: rgba(124,58,237,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.22rem 0.65rem;
+    background: var(--primary-soft);
     color: var(--primary-2);
     border-radius: 20px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    margin-top: 0.5rem;
-    margin-left: 0.3rem;
+    margin-top: 0.4rem;
+    margin-left: 0.25rem;
   }
 
-  .badge.green { background: rgba(16,185,129,0.2); color: var(--success); }
-  .badge.cyan { background: rgba(6,182,212,0.2); color: var(--accent); }
-  .badge.gold { background: rgba(251,191,36,0.2); color: var(--gold); }
-  .badge.red { background: rgba(239,68,68,0.2); color: var(--danger); }
-  .badge.warning { background: rgba(245,158,11,0.2); color: var(--warning); }
+  .badge.green { background: rgba(16,185,129,0.15); color: var(--success); }
+  .badge.cyan { background: rgba(6,182,212,0.15); color: var(--accent); }
+  .badge.gold { background: rgba(251,191,36,0.15); color: var(--gold); }
+  .badge.red { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .badge.gray { background: var(--bg-2); color: var(--muted); }
 
-  /* ===== Empty State ===== */
+  /* ========== EMPTY STATE ========== */
   .empty-state {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
     color: var(--muted);
     background: var(--card);
     border: 2px dashed var(--border);
     border-radius: 16px;
+    grid-column: 1 / -1;
   }
 
-  .empty-state .emoji { font-size: 3rem; margin-bottom: 1rem; display: block; }
-  .empty-state h3 { color: var(--text); margin-bottom: 0.5rem; font-size: 1.2rem; }
-  .empty-state p { font-size: 0.9rem; margin-bottom: 1.2rem; }
+  .empty-state .icon-wrap {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--primary-soft);
+    color: var(--primary-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 
-  /* ===== Forms ===== */
-  .form-group { margin-bottom: 1.1rem; }
+  .empty-state .icon-wrap svg { width: 32px; height: 32px; }
+  .empty-state h3 { color: var(--text-strong); margin-bottom: 0.4rem; font-size: 1.1rem; }
+  .empty-state p { font-size: 0.88rem; margin-bottom: 1.2rem; }
+
+  /* ========== FORM ========== */
+  .form-group { margin-bottom: 1rem; }
 
   .form-group label {
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
     font-weight: 600;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
+    color: var(--text-strong);
   }
 
   .form-group input,
   .form-group textarea,
   .form-group select {
     width: 100%;
-    padding: 0.85rem 1rem;
+    padding: 0.8rem 0.95rem;
     background: var(--bg-2);
     border: 1px solid var(--border);
     border-radius: 10px;
     color: var(--text);
     font-family: inherit;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     transition: all 0.2s;
   }
 
@@ -413,7 +527,7 @@
   .form-group select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(124,58,237,0.2);
+    box-shadow: 0 0 0 3px var(--primary-soft);
   }
 
   .form-group textarea { resize: vertical; min-height: 100px; }
@@ -421,16 +535,16 @@
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 0.9rem;
   }
 
-  /* ===== Modal ===== */
+  /* ========== MODAL ========== */
   .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
     z-index: 2000;
     align-items: center;
     justify-content: center;
@@ -443,21 +557,29 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 1.8rem;
-    max-width: 560px;
+    padding: 1.6rem;
+    max-width: 580px;
     width: 100%;
-    max-height: 90vh;
+    max-height: 92vh;
     overflow-y: auto;
     animation: modalIn 0.3s;
     position: relative;
+    box-shadow: var(--shadow);
   }
 
   @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.9); }
+    from { opacity: 0; transform: scale(0.92); }
     to { opacity: 1; transform: scale(1); }
   }
 
-  .modal h2 { margin-bottom: 1.3rem; font-size: 1.35rem; }
+  .modal h2 {
+    margin-bottom: 1.2rem;
+    font-size: 1.25rem;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   .modal-close {
     position: absolute;
@@ -465,22 +587,27 @@
     background: transparent;
     border: none;
     color: var(--muted);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     cursor: pointer;
     width: 32px; height: 32px;
     border-radius: 8px;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  [dir="ltr"] .modal-close { left: auto; right: 1rem; }
 
   .modal-close:hover { background: var(--bg-2); color: var(--text); }
 
-  /* ===== Post ===== */
+  /* ========== POST ========== */
   .post {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 1.3rem;
-    margin-bottom: 1rem;
+    border-radius: 16px;
+    padding: 1.2rem 1.3rem;
+    margin-bottom: 0.9rem;
     transition: all 0.3s;
   }
 
@@ -489,67 +616,246 @@
   .post-header {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.8rem;
+    gap: 0.7rem;
+    margin-bottom: 0.75rem;
   }
 
+  .post-header-info { flex: 1; min-width: 0; }
+  .post-author-name {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .post-meta {
+    color: var(--muted);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 0.1rem;
+  }
+  .post-meta > span { display: inline-flex; align-items: center; gap: 0.25rem; }
+
+  .post-title {
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-strong);
+  }
+
+  .post-body {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* ========== POST ACTIONS (like / comment / view) ========== */
+  .post-actions {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .action-btn:hover {
+    background: var(--bg-2);
+    color: var(--text);
+    border-color: var(--border);
+  }
+
+  .action-btn svg { width: 16px; height: 16px; }
+  .action-btn .count { font-size: 0.78rem; }
+
+  .action-btn.liked {
+    color: #ec4899;
+    background: rgba(236,72,153,0.1);
+    border-color: rgba(236,72,153,0.3);
+  }
+
+  .action-btn.liked svg { fill: #ec4899; }
+
+  .action-btn.comments-open {
+    color: var(--accent);
+    background: rgba(6,182,212,0.1);
+    border-color: rgba(6,182,212,0.3);
+  }
+
+  .action-btn.views {
+    color: var(--muted);
+    cursor: default;
+  }
+
+  .action-btn.views:hover {
+    background: transparent;
+    border-color: transparent;
+    color: var(--muted);
+  }
+
+  /* ========== COMMENTS SECTION ========== */
+  .comments-section {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-soft);
+    animation: slideDown 0.3s;
+  }
+
+  .comments-section.open { display: block; }
+
+  @keyframes slideDown {
+    from { opacity: 0; max-height: 0; }
+    to { opacity: 1; max-height: 2000px; }
+  }
+
+  .comment {
+    display: flex;
+    gap: 0.65rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .comment:last-child { border-bottom: none; }
+
+  .comment-body { flex: 1; min-width: 0; }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+    flex-wrap: wrap;
+  }
+
+  .comment-author {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-strong);
+  }
+
+  .comment-time {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .comment-text {
+    font-size: 0.87rem;
+    color: var(--text);
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .comment-form {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .comment-form .avatar { flex-shrink: 0; }
+
+  .comment-form-inner {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .comment-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.85rem;
+    resize: vertical;
+    min-height: 55px;
+    transition: all 0.2s;
+  }
+
+  .comment-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+  }
+
+  .comment-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+
+  /* ========== AVATAR ========== */
   .avatar {
-    width: 42px; height: 42px;
+    width: 40px; height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: var(--gradient);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     color: white;
     flex-shrink: 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--border);
   }
 
-  .avatar.sm { width: 32px; height: 32px; font-size: 0.8rem; }
-  .avatar.gold { background: linear-gradient(135deg, var(--gold), var(--warning)); }
-  .avatar.silver { background: linear-gradient(135deg, #9ca3af, #d1d5db); }
-  .avatar.bronze { background: linear-gradient(135deg, #b45309, #d97706); }
+  .avatar.sm { width: 30px; height: 30px; font-size: 0.75rem; }
+  .avatar.lg { width: 60px; height: 60px; font-size: 1.4rem; }
+  .avatar.xl { width: 80px; height: 80px; font-size: 1.8rem; }
+  .avatar.gold { background: linear-gradient(135deg, var(--gold), #f59e0b); color: #000; }
+  .avatar.silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color: #000; }
+  .avatar.bronze { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
 
-  .post-meta { color: var(--muted); font-size: 0.78rem; }
-
-  .post-title { font-weight: 700; font-size: 1.02rem; margin-bottom: 0.4rem; }
-  .post-body { color: var(--muted); font-size: 0.9rem; }
-
-  .post-footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.82rem;
-    color: var(--muted);
-    flex-wrap: wrap;
+  .avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
   }
 
-  .post-footer span {
-    cursor: pointer;
-    transition: color 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  .post-footer span:hover { color: var(--primary-2); }
-  .post-footer span.liked { color: var(--danger); }
-
-  /* ===== Tabs ===== */
+  /* ========== TABS ========== */
   .tabs {
     display: flex;
-    gap: 0.4rem;
-    margin-bottom: 1.5rem;
+    gap: 0.3rem;
+    margin-bottom: 1.3rem;
     flex-wrap: wrap;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
   }
 
   .tab {
-    padding: 0.55rem 1.1rem;
+    padding: 0.5rem 1rem;
     background: transparent;
     border: none;
     color: var(--muted);
@@ -558,55 +864,62 @@
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.2s;
-    font-size: 0.85rem;
+    font-size: 0.83rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .tab:hover { color: var(--text); background: var(--card); }
   .tab.active { color: white; background: var(--primary); }
 
-  /* ===== Search Bar ===== */
+  /* ========== SEARCH BAR ========== */
   .search-bar {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
     flex-wrap: wrap;
   }
 
   .search-bar input {
     flex: 1;
     min-width: 200px;
-    padding: 0.8rem 1rem;
+    padding: 0.75rem 1rem;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 10px;
     color: var(--text);
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    transition: all 0.2s;
   }
 
   .search-bar input:focus {
     outline: none;
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
   }
 
-  /* ===== User Chip ===== */
+  /* ========== USER CHIP ========== */
   .user-chip {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.3rem 0.8rem 0.3rem 0.3rem;
+    padding: 0.28rem 0.75rem 0.28rem 0.28rem;
     background: var(--card);
     border-radius: 30px;
     border: 1px solid var(--border);
     cursor: pointer;
-    font-size: 0.83rem;
+    font-size: 0.8rem;
     font-weight: 600;
     transition: all 0.2s;
   }
 
+  [dir="ltr"] .user-chip { padding: 0.28rem 0.28rem 0.28rem 0.75rem; }
+
   .user-chip:hover { border-color: var(--primary); }
 
-  /* ===== Toast ===== */
+  /* ========== TOAST ========== */
   .toast {
     position: fixed;
     bottom: 2rem;
@@ -615,144 +928,185 @@
     background: var(--card);
     border: 1px solid var(--primary);
     color: var(--text);
-    padding: 0.9rem 1.5rem;
+    padding: 0.85rem 1.4rem;
     border-radius: 12px;
     z-index: 3000;
-    transition: transform 0.4s;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: var(--shadow);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     max-width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.success { border-color: var(--success); }
   .toast.error { border-color: var(--danger); }
+  .toast svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .toast.success svg { color: var(--success); }
+  .toast.error svg { color: var(--danger); }
 
-  /* ===== Footer ===== */
+  /* ========== FOOTER ========== */
   footer {
-    margin-top: 4rem;
-    padding: 2rem;
+    margin-top: 3.5rem;
+    padding: 1.8rem;
     text-align: center;
     color: var(--muted);
     border-top: 1px solid var(--border);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
   }
 
-  /* ===== Leaderboard ===== */
+  /* ========== LEADERBOARD ========== */
   .leaderboard-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.9rem 1.2rem;
+    gap: 0.85rem;
+    padding: 0.85rem 1.1rem;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.55rem;
     transition: all 0.3s;
   }
 
   .leaderboard-item:hover {
     border-color: var(--primary);
-    transform: translateX(-5px);
+    transform: translateX(-4px);
   }
 
-  .leaderboard-item.top-1 { border-color: var(--gold); background: linear-gradient(90deg, rgba(251,191,36,0.1), transparent); }
-  .leaderboard-item.top-2 { border-color: #9ca3af; background: linear-gradient(90deg, rgba(156,163,175,0.08), transparent); }
-  .leaderboard-item.top-3 { border-color: #d97706; background: linear-gradient(90deg, rgba(217,119,6,0.08), transparent); }
+  [dir="ltr"] .leaderboard-item:hover { transform: translateX(4px); }
+
+  .leaderboard-item.top-1 { border-color: var(--gold); background: linear-gradient(90deg, rgba(251,191,36,0.08), transparent); }
+  .leaderboard-item.top-2 { border-color: #9ca3af; background: linear-gradient(90deg, rgba(156,163,175,0.06), transparent); }
+  .leaderboard-item.top-3 { border-color: #d97706; background: linear-gradient(90deg, rgba(217,119,6,0.06), transparent); }
 
   .rank-badge {
-    width: 34px; height: 34px;
+    width: 32px; height: 32px;
     border-radius: 50%;
     background: var(--bg-2);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     flex-shrink: 0;
+    color: var(--muted);
   }
 
   .rank-badge.gold { background: linear-gradient(135deg, var(--gold), #f59e0b); color: #000; }
   .rank-badge.silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color: #000; }
   .rank-badge.bronze { background: linear-gradient(135deg, #d97706, #b45309); color: #fff; }
 
-  .leaderboard-info { flex: 1; }
-  .leaderboard-name { font-weight: 700; font-size: 0.95rem; }
-  .leaderboard-stats { color: var(--muted); font-size: 0.78rem; }
+  .leaderboard-info { flex: 1; min-width: 0; }
+  .leaderboard-name { font-weight: 700; font-size: 0.92rem; color: var(--text-strong); }
+  .leaderboard-stats { color: var(--muted); font-size: 0.75rem; }
 
   .leaderboard-score {
     font-weight: 800;
-    background: linear-gradient(135deg, var(--primary-2), var(--accent));
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
-  /* ===== Freelancer Card ===== */
+  /* ========== FREELANCER CARD ========== */
   .freelancer-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 1.4rem;
+    padding: 1.3rem;
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.7rem;
   }
 
   .freelancer-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--primary);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-sm);
   }
 
   .freelancer-header {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.75rem;
   }
 
   .freelancer-skills {
     display: flex;
-    gap: 0.4rem;
+    gap: 0.35rem;
     flex-wrap: wrap;
   }
 
   .skill-tag {
-    padding: 0.2rem 0.6rem;
-    background: rgba(6,182,212,0.15);
+    padding: 0.18rem 0.55rem;
+    background: rgba(6,182,212,0.12);
     color: var(--accent);
     border-radius: 6px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
   }
 
   .freelancer-stats {
     display: flex;
     justify-content: space-between;
-    padding-top: 0.8rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.8rem;
+    align-items: center;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* ========== STAR RATING ========== */
+  .star-rating {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+  }
+
+  .star {
+    width: 16px; height: 16px;
+    cursor: pointer;
+    color: var(--border);
+    transition: all 0.15s;
+    fill: currentColor;
+  }
+
+  .star.filled { color: var(--gold); }
+  .star:hover { transform: scale(1.15); }
+  .star.readonly { cursor: default; }
+  .star.readonly:hover { transform: none; }
+
+  .rating-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
     color: var(--muted);
   }
 
-  .rating-stars { color: var(--gold); font-weight: 700; }
+  .rating-display .star { width: 14px; height: 14px; }
+  .rating-display strong { color: var(--gold); font-weight: 700; }
 
-  /* ===== Filter Chips ===== */
+  /* ========== FILTER CHIPS ========== */
   .chips {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
-    margin-bottom: 1.3rem;
+    margin-bottom: 1.2rem;
   }
 
   .chip {
-    padding: 0.4rem 0.9rem;
+    padding: 0.35rem 0.85rem;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 30px;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     cursor: pointer;
     transition: all 0.2s;
     font-weight: 500;
@@ -761,53 +1115,176 @@
   .chip:hover { border-color: var(--primary); }
   .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-  /* ===== Profile Modal ===== */
+  /* ========== NOTIFICATIONS PANEL ========== */
+  .notif-panel {
+    position: fixed;
+    top: 70px;
+    left: 1.5rem;
+    width: 380px;
+    max-width: calc(100vw - 3rem);
+    max-height: 70vh;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    z-index: 1500;
+    overflow: hidden;
+    display: none;
+    animation: modalIn 0.25s;
+  }
+
+  [dir="ltr"] .notif-panel { left: auto; right: 1.5rem; }
+
+  .notif-panel.active { display: block; }
+
+  .notif-header {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-2);
+  }
+
+  .notif-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .notif-list {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .notif-item {
+    padding: 0.85rem 1.2rem;
+    border-bottom: 1px solid var(--border-soft);
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+
+  .notif-item:hover { background: var(--card-hover); }
+  .notif-item.unread { background: var(--primary-soft); }
+  .notif-item.unread::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-2);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .notif-content { flex: 1; min-width: 0; }
+  .notif-text { font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+  .notif-text strong { color: var(--text-strong); }
+  .notif-time { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ========== PROFILE MODAL ========== */
   .profile-header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
+    padding-bottom: 1.3rem;
     border-bottom: 1px solid var(--border);
   }
 
-  .profile-avatar {
-    width: 70px; height: 70px;
+  .avatar-upload {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .avatar-upload-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    font-weight: 800;
     color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    nav { padding: 0.7rem 1rem; }
-    .nav-links {
+  .avatar-upload:hover .avatar-upload-overlay { opacity: 1; }
+
+  /* ========== LANGUAGE SWITCHER ========== */
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .lang-opt {
+    padding: 0.35rem 0.6rem;
+    border-radius: 7px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+
+  .lang-opt.active { background: var(--primary); color: white; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-container { gap: 0.5rem; }
+    .mobile-nav {
+      display: flex !important;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--bg-2);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
-      padding: 0.6rem;
+      padding: 0.4rem;
       justify-content: space-around;
       z-index: 999;
-      overflow-x: auto;
     }
-    .nav-links a { font-size: 0.75rem; padding: 0.5rem; }
-    main { padding: 1rem; padding-bottom: 80px; }
-    .hero { padding: 2.5rem 1.2rem; }
-    .section-title { font-size: 1.3rem; }
+    .mobile-nav a {
+      font-size: 0.7rem;
+      padding: 0.5rem 0.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    .mobile-nav a svg { width: 18px; height: 18px; }
+    main { padding: 1rem; padding-bottom: 90px; }
+    .hero { padding: 2.2rem 1.2rem; }
+    .section-title { font-size: 1.15rem; }
     .form-row { grid-template-columns: 1fr; }
+    .notif-panel { width: calc(100vw - 2rem); left: 1rem; right: 1rem; }
   }
 
+  .mobile-nav { display: none; }
+
   @media (max-width: 480px) {
-    .stat-number { font-size: 1.5rem; }
+    .stat-number { font-size: 1.4rem; }
     .grid { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -817,179 +1294,273 @@
 <nav>
   <div class="nav-container">
     <div class="logo" onclick="navigate('home')">
-      <div class="logo-icon">🎮</div>
-      <span>روبلاکس‌سازان</span>
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="6" width="20" height="12" rx="3"/>
+          <line x1="6" y1="12" x2="10" y2="12"/>
+          <line x1="8" y1="10" x2="8" y2="14"/>
+          <circle cx="16" cy="11" r="0.8" fill="currentColor"/>
+          <circle cx="18.5" cy="13" r="0.8" fill="currentColor"/>
+        </svg>
+      </div>
+      <span>RobloxDevs IR</span>
     </div>
 
     <ul class="nav-links">
-      <li><a onclick="navigate('home')" data-page="home" class="active">خانه</a></li>
-      <li><a onclick="navigate('forum')" data-page="forum">انجمن</a></li>
-      <li><a onclick="navigate('tutorials')" data-page="tutorials">آموزش</a></li>
-      <li><a onclick="navigate('showcase')" data-page="showcase">پروژه‌ها</a></li>
-      <li><a onclick="navigate('jobs')" data-page="jobs">بازار کار</a></li>
-      <li><a onclick="navigate('freelancers')" data-page="freelancers">فریلنسرها</a></li>
-      <li><a onclick="navigate('leaderboard')" data-page="leaderboard">🏆 برترین‌ها</a></li>
+      <li><a onclick="navigate('home')" data-page="home" data-i18n="nav.home"></a></li>
+      <li><a onclick="navigate('forum')" data-page="forum" data-i18n="nav.forum"></a></li>
+      <li><a onclick="navigate('tutorials')" data-page="tutorials" data-i18n="nav.tutorials"></a></li>
+      <li><a onclick="navigate('showcase')" data-page="showcase" data-i18n="nav.showcase"></a></li>
+      <li><a onclick="navigate('jobs')" data-page="jobs" data-i18n="nav.jobs"></a></li>
+      <li><a onclick="navigate('freelancers')" data-page="freelancers" data-i18n="nav.freelancers"></a></li>
+      <li><a onclick="navigate('leaderboard')" data-page="leaderboard" data-i18n="nav.leaderboard"></a></li>
     </ul>
 
     <div class="nav-actions" id="navActions"></div>
   </div>
 </nav>
 
+<!-- ========== NOTIFICATIONS PANEL ========== -->
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-header">
+    <h3>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+      </svg>
+      <span data-i18n="notif.title"></span>
+    </h3>
+    <button class="btn btn-ghost btn-sm" onclick="markAllRead()" data-i18n="notif.markAll"></button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
 <!-- ========== MAIN ========== -->
 <main>
 
-  <!-- ===== HOME ===== -->
+  <!-- HOME -->
   <section class="page active" id="page-home">
     <div class="hero">
-      <h1>جامعه حرفه‌ای بازی‌سازان روبلاکس ایران 🚀</h1>
-      <p>بزرگ‌ترین پلتفرم فارسی برای یادگیری، همکاری، فریلنسری و استخدام در حوزه روبلاکس استودیو. عضویت کاملاً رایگان!</p>
+      <h1 data-i18n="home.heroTitle"></h1>
+      <p data-i18n="home.heroSubtitle"></p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" onclick="openAuthModal()">🚀 عضویت رایگان</button>
-        <button class="btn btn-ghost" onclick="navigate('freelancers')">💼 دیدن فریلنسرها</button>
+        <button class="btn btn-primary" onclick="openAuthModal()">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="8.5" cy="7" r="4"/>
+            <line x1="20" y1="8" x2="20" y2="14"/>
+            <line x1="23" y1="11" x2="17" y2="11"/>
+          </svg>
+          <span data-i18n="home.ctaJoin"></span>
+        </button>
+        <button class="btn btn-ghost" onclick="navigate('freelancers')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+          <span data-i18n="home.ctaFreelancers"></span>
+        </button>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat-card">
-        <div class="stat-icon">👥</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
         <div class="stat-number" id="statUsers">0</div>
-        <div class="stat-label">کاربر ثبت‌شده</div>
+        <div class="stat-label" data-i18n="stats.users"></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">💬</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
         <div class="stat-number" id="statPosts">0</div>
-        <div class="stat-label">مطلب انجمن</div>
+        <div class="stat-label" data-i18n="stats.posts"></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">🎮</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+            <line x1="6" y1="12" x2="10" y2="12"/>
+            <line x1="8" y1="10" x2="8" y2="14"/>
+            <line x1="15" y1="13" x2="15.01" y2="13"/>
+            <line x1="18" y1="11" x2="18.01" y2="11"/>
+            <rect x="2" y="6" width="20" height="12" rx="3"/>
+          </svg>
+        </div>
         <div class="stat-number" id="statProjects">0</div>
-        <div class="stat-label">پروژه ثبت‌شده</div>
+        <div class="stat-label" data-i18n="stats.projects"></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">💼</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
         <div class="stat-number" id="statJobs">0</div>
-        <div class="stat-label">آگهی کاری</div>
+        <div class="stat-label" data-i18n="stats.jobs"></div>
       </div>
       <div class="stat-card">
-        <div class="stat-icon">⚡</div>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
         <div class="stat-number" id="statFreelancers">0</div>
-        <div class="stat-label">فریلنسر فعال</div>
+        <div class="stat-label" data-i18n="stats.freelancers"></div>
       </div>
     </div>
 
     <h2 class="section-title">
-      <span class="section-title-text">🏆 برترین مطلب‌نویس‌ها</span>
-      <button class="btn btn-ghost btn-sm" onclick="navigate('leaderboard')">مشاهده همه</button>
+      <span class="section-title-text" data-i18n="sections.topWriters"></span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('leaderboard')" data-i18n="common.viewAll"></button>
     </h2>
     <div id="homeLeaderboard"></div>
 
     <h2 class="section-title">
-      <span class="section-title-text">🔥 جدیدترین پروژه‌ها</span>
-      <button class="btn btn-ghost btn-sm" onclick="navigate('showcase')">مشاهده همه</button>
+      <span class="section-title-text" data-i18n="sections.latestProjects"></span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('showcase')" data-i18n="common.viewAll"></button>
     </h2>
     <div class="grid" id="featuredProjects"></div>
 
     <h2 class="section-title">
-      <span class="section-title-text">📚 آموزش‌های پرطرفدار</span>
-      <button class="btn btn-ghost btn-sm" onclick="navigate('tutorials')">مشاهده همه</button>
+      <span class="section-title-text" data-i18n="sections.popularTutorials"></span>
+      <button class="btn btn-ghost btn-sm" onclick="navigate('tutorials')" data-i18n="common.viewAll"></button>
     </h2>
     <div class="grid" id="featuredTutorials"></div>
   </section>
 
-  <!-- ===== FORUM ===== -->
+  <!-- FORUM -->
   <section class="page" id="page-forum">
     <h2 class="section-title">
-      <span class="section-title-text">💬 انجمن گفتگو</span>
-      <button class="btn btn-primary btn-sm" onclick="openNewPostModal()">✏️ موضوع جدید</button>
+      <span class="section-title-text" data-i18n="forum.title"></span>
+      <button class="btn btn-primary btn-sm" onclick="openNewPostModal()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span data-i18n="forum.newTopic"></span>
+      </button>
     </h2>
 
     <div class="search-bar">
-      <input type="text" id="forumSearch" placeholder="🔍 جستجو در موضوعات..." oninput="renderPosts()">
+      <input type="text" id="forumSearch" data-i18n-placeholder="forum.searchPlaceholder" oninput="renderPosts()">
     </div>
 
     <div class="tabs" id="forumTabs">
-      <button class="tab active" onclick="filterForum('all', this)">همه</button>
-      <button class="tab" onclick="filterForum('general', this)">💬 عمومی</button>
-      <button class="tab" onclick="filterForum('help', this)">🛠️ کمک فنی</button>
-      <button class="tab" onclick="filterForum('script', this)">📜 اسکریپت</button>
-      <button class="tab" onclick="filterForum('team', this)">🤝 هم‌تیمی</button>
-      <button class="tab" onclick="filterForum('money', this)">💰 درآمد</button>
-      <button class="tab" onclick="filterForum('showcase', this)">🎮 نمایش پروژه</button>
+      <button class="tab active" onclick="filterForum('all', this)" data-i18n="forum.tabs.all"></button>
+      <button class="tab" onclick="filterForum('general', this)" data-i18n="forum.tabs.general"></button>
+      <button class="tab" onclick="filterForum('help', this)" data-i18n="forum.tabs.help"></button>
+      <button class="tab" onclick="filterForum('script', this)" data-i18n="forum.tabs.script"></button>
+      <button class="tab" onclick="filterForum('team', this)" data-i18n="forum.tabs.team"></button>
+      <button class="tab" onclick="filterForum('money', this)" data-i18n="forum.tabs.money"></button>
+      <button class="tab" onclick="filterForum('showcase', this)" data-i18n="forum.tabs.showcase"></button>
     </div>
 
     <div id="postsList"></div>
   </section>
 
-  <!-- ===== TUTORIALS ===== -->
+  <!-- TUTORIALS -->
   <section class="page" id="page-tutorials">
     <h2 class="section-title">
-      <span class="section-title-text">📚 آموزش‌های روبلاکس استودیو</span>
-      <button class="btn btn-primary btn-sm" onclick="openNewTutorialModal()">➕ افزودن آموزش</button>
+      <span class="section-title-text" data-i18n="tutorials.title"></span>
+      <button class="btn btn-primary btn-sm" onclick="openNewTutorialModal()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span data-i18n="tutorials.add"></span>
+      </button>
     </h2>
 
     <div class="tabs">
-      <button class="tab active" onclick="filterTutorials('all', this)">همه</button>
-      <button class="tab" onclick="filterTutorials('beginner', this)">🌱 مبتدی</button>
-      <button class="tab" onclick="filterTutorials('intermediate', this)">⚡ متوسط</button>
-      <button class="tab" onclick="filterTutorials('advanced', this)">🚀 پیشرفته</button>
+      <button class="tab active" onclick="filterTutorials('all', this)" data-i18n="tutorials.levels.all"></button>
+      <button class="tab" onclick="filterTutorials('beginner', this)" data-i18n="tutorials.levels.beginner"></button>
+      <button class="tab" onclick="filterTutorials('intermediate', this)" data-i18n="tutorials.levels.intermediate"></button>
+      <button class="tab" onclick="filterTutorials('advanced', this)" data-i18n="tutorials.levels.advanced"></button>
     </div>
 
     <div class="grid" id="tutorialsGrid"></div>
   </section>
 
-  <!-- ===== SHOWCASE ===== -->
+  <!-- SHOWCASE -->
   <section class="page" id="page-showcase">
     <h2 class="section-title">
-      <span class="section-title-text">🎮 گالری پروژه‌ها</span>
-      <button class="btn btn-primary btn-sm" onclick="openNewProjectModal()">➕ افزودن پروژه</button>
+      <span class="section-title-text" data-i18n="showcase.title"></span>
+      <button class="btn btn-primary btn-sm" onclick="openNewProjectModal()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span data-i18n="showcase.add"></span>
+      </button>
     </h2>
 
     <div class="search-bar">
-      <input type="text" id="projectSearch" placeholder="🔍 جستجوی پروژه..." oninput="renderProjects()">
+      <input type="text" id="projectSearch" data-i18n-placeholder="showcase.searchPlaceholder" oninput="renderProjects()">
     </div>
 
     <div class="grid" id="projectsGrid"></div>
   </section>
 
-  <!-- ===== JOBS ===== -->
+  <!-- JOBS -->
   <section class="page" id="page-jobs">
     <h2 class="section-title">
-      <span class="section-title-text">💼 بازار کار و استخدام</span>
-      <button class="btn btn-primary btn-sm" onclick="openNewJobModal()">➕ ثبت آگهی</button>
+      <span class="section-title-text" data-i18n="jobs.title"></span>
+      <button class="btn btn-primary btn-sm" onclick="openNewJobModal()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span data-i18n="jobs.add"></span>
+      </button>
     </h2>
 
     <div class="tabs" id="jobsTabs">
-      <button class="tab active" onclick="filterJobs('all', this)">همه</button>
-      <button class="tab" onclick="filterJobs('hiring', this)">📢 استخدام</button>
-      <button class="tab" onclick="filterJobs('available', this)">🙋 آماده همکاری</button>
+      <button class="tab active" onclick="filterJobs('all', this)" data-i18n="jobs.tabs.all"></button>
+      <button class="tab" onclick="filterJobs('hiring', this)" data-i18n="jobs.tabs.hiring"></button>
+      <button class="tab" onclick="filterJobs('available', this)" data-i18n="jobs.tabs.available"></button>
     </div>
 
     <div class="grid" id="jobsGrid"></div>
   </section>
 
-  <!-- ===== FREELANCERS ===== -->
+  <!-- FREELANCERS -->
   <section class="page" id="page-freelancers">
     <h2 class="section-title">
-      <span class="section-title-text">⚡ فریلنسرهای حرفه‌ای</span>
-      <button class="btn btn-primary btn-sm" onclick="openFreelancerProfileModal()">➕ پروفایل فریلنسری</button>
+      <span class="section-title-text" data-i18n="freelancers.title"></span>
+      <button class="btn btn-primary btn-sm" onclick="openFreelancerProfileModal()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        <span data-i18n="freelancers.add"></span>
+      </button>
     </h2>
 
     <div class="chips" id="freelancerSkills"></div>
-
     <div class="grid grid-2" id="freelancersGrid"></div>
   </section>
 
-  <!-- ===== LEADERBOARD ===== -->
+  <!-- LEADERBOARD -->
   <section class="page" id="page-leaderboard">
     <h2 class="section-title">
-      <span class="section-title-text">🏆 برترین‌های جامعه</span>
+      <span class="section-title-text" data-i18n="leaderboard.title"></span>
     </h2>
 
     <div class="tabs" id="lbTabs">
-      <button class="tab active" onclick="filterLeaderboard('writers', this)">✍️ مطلب‌نویس‌ها</button>
-      <button class="tab" onclick="filterLeaderboard('helpful', this)">🤝 کمک‌کننده‌ها</button>
-      <button class="tab" onclick="filterLeaderboard('freelancers', this)">⚡ فریلنسرها</button>
-      <button class="tab" onclick="filterLeaderboard('projects', this)">🎮 پروژه‌سازها</button>
+      <button class="tab active" onclick="filterLeaderboard('writers', this)" data-i18n="leaderboard.tabs.writers"></button>
+      <button class="tab" onclick="filterLeaderboard('helpful', this)" data-i18n="leaderboard.tabs.helpful"></button>
+      <button class="tab" onclick="filterLeaderboard('freelancers', this)" data-i18n="leaderboard.tabs.freelancers"></button>
+      <button class="tab" onclick="filterLeaderboard('projects', this)" data-i18n="leaderboard.tabs.projects"></button>
     </div>
 
     <div id="leaderboardContent"></div>
@@ -998,9 +1569,9 @@
 </main>
 
 <footer>
-  <p>🎮 روبلاکس‌سازان ایران | پلتفرم جامعه بازی‌سازان</p>
-  <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
-    © 2025 - اطلاعات در مرورگر شما ذخیره می‌شود · <span id="footerStats"></span>
+  <p>RobloxDevs IR — <span data-i18n="footer.tagline"></span></p>
+  <p style="margin-top: 0.4rem; font-size: 0.78rem; opacity: 0.7;">
+    © 2025 · <span id="footerStats"></span>
   </p>
 </footer>
 
@@ -1008,19 +1579,16 @@
 <div class="modal-overlay" id="authModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('authModal')">✕</button>
-    <h2 id="authTitle">🚀 ورود / ثبت‌نام</h2>
+    <h2 data-i18n="auth.title"></h2>
     <div class="form-group">
-      <label>نام کاربری</label>
-      <input type="text" id="authUsername" placeholder="مثلاً: RobloxMaster" autocomplete="off">
+      <label data-i18n="auth.username"></label>
+      <input type="text" id="authUsername" autocomplete="off">
     </div>
     <div class="form-group">
-      <label>رمز عبور</label>
-      <input type="password" id="authPassword" placeholder="حداقل ۴ کاراکتر">
+      <label data-i18n="auth.password"></label>
+      <input type="password" id="authPassword">
     </div>
-    <button class="btn btn-primary btn-block" onclick="handleAuth()">ادامه</button>
-    <p style="text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 1rem;">
-      🔒 اطلاعات فقط در مرورگر شما ذخیره می‌شود
-    </p>
+    <button class="btn btn-primary btn-block" onclick="handleAuth()" data-i18n="auth.submit"></button>
   </div>
 </div>
 
@@ -1028,27 +1596,27 @@
 <div class="modal-overlay" id="postModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('postModal')">✕</button>
-    <h2>✏️ موضوع جدید</h2>
+    <h2 data-i18n="postModal.title"></h2>
     <div class="form-group">
-      <label>عنوان *</label>
-      <input type="text" id="postTitle" placeholder="عنوان جذاب بنویس...">
+      <label data-i18n="postModal.titleLabel"></label>
+      <input type="text" id="postTitle">
     </div>
     <div class="form-group">
-      <label>دسته‌بندی</label>
+      <label data-i18n="postModal.category"></label>
       <select id="postCategory">
-        <option value="general">💬 عمومی</option>
-        <option value="help">🛠️ کمک فنی</option>
-        <option value="script">📜 اسکریپت</option>
-        <option value="team">🤝 هم‌تیمی</option>
-        <option value="money">💰 درآمد</option>
-        <option value="showcase">🎮 نمایش پروژه</option>
+        <option value="general" data-i18n="forum.tabs.general"></option>
+        <option value="help" data-i18n="forum.tabs.help"></option>
+        <option value="script" data-i18n="forum.tabs.script"></option>
+        <option value="team" data-i18n="forum.tabs.team"></option>
+        <option value="money" data-i18n="forum.tabs.money"></option>
+        <option value="showcase" data-i18n="forum.tabs.showcase"></option>
       </select>
     </div>
     <div class="form-group">
-      <label>متن *</label>
-      <textarea id="postBody" placeholder="متن موضوع..."></textarea>
+      <label data-i18n="postModal.body"></label>
+      <textarea id="postBody"></textarea>
     </div>
-    <button class="btn btn-primary btn-block" onclick="createPost()">ثبت موضوع</button>
+    <button class="btn btn-primary btn-block" onclick="createPost()" data-i18n="postModal.submit"></button>
   </div>
 </div>
 
@@ -1056,14 +1624,14 @@
 <div class="modal-overlay" id="projectModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('projectModal')">✕</button>
-    <h2>🎮 افزودن پروژه</h2>
+    <h2 data-i18n="projectModal.title"></h2>
     <div class="form-group">
-      <label>نام پروژه *</label>
-      <input type="text" id="projectTitle" placeholder="مثلاً: شبیه‌ساز مزرعه">
+      <label data-i18n="projectModal.name"></label>
+      <input type="text" id="projectTitle">
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>ژانر</label>
+        <label data-i18n="projectModal.genre"></label>
         <select id="projectGenre">
           <option>Obby</option>
           <option>Simulator</option>
@@ -1076,23 +1644,23 @@
         </select>
       </div>
       <div class="form-group">
-        <label>وضعیت</label>
+        <label data-i18n="projectModal.status"></label>
         <select id="projectStatus">
-          <option value="released">✅ منتشر شده</option>
-          <option value="development">🔧 در حال ساخت</option>
-          <option value="concept">💡 ایده</option>
+          <option value="released" data-i18n="projectModal.statusReleased"></option>
+          <option value="development" data-i18n="projectModal.statusDev"></option>
+          <option value="concept" data-i18n="projectModal.statusConcept"></option>
         </select>
       </div>
     </div>
     <div class="form-group">
-      <label>لینک روبلاکس (اختیاری)</label>
+      <label data-i18n="projectModal.link"></label>
       <input type="text" id="projectLink" placeholder="https://www.roblox.com/games/...">
     </div>
     <div class="form-group">
-      <label>توضیحات *</label>
-      <textarea id="projectDesc" placeholder="درباره پروژه بنویس..."></textarea>
+      <label data-i18n="projectModal.desc"></label>
+      <textarea id="projectDesc"></textarea>
     </div>
-    <button class="btn btn-primary btn-block" onclick="createProject()">ثبت پروژه</button>
+    <button class="btn btn-primary btn-block" onclick="createProject()" data-i18n="projectModal.submit"></button>
   </div>
 </div>
 
@@ -1100,34 +1668,34 @@
 <div class="modal-overlay" id="tutorialModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('tutorialModal')">✕</button>
-    <h2>📚 افزودن آموزش</h2>
+    <h2 data-i18n="tutorialModal.title"></h2>
     <div class="form-group">
-      <label>عنوان *</label>
-      <input type="text" id="tutorialTitle" placeholder="عنوان آموزش...">
+      <label data-i18n="tutorialModal.name"></label>
+      <input type="text" id="tutorialTitle">
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>سطح</label>
+        <label data-i18n="tutorialModal.level"></label>
         <select id="tutorialLevel">
-          <option value="beginner">🌱 مبتدی</option>
-          <option value="intermediate">⚡ متوسط</option>
-          <option value="advanced">🚀 پیشرفته</option>
+          <option value="beginner" data-i18n="tutorials.levels.beginner"></option>
+          <option value="intermediate" data-i18n="tutorials.levels.intermediate"></option>
+          <option value="advanced" data-i18n="tutorials.levels.advanced"></option>
         </select>
       </div>
       <div class="form-group">
-        <label>مدت زمان</label>
-        <input type="text" id="tutorialDuration" placeholder="مثلاً: 30 دقیقه">
+        <label data-i18n="tutorialModal.duration"></label>
+        <input type="text" id="tutorialDuration">
       </div>
     </div>
     <div class="form-group">
-      <label>لینک (اختیاری)</label>
-      <input type="text" id="tutorialLink" placeholder="https://...">
+      <label data-i18n="tutorialModal.link"></label>
+      <input type="text" id="tutorialLink">
     </div>
     <div class="form-group">
-      <label>توضیحات *</label>
-      <textarea id="tutorialDesc" placeholder="درباره آموزش بنویس..."></textarea>
+      <label data-i18n="tutorialModal.desc"></label>
+      <textarea id="tutorialDesc"></textarea>
     </div>
-    <button class="btn btn-primary btn-block" onclick="createTutorial()">ثبت آموزش</button>
+    <button class="btn btn-primary btn-block" onclick="createTutorial()" data-i18n="tutorialModal.submit"></button>
   </div>
 </div>
 
@@ -1135,93 +1703,93 @@
 <div class="modal-overlay" id="jobModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('jobModal')">✕</button>
-    <h2>💼 ثبت آگهی کار</h2>
+    <h2 data-i18n="jobModal.title"></h2>
     <div class="form-group">
-      <label>عنوان *</label>
-      <input type="text" id="jobTitle" placeholder="مثلاً: استخدام اسکریپتر حرفه‌ای">
+      <label data-i18n="jobModal.name"></label>
+      <input type="text" id="jobTitle">
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>نوع</label>
+        <label data-i18n="jobModal.type"></label>
         <select id="jobType">
-          <option value="hiring">📢 استخدام می‌کنم</option>
-          <option value="available">🙋 آماده همکاری هستم</option>
+          <option value="hiring" data-i18n="jobs.tabs.hiring"></option>
+          <option value="available" data-i18n="jobs.tabs.available"></option>
         </select>
       </div>
       <div class="form-group">
-        <label>دسته‌بندی</label>
+        <label data-i18n="jobModal.tag"></label>
         <select id="jobTag">
-          <option>اسکریپت (Scripting)</option>
-          <option>بیلد (Building)</option>
-          <option>UI / UX</option>
-          <option>انیمیشن</option>
-          <option>مدلینگ (3D)</option>
-          <option>صداگذاری</option>
-          <option>مدیریت پروژه</option>
+          <option>Scripting</option>
+          <option>Building</option>
+          <option>UI/UX</option>
+          <option>Animation</option>
+          <option>3D Modeling</option>
+          <option>Sound</option>
+          <option>Project Manager</option>
           <option>GFX</option>
         </select>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>بودجه</label>
-        <input type="text" id="jobBudget" placeholder="مثلاً: 5 میلیون تومان">
+        <label data-i18n="jobModal.budget"></label>
+        <input type="text" id="jobBudget">
       </div>
       <div class="form-group">
-        <label>نوع پرداخت</label>
+        <label data-i18n="jobModal.payType"></label>
         <select id="jobPayType">
-          <option>مقطوعی</option>
-          <option>ساعتی</option>
-          <option>درصد از سود</option>
-          <option>توافقی</option>
+          <option data-i18n="jobModal.payFixed"></option>
+          <option data-i18n="jobModal.payHourly"></option>
+          <option data-i18n="jobModal.payPercent"></option>
+          <option data-i18n="jobModal.payNegotiable"></option>
         </select>
       </div>
     </div>
     <div class="form-group">
-      <label>توضیحات *</label>
-      <textarea id="jobDesc" placeholder="جزئیات بیشتر..."></textarea>
+      <label data-i18n="jobModal.desc"></label>
+      <textarea id="jobDesc"></textarea>
     </div>
-    <button class="btn btn-primary btn-block" onclick="createJob()">ثبت آگهی</button>
+    <button class="btn btn-primary btn-block" onclick="createJob()" data-i18n="jobModal.submit"></button>
   </div>
 </div>
 
-<!-- ========== FREELANCER PROFILE MODAL ========== -->
+<!-- ========== FREELANCER MODAL ========== -->
 <div class="modal-overlay" id="freelancerModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('freelancerModal')">✕</button>
-    <h2>⚡ پروفایل فریلنسری</h2>
+    <h2 data-i18n="freelancerModal.title"></h2>
     <div class="form-group">
-      <label>عنوان تخصص *</label>
-      <input type="text" id="flTitle" placeholder="مثلاً: اسکریپتر حرفه‌ای Lua">
+      <label data-i18n="freelancerModal.jobTitle"></label>
+      <input type="text" id="flTitle">
     </div>
     <div class="form-group">
-      <label>مهارت‌ها (با کاما جدا کن) *</label>
-      <input type="text" id="flSkills" placeholder="Lua, DataStore, UI, Multiplayer">
+      <label data-i18n="freelancerModal.skills"></label>
+      <input type="text" id="flSkills" placeholder="Lua, DataStore, UI...">
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>نرخ ساعتی</label>
-        <input type="text" id="flRate" placeholder="مثلاً: 500 هزار تومان">
+        <label data-i18n="freelancerModal.rate"></label>
+        <input type="text" id="flRate">
       </div>
       <div class="form-group">
-        <label>سابقه کار</label>
+        <label data-i18n="freelancerModal.exp"></label>
         <select id="flExp">
-          <option>تازه‌کار (زیر ۱ سال)</option>
-          <option>متوسط (۱-۳ سال)</option>
-          <option>حرفه‌ای (۳-۵ سال)</option>
-          <option>ارشد (۵+ سال)</option>
+          <option data-i18n="freelancerModal.exp0"></option>
+          <option data-i18n="freelancerModal.exp1"></option>
+          <option data-i18n="freelancerModal.exp2"></option>
+          <option data-i18n="freelancerModal.exp3"></option>
         </select>
       </div>
     </div>
     <div class="form-group">
-      <label>درباره من *</label>
-      <textarea id="flBio" placeholder="تجربه‌ها، پروژه‌های قبلی، تخصص‌ها..."></textarea>
+      <label data-i18n="freelancerModal.bio"></label>
+      <textarea id="flBio"></textarea>
     </div>
     <div class="form-group">
-      <label>راه ارتباطی (تلگرام/دیسکورد/ایمیل)</label>
-      <input type="text" id="flContact" placeholder="@username یا ایمیل">
+      <label data-i18n="freelancerModal.contact"></label>
+      <input type="text" id="flContact" placeholder="@username">
     </div>
-    <button class="btn btn-primary btn-block" onclick="createFreelancer()">ثبت پروفایل</button>
+    <button class="btn btn-primary btn-block" onclick="createFreelancer()" data-i18n="freelancerModal.submit"></button>
   </div>
 </div>
 
@@ -1233,31 +1801,453 @@
   </div>
 </div>
 
+<!-- ========== RATING MODAL ========== -->
+<div class="modal-overlay" id="ratingModal">
+  <div class="modal" style="max-width: 400px;">
+    <button class="modal-close" onclick="closeModal('ratingModal')">✕</button>
+    <h2 data-i18n="rating.title"></h2>
+    <div id="ratingContent"></div>
+  </div>
+</div>
+
 <!-- ========== TOAST ========== -->
 <div class="toast" id="toast"></div>
 
 <script>
 /* ============================================================
-   DATABASE - localStorage
+   I18N - TRANSLATIONS
+   ============================================================ */
+const I18N = {
+  fa: {
+    'nav.home': 'خانه',
+    'nav.forum': 'انجمن',
+    'nav.tutorials': 'آموزش',
+    'nav.showcase': 'پروژه‌ها',
+    'nav.jobs': 'بازار کار',
+    'nav.freelancers': 'فریلنسرها',
+    'nav.leaderboard': 'برترین‌ها',
+    'nav.mobile.home': 'خانه',
+    'nav.mobile.forum': 'انجمن',
+    'nav.mobile.jobs': 'کار',
+
+    'home.heroTitle': 'جامعه حرفه‌ای بازی‌سازان روبلاکس ایران',
+    'home.heroSubtitle': 'بزرگ‌ترین پلتفرم فارسی برای یادگیری، همکاری، فریلنسری و استخدام در حوزه روبلاکس استودیو. عضویت کاملاً رایگان!',
+    'home.ctaJoin': 'عضویت رایگان',
+    'home.ctaFreelancers': 'دیدن فریلنسرها',
+    'sections.topWriters': 'برترین مطلب‌نویس‌ها',
+    'sections.latestProjects': 'جدیدترین پروژه‌ها',
+    'sections.popularTutorials': 'آموزش‌های پرطرفدار',
+    'common.viewAll': 'مشاهده همه',
+
+    'stats.users': 'کاربر ثبت‌شده',
+    'stats.posts': 'مطلب انجمن',
+    'stats.projects': 'پروژه',
+    'stats.jobs': 'آگهی کاری',
+    'stats.freelancers': 'فریلنسر فعال',
+
+    'auth.title': 'ورود / ثبت‌نام',
+    'auth.username': 'نام کاربری',
+    'auth.password': 'رمز عبور',
+    'auth.submit': 'ادامه',
+
+    'forum.title': 'انجمن گفتگو',
+    'forum.newTopic': 'موضوع جدید',
+    'forum.searchPlaceholder': 'جستجو در موضوعات...',
+    'forum.tabs.all': 'همه',
+    'forum.tabs.general': 'عمومی',
+    'forum.tabs.help': 'کمک فنی',
+    'forum.tabs.script': 'اسکریپت',
+    'forum.tabs.team': 'هم‌تیمی',
+    'forum.tabs.money': 'درآمد',
+    'forum.tabs.showcase': 'نمایش پروژه',
+
+    'tutorials.title': 'آموزش‌های روبلاکس استودیو',
+    'tutorials.add': 'افزودن آموزش',
+    'tutorials.levels.all': 'همه سطوح',
+    'tutorials.levels.beginner': 'مبتدی',
+    'tutorials.levels.intermediate': 'متوسط',
+    'tutorials.levels.advanced': 'پیشرفته',
+
+    'showcase.title': 'گالری پروژه‌ها',
+    'showcase.add': 'افزودن پروژه',
+    'showcase.searchPlaceholder': 'جستجوی پروژه...',
+
+    'jobs.title': 'بازار کار و استخدام',
+    'jobs.add': 'ثبت آگهی',
+    'jobs.tabs.all': 'همه',
+    'jobs.tabs.hiring': 'استخدام',
+    'jobs.tabs.available': 'آماده همکاری',
+
+    'freelancers.title': 'فریلنسرهای حرفه‌ای',
+    'freelancers.add': 'پروفایل فریلنسری',
+
+    'leaderboard.title': 'برترین‌های جامعه',
+    'leaderboard.tabs.writers': 'مطلب‌نویس‌ها',
+    'leaderboard.tabs.helpful': 'کمک‌کننده‌ها',
+    'leaderboard.tabs.freelancers': 'فریلنسرها',
+    'leaderboard.tabs.projects': 'پروژه‌سازها',
+
+    'notif.title': 'اعلان‌ها',
+    'notif.markAll': 'خوانده شده',
+    'notif.empty': 'اعلان جدیدی نداری',
+    'notif.like': 'پست شما را لایک کرد',
+    'notif.comment': 'زیر پست شما نظر داد',
+    'notif.follow': 'شما را دنبال کرد',
+    'notif.welcome': 'به جامعه خوش آمدی',
+
+    'footer.tagline': 'پلتفرم جامعه بازی‌سازان',
+
+    'postModal.title': 'موضوع جدید',
+    'postModal.titleLabel': 'عنوان',
+    'postModal.category': 'دسته‌بندی',
+    'postModal.body': 'متن',
+    'postModal.submit': 'ثبت موضوع',
+
+    'projectModal.title': 'افزودن پروژه',
+    'projectModal.name': 'نام پروژه',
+    'projectModal.genre': 'ژانر',
+    'projectModal.status': 'وضعیت',
+    'projectModal.statusReleased': 'منتشر شده',
+    'projectModal.statusDev': 'در حال ساخت',
+    'projectModal.statusConcept': 'ایده',
+    'projectModal.link': 'لینک روبلاکس',
+    'projectModal.desc': 'توضیحات',
+    'projectModal.submit': 'ثبت پروژه',
+
+    'tutorialModal.title': 'افزودن آموزش',
+    'tutorialModal.name': 'عنوان',
+    'tutorialModal.level': 'سطح',
+    'tutorialModal.duration': 'مدت زمان',
+    'tutorialModal.link': 'لینک',
+    'tutorialModal.desc': 'توضیحات',
+    'tutorialModal.submit': 'ثبت آموزش',
+
+    'jobModal.title': 'ثبت آگهی کار',
+    'jobModal.name': 'عنوان',
+    'jobModal.type': 'نوع',
+    'jobModal.tag': 'دسته‌بندی',
+    'jobModal.budget': 'بودجه',
+    'jobModal.payType': 'نوع پرداخت',
+    'jobModal.payFixed': 'مقطوعی',
+    'jobModal.payHourly': 'ساعتی',
+    'jobModal.payPercent': 'درصد از سود',
+    'jobModal.payNegotiable': 'توافقی',
+    'jobModal.desc': 'توضیحات',
+    'jobModal.submit': 'ثبت آگهی',
+
+    'freelancerModal.title': 'پروفایل فریلنسری',
+    'freelancerModal.jobTitle': 'عنوان تخصص',
+    'freelancerModal.skills': 'مهارت‌ها (با کاما)',
+    'freelancerModal.rate': 'نرخ ساعتی',
+    'freelancerModal.exp': 'سابقه کار',
+    'freelancerModal.exp0': 'تازه‌کار (زیر ۱ سال)',
+    'freelancerModal.exp1': 'متوسط (۱-۳ سال)',
+    'freelancerModal.exp2': 'حرفه‌ای (۳-۵ سال)',
+    'freelancerModal.exp3': 'ارشد (۵+ سال)',
+    'freelancerModal.bio': 'درباره من',
+    'freelancerModal.contact': 'راه ارتباطی',
+    'freelancerModal.submit': 'ثبت پروفایل',
+
+    'rating.title': 'امتیازدهی به فریلنسر',
+    'rating.yourRating': 'امتیاز شما',
+    'rating.submit': 'ثبت امتیاز',
+    'rating.select': 'لطفاً یک امتیاز انتخاب کن',
+
+    'profile.title': 'پروفایل',
+    'profile.memberSince': 'عضو از',
+    'profile.stats': 'آمار',
+    'profile.posts': 'مطلب',
+    'profile.projects': 'پروژه',
+    'profile.tutorials': 'آموزش',
+    'profile.likes': 'لایک دریافتی',
+    'profile.uploadAvatar': 'آپلود عکس پروفایل',
+    'profile.logout': 'خروج از حساب',
+
+    'comments.title': 'نظرات',
+    'comments.placeholder': 'نظر خود را بنویسید...',
+    'comments.submit': 'ارسال',
+    'comments.noComments': 'هنوز نظری ثبت نشده',
+    'comments.beFirst': 'اولین نظر را بنویس',
+    'comments.you': 'شما',
+
+    'errors.login': 'ابتدا وارد شوید',
+    'errors.fillAll': 'همه فیلدها را پر کنید',
+    'errors.shortUsername': 'نام کاربری حداقل ۳ کاراکتر',
+    'errors.invalidUsername': 'نام کاربری نامعتبر',
+    'errors.shortPassword': 'رمز حداقل ۴ کاراکتر',
+    'errors.wrongPassword': 'رمز اشتباه است',
+    'errors.shortTitle': 'عنوان حداقل ۵ کاراکتر',
+
+    'success.login': 'خوش آمدی',
+    'success.welcome': 'خوش آمدی',
+    'success.logout': 'خارج شدید',
+    'success.postCreated': 'موضوع ثبت شد',
+    'success.projectCreated': 'پروژه ثبت شد',
+    'success.tutorialCreated': 'آموزش ثبت شد',
+    'success.jobCreated': 'آگهی ثبت شد',
+    'success.freelancerSaved': 'پروفایل فریلنسری ذخیره شد',
+    'success.commentAdded': 'نظر ثبت شد',
+    'success.ratingAdded': 'امتیاز ثبت شد',
+    'success.avatarUpdated': 'عکس پروفایل به‌روز شد',
+
+    'empty.noData': 'هنوز داده‌ای نیست',
+    'empty.beFirst': 'اولین نفر باش!'
+  },
+
+  en: {
+    'nav.home': 'Home',
+    'nav.forum': 'Forum',
+    'nav.tutorials': 'Tutorials',
+    'nav.showcase': 'Projects',
+    'nav.jobs': 'Jobs',
+    'nav.freelancers': 'Freelancers',
+    'nav.leaderboard': 'Leaderboard',
+    'nav.mobile.home': 'Home',
+    'nav.mobile.forum': 'Forum',
+    'nav.mobile.jobs': 'Jobs',
+
+    'home.heroTitle': 'Iran\'s Professional Roblox Developer Community',
+    'home.heroSubtitle': 'The largest Persian platform for learning, collaborating, freelancing, and hiring in Roblox Studio. Free to join!',
+    'home.ctaJoin': 'Join Free',
+    'home.ctaFreelancers': 'Browse Freelancers',
+    'sections.topWriters': 'Top Writers',
+    'sections.latestProjects': 'Latest Projects',
+    'sections.popularTutorials': 'Popular Tutorials',
+    'common.viewAll': 'View All',
+
+    'stats.users': 'Users',
+    'stats.posts': 'Forum Posts',
+    'stats.projects': 'Projects',
+    'stats.jobs': 'Job Posts',
+    'stats.freelancers': 'Freelancers',
+
+    'auth.title': 'Login / Register',
+    'auth.username': 'Username',
+    'auth.password': 'Password',
+    'auth.submit': 'Continue',
+
+    'forum.title': 'Community Forum',
+    'forum.newTopic': 'New Topic',
+    'forum.searchPlaceholder': 'Search topics...',
+    'forum.tabs.all': 'All',
+    'forum.tabs.general': 'General',
+    'forum.tabs.help': 'Help',
+    'forum.tabs.script': 'Scripting',
+    'forum.tabs.team': 'Team',
+    'forum.tabs.money': 'Money',
+    'forum.tabs.showcase': 'Showcase',
+
+    'tutorials.title': 'Roblox Studio Tutorials',
+    'tutorials.add': 'Add Tutorial',
+    'tutorials.levels.all': 'All Levels',
+    'tutorials.levels.beginner': 'Beginner',
+    'tutorials.levels.intermediate': 'Intermediate',
+    'tutorials.levels.advanced': 'Advanced',
+
+    'showcase.title': 'Projects Gallery',
+    'showcase.add': 'Add Project',
+    'showcase.searchPlaceholder': 'Search projects...',
+
+    'jobs.title': 'Jobs & Hiring',
+    'jobs.add': 'Post Job',
+    'jobs.tabs.all': 'All',
+    'jobs.tabs.hiring': 'Hiring',
+    'jobs.tabs.available': 'Available',
+
+    'freelancers.title': 'Professional Freelancers',
+    'freelancers.add': 'Freelancer Profile',
+
+    'leaderboard.title': 'Community Leaders',
+    'leaderboard.tabs.writers': 'Writers',
+    'leaderboard.tabs.helpful': 'Helpful',
+    'leaderboard.tabs.freelancers': 'Freelancers',
+    'leaderboard.tabs.projects': 'Project Makers',
+
+    'notif.title': 'Notifications',
+    'notif.markAll': 'Mark all read',
+    'notif.empty': 'No new notifications',
+    'notif.like': 'liked your post',
+    'notif.comment': 'commented on your post',
+    'notif.follow': 'followed you',
+    'notif.welcome': 'Welcome to the community',
+
+    'footer.tagline': 'Developer Community Platform',
+
+    'postModal.title': 'New Topic',
+    'postModal.titleLabel': 'Title',
+    'postModal.category': 'Category',
+    'postModal.body': 'Content',
+    'postModal.submit': 'Submit',
+
+    'projectModal.title': 'Add Project',
+    'projectModal.name': 'Project Name',
+    'projectModal.genre': 'Genre',
+    'projectModal.status': 'Status',
+    'projectModal.statusReleased': 'Released',
+    'projectModal.statusDev': 'In Development',
+    'projectModal.statusConcept': 'Concept',
+    'projectModal.link': 'Roblox Link',
+    'projectModal.desc': 'Description',
+    'projectModal.submit': 'Submit',
+
+    'tutorialModal.title': 'Add Tutorial',
+    'tutorialModal.name': 'Title',
+    'tutorialModal.level': 'Level',
+    'tutorialModal.duration': 'Duration',
+    'tutorialModal.link': 'Link',
+    'tutorialModal.desc': 'Description',
+    'tutorialModal.submit': 'Submit',
+
+    'jobModal.title': 'Post a Job',
+    'jobModal.name': 'Title',
+    'jobModal.type': 'Type',
+    'jobModal.tag': 'Category',
+    'jobModal.budget': 'Budget',
+    'jobModal.payType': 'Pay Type',
+    'jobModal.payFixed': 'Fixed',
+    'jobModal.payHourly': 'Hourly',
+    'jobModal.payPercent': 'Revenue %',
+    'jobModal.payNegotiable': 'Negotiable',
+    'jobModal.desc': 'Description',
+    'jobModal.submit': 'Submit',
+
+    'freelancerModal.title': 'Freelancer Profile',
+    'freelancerModal.jobTitle': 'Professional Title',
+    'freelancerModal.skills': 'Skills (comma separated)',
+    'freelancerModal.rate': 'Hourly Rate',
+    'freelancerModal.exp': 'Experience',
+    'freelancerModal.exp0': 'Junior (< 1 year)',
+    'freelancerModal.exp1': 'Mid (1-3 years)',
+    'freelancerModal.exp2': 'Senior (3-5 years)',
+    'freelancerModal.exp3': 'Expert (5+ years)',
+    'freelancerModal.bio': 'About Me',
+    'freelancerModal.contact': 'Contact',
+    'freelancerModal.submit': 'Submit',
+
+    'rating.title': 'Rate Freelancer',
+    'rating.yourRating': 'Your Rating',
+    'rating.submit': 'Submit Rating',
+    'rating.select': 'Please select a rating',
+
+    'profile.title': 'Profile',
+    'profile.memberSince': 'Member since',
+    'profile.stats': 'Stats',
+    'profile.posts': 'Posts',
+    'profile.projects': 'Projects',
+    'profile.tutorials': 'Tutorials',
+    'profile.likes': 'Likes Received',
+    'profile.uploadAvatar': 'Upload Avatar',
+    'profile.logout': 'Logout',
+
+    'comments.title': 'Comments',
+    'comments.placeholder': 'Write a comment...',
+    'comments.submit': 'Send',
+    'comments.noComments': 'No comments yet',
+    'comments.beFirst': 'Be the first to comment',
+    'comments.you': 'You',
+
+    'errors.login': 'Please login first',
+    'errors.fillAll': 'Please fill all fields',
+    'errors.shortUsername': 'Username min 3 chars',
+    'errors.invalidUsername': 'Invalid username',
+    'errors.shortPassword': 'Password min 4 chars',
+    'errors.wrongPassword': 'Wrong password',
+    'errors.shortTitle': 'Title min 5 chars',
+
+    'success.login': 'Welcome back',
+    'success.welcome': 'Welcome',
+    'success.logout': 'Logged out',
+    'success.postCreated': 'Topic posted',
+    'success.projectCreated': 'Project added',
+    'success.tutorialCreated': 'Tutorial added',
+    'success.jobCreated': 'Job posted',
+    'success.freelancerSaved': 'Freelancer profile saved',
+    'success.commentAdded': 'Comment added',
+    'success.ratingAdded': 'Rating submitted',
+    'success.avatarUpdated': 'Avatar updated',
+
+    'empty.noData': 'No data yet',
+    'empty.beFirst': 'Be the first!'
+  }
+};
+
+/* ============================================================
+   DB - localStorage
    ============================================================ */
 const DB = {
   get(key, def = []) {
     try {
-      const val = localStorage.getItem('rblx_' + key);
+      const val = localStorage.getItem('rdi_' + key);
       return val ? JSON.parse(val) : def;
     } catch { return def; }
   },
-  set(key, val) { localStorage.setItem('rblx_' + key, JSON.stringify(val)); },
-  remove(key) { localStorage.removeItem('rblx_' + key); }
+  set(key, val) { localStorage.setItem('rdi_' + key, JSON.stringify(val)); }
 };
 
-// ===== State =====
+/* ============================================================
+   STATE
+   ============================================================ */
 let currentUser = DB.get('currentUser', null);
+let currentLang = DB.get('lang', 'fa');
+let currentTheme = DB.get('theme', 'dark');
 let forumFilter = 'all';
 let tutorialFilter = 'all';
 let jobFilter = 'all';
 let freelancerFilter = 'all';
 let leaderboardType = 'writers';
+let openComments = new Set();
+let viewedPosts = DB.get('viewedPosts', []);
+
+const FREELANCER_SKILLS_MAP = {
+  fa: ['همه', 'Lua', 'DataStore', 'UI', 'بیلد', 'انیمیشن', 'مدلینگ', 'GFX', 'صداگذاری', 'Multiplayer'],
+  en: ['All', 'Lua', 'DataStore', 'UI', 'Building', 'Animation', 'Modeling', 'GFX', 'Sound', 'Multiplayer']
+};
+
+/* ============================================================
+   THEME
+   ============================================================ */
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', currentTheme);
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  DB.set('theme', currentTheme);
+  applyTheme();
+  renderNavActions();
+}
+
+/* ============================================================
+   LANGUAGE
+   ============================================================ */
+function t(key) {
+  return I18N[currentLang][key] || I18N.fa[key] || key;
+}
+
+function applyLanguage() {
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const translation = t(key);
+    if (translation) el.textContent = translation;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const translation = t(key);
+    if (translation) el.placeholder = translation;
+  });
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  DB.set('lang', lang);
+  applyLanguage();
+  renderAll();
+  renderNavActions();
+}
 
 /* ============================================================
    NAVIGATION
@@ -1266,25 +2256,117 @@ function navigate(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + page);
   if (target) target.classList.add('active');
-
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === page);
   });
-
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeNotifPanel();
 }
 
 /* ============================================================
-   MODALS
+   MODAL
    ============================================================ */
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.classList.remove('active');
-  });
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('active'); });
 });
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer;
+function showToast(msg, type = '') {
+  const toast = document.getElementById('toast');
+  const icons = {
+    success: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    error: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    '': ''
+  };
+  toast.innerHTML = (icons[type] || '') + '<span>' + escapeHtml(msg) + '</span>';
+  toast.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function toLocaleNum(n) {
+  const str = String(n);
+  if (currentLang === 'fa') return str.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  return str;
+}
+
+function timeAgo(timestamp) {
+  const seconds = Math.floor((Date.now() - timestamp) / 1000);
+  const map = {
+    fa: { s: 'ثانیه', m: 'دقیقه', h: 'ساعت', d: 'روز', ago: 'پیش' },
+    en: { s: 's', m: 'm', h: 'h', d: 'd', ago: 'ago' }
+  };
+  const l = map[currentLang];
+  if (seconds < 60) return currentLang === 'fa' ? `همین حالا` : `just now`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return currentLang === 'fa' ? `${toLocaleNum(minutes)} ${l.m} ${l.ago}` : `${minutes}${l.m} ${l.ago}`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return currentLang === 'fa' ? `${toLocaleNum(hours)} ${l.h} ${l.ago}` : `${hours}${l.h} ${l.ago}`;
+  const days = Math.floor(hours / 24);
+  if (days < 30) return currentLang === 'fa' ? `${toLocaleNum(days)} ${l.d} ${l.ago}` : `${days}${l.d} ${l.ago}`;
+  return new Date(timestamp).toLocaleDateString(currentLang === 'fa' ? 'fa-IR' : 'en-US');
+}
+
+function emptyState(iconSvg, title, desc, btnAction, btnText) {
+  return `
+    <div class="empty-state">
+      <div class="icon-wrap">${iconSvg}</div>
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(desc)}</p>
+      ${btnAction ? `<button class="btn btn-primary" onclick="${btnAction}">${escapeHtml(btnText)}</button>` : ''}
+    </div>
+  `;
+}
+
+function avatarHtml(user, size = '') {
+  const users = DB.get('users', []);
+  const u = users.find(x => x.username === user);
+  const avatar = u?.avatar;
+  if (avatar) {
+    return `<div class="avatar ${size}"><img src="${avatar}" alt="${escapeHtml(user)}"></div>`;
+  }
+  return `<div class="avatar ${size}">${escapeHtml((user[0] || '?').toUpperCase())}</div>`;
+}
+
+/* ============================================================
+   SVG ICONS
+   ============================================================ */
+const ICONS = {
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+  comment: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  starOutline: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+  camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
+  sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+  moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+  inbox: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>',
+  gamepad: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="3"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+  briefcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+  zap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+};
 
 /* ============================================================
    AUTH
@@ -1298,120 +2380,161 @@ function handleAuth() {
   const username = document.getElementById('authUsername').value.trim();
   const password = document.getElementById('authPassword').value.trim();
 
-  if (username.length < 3) return showToast('❌ نام کاربری حداقل ۳ کاراکتر', 'error');
-  if (!/^[a-zA-Z0-9_آ-ی]+$/.test(username)) return showToast('❌ نام کاربری فقط حروف و عدد', 'error');
-  if (password.length < 4) return showToast('❌ رمز حداقل ۴ کاراکتر', 'error');
+  if (username.length < 3) return showToast(t('errors.shortUsername'), 'error');
+  if (!/^[a-zA-Z0-9_آ-ی]+$/.test(username)) return showToast(t('errors.invalidUsername'), 'error');
+  if (password.length < 4) return showToast(t('errors.shortPassword'), 'error');
 
   let users = DB.get('users', []);
   let user = users.find(u => u.username === username);
 
   if (user) {
-    if (user.password !== password) return showToast('❌ رمز اشتباه است', 'error');
-    showToast(`✅ خوش برگشتی ${username}!`, 'success');
+    if (user.password !== password) return showToast(t('errors.wrongPassword'), 'error');
+    showToast(`${t('success.login')} ${username}!`, 'success');
   } else {
-    users.push({
-      username,
-      password,
-      joined: new Date().toLocaleDateString('fa-IR'),
-      posts: 0,
-      likes: 0,
-      projects: 0,
-      tutorials: 0,
-      jobs: 0,
-      helpful: 0,
-      isFreelancer: false
-    });
+    const newUser = {
+      username, password,
+      joined: Date.now(),
+      posts: 0, likes: 0, projects: 0, tutorials: 0,
+      jobs: 0, helpful: 0, comments: 0,
+      avatar: null,
+      notifications: [{
+        id: Date.now(),
+        type: 'welcome',
+        from: 'system',
+        text: t('notif.welcome'),
+        time: Date.now(),
+        read: false
+      }]
+    };
+    users.push(newUser);
     DB.set('users', users);
-    showToast(`🎉 خوش اومدی ${username}!`, 'success');
+    showToast(`${t('success.welcome')} ${username}!`, 'success');
   }
 
   currentUser = { username };
   DB.set('currentUser', currentUser);
-
   closeModal('authModal');
   document.getElementById('authUsername').value = '';
   document.getElementById('authPassword').value = '';
-  renderAuthState();
   renderAll();
+  renderNavActions();
 }
 
 function logout() {
   currentUser = null;
   DB.set('currentUser', null);
-  renderAuthState();
+  renderNavActions();
   renderAll();
-  showToast('👋 خارج شدی', 'success');
+  showToast(t('success.logout'), 'success');
 }
 
-function renderAuthState() {
+/* ============================================================
+   NAV ACTIONS
+   ============================================================ */
+function renderNavActions() {
   const el = document.getElementById('navActions');
-  if (currentUser) {
-    el.innerHTML = `
+  const themeIcon = currentTheme === 'dark' ? ICONS.sun : ICONS.moon;
+
+  const unreadCount = currentUser ? getUserUnreadCount() : 0;
+
+  el.innerHTML = `
+    <div class="lang-switch">
+      <button class="lang-opt ${currentLang === 'fa' ? 'active' : ''}" onclick="setLanguage('fa')">FA</button>
+      <button class="lang-opt ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">EN</button>
+    </div>
+    <button class="btn btn-icon" onclick="toggleTheme()" title="Theme">${themeIcon}</button>
+    ${currentUser ? `
+      <button class="btn btn-icon notif-btn" onclick="toggleNotifPanel()" title="${t('notif.title')}">
+        ${ICONS.bell}
+        ${unreadCount > 0 ? `<span class="notif-badge">${toLocaleNum(unreadCount)}</span>` : ''}
+      </button>
       <div class="user-chip" onclick="showProfile()">
-        <div class="avatar sm">${currentUser.username[0].toUpperCase()}</div>
-        <span>${currentUser.username}</span>
+        ${avatarHtml(currentUser.username, 'sm')}
+        <span>${escapeHtml(currentUser.username)}</span>
       </div>
-      <button class="btn btn-ghost btn-sm" onclick="logout()">خروج</button>
-    `;
-  } else {
-    el.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openAuthModal()">ورود / ثبت‌نام</button>`;
-  }
-}
-
-/* ============================================================
-   PROFILE
-   ============================================================ */
-function showProfile() {
-  if (!currentUser) return;
-  const users = DB.get('users', []);
-  const user = users.find(u => u.username === currentUser.username);
-  if (!user) return;
-
-  const posts = DB.get('posts', []).filter(p => p.author === currentUser.username).length;
-  const projects = DB.get('projects', []).filter(p => p.author === currentUser.username).length;
-  const tutorials = DB.get('tutorials', []).filter(t => t.author === currentUser.username).length;
-
-  document.getElementById('profileContent').innerHTML = `
-    <div class="profile-header">
-      <div class="profile-avatar">${currentUser.username[0].toUpperCase()}</div>
-      <div>
-        <h2 style="margin: 0;">${currentUser.username}</h2>
-        <p style="color: var(--muted); font-size: 0.85rem;">عضو از ${user.joined}</p>
-      </div>
-    </div>
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.5rem;">
-      <div class="stat-card"><div class="stat-number">${posts}</div><div class="stat-label">مطلب</div></div>
-      <div class="stat-card"><div class="stat-number">${projects}</div><div class="stat-label">پروژه</div></div>
-      <div class="stat-card"><div class="stat-number">${tutorials}</div><div class="stat-label">آموزش</div></div>
-      <div class="stat-card"><div class="stat-number">${user.likes || 0}</div><div class="stat-label">لایک دریافتی</div></div>
-    </div>
-    <button class="btn btn-danger btn-block" onclick="logout(); closeModal('profileModal')">🚪 خروج از حساب</button>
+    ` : `
+      <button class="btn btn-primary btn-sm" onclick="openAuthModal()">${currentLang === 'fa' ? 'ورود' : 'Login'}</button>
+    `}
   `;
-  openModal('profileModal');
 }
 
 /* ============================================================
-   USER STAT UPDATE
+   NOTIFICATIONS
    ============================================================ */
-function updateUserStat(username, field, delta = 1) {
+function getUserUnreadCount() {
   const users = DB.get('users', []);
-  const user = users.find(u => u.username === username);
-  if (user) {
-    user[field] = (user[field] || 0) + delta;
-    DB.set('users', users);
-  }
+  const u = users.find(x => x.username === currentUser?.username);
+  return (u?.notifications || []).filter(n => !n.read).length;
 }
 
-/* ============================================================
-   TOAST
-   ============================================================ */
-let toastTimer;
-function showToast(msg, type = '') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + type;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+function toggleNotifPanel() {
+  const panel = document.getElementById('notifPanel');
+  panel.classList.toggle('active');
+  if (panel.classList.contains('active')) renderNotifications();
+}
+
+function closeNotifPanel() {
+  document.getElementById('notifPanel').classList.remove('active');
+}
+
+function renderNotifications() {
+  const users = DB.get('users', []);
+  const u = users.find(x => x.username === currentUser?.username);
+  const notifs = (u?.notifications || []).slice().sort((a, b) => b.time - a.time);
+
+  const list = document.getElementById('notifList');
+  if (!notifs.length) {
+    list.innerHTML = `<div style="padding: 2.5rem 1rem; text-align: center; color: var(--muted); font-size: 0.85rem;">
+      ${ICONS.inbox}<div style="margin-top: 0.5rem;">${t('notif.empty')}</div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = notifs.map(n => `
+    <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotifRead(${n.id})">
+      <div class="notif-content">
+        <div class="notif-text">${escapeHtml(n.text)}</div>
+        <div class="notif-time">${timeAgo(n.time)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function markNotifRead(id) {
+  const users = DB.get('users', []);
+  const u = users.find(x => x.username === currentUser?.username);
+  if (!u) return;
+  const n = u.notifications.find(x => x.id === id);
+  if (n) n.read = true;
+  DB.set('users', users);
+  renderNotifications();
+  renderNavActions();
+}
+
+function markAllRead() {
+  const users = DB.get('users', []);
+  const u = users.find(x => x.username === currentUser?.username);
+  if (!u) return;
+  u.notifications.forEach(n => n.read = true);
+  DB.set('users', users);
+  renderNotifications();
+  renderNavActions();
+}
+
+function addNotification(username, text) {
+  if (username === currentUser?.username) return;
+  const users = DB.get('users', []);
+  const u = users.find(x => x.username === username);
+  if (!u) return;
+  u.notifications = u.notifications || [];
+  u.notifications.unshift({
+    id: Date.now() + Math.random(),
+    text,
+    time: Date.now(),
+    read: false
+  });
+  if (u.notifications.length > 30) u.notifications = u.notifications.slice(0, 30);
+  DB.set('users', users);
 }
 
 /* ============================================================
@@ -1419,8 +2542,14 @@ function showToast(msg, type = '') {
    ============================================================ */
 function filterForum(cat, btn) {
   forumFilter = cat;
-  document.querySelectorAll('#forumTabs .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#forumTabs .tab').forEach(t2 => t2.classList.remove('active'));
   btn.classList.add('active');
+  renderPosts();
+}
+
+function toggleComments(postId) {
+  if (openComments.has(postId)) openComments.delete(postId);
+  else openComments.add(postId);
   renderPosts();
 }
 
@@ -1436,43 +2565,91 @@ function renderPosts() {
 
   const container = document.getElementById('postsList');
   if (!filtered.length) {
-    container.innerHTML = emptyState('📭', 'هنوز موضوعی ثبت نشده', 'اولین نفری باش که موضوع ایجاد می‌کنه!', 'openNewPostModal()', '✏️ ایجاد موضوع');
+    container.innerHTML = emptyState(ICONS.inbox, t('empty.noData'), t('empty.beFirst'), 'openNewPostModal()', t('forum.newTopic'));
     return;
   }
 
-  container.innerHTML = filtered.map(p => `
-    <div class="post">
-      <div class="post-header">
-        <div class="avatar">${p.author[0].toUpperCase()}</div>
-        <div>
-          <div style="font-weight: 600;">${p.author}</div>
-          <div class="post-meta">${p.date} · ${getCategoryName(p.category)}</div>
+  container.innerHTML = filtered.map(p => {
+    const isLiked = p.likedBy?.includes(currentUser?.username);
+    const commentsOpen = openComments.has(p.id);
+    const comments = p.commentsList || [];
+
+    return `
+      <div class="post" data-post-id="${p.id}">
+        <div class="post-header">
+          ${avatarHtml(p.author)}
+          <div class="post-header-info">
+            <div class="post-author-name">${escapeHtml(p.author)}</div>
+            <div class="post-meta">
+              <span>${timeAgo(p.date)}</span>
+              <span>·</span>
+              <span>${getCategoryName(p.category)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-title">${escapeHtml(p.title)}</div>
+        <div class="post-body">${escapeHtml(p.body)}</div>
+        <div class="post-actions">
+          <button class="action-btn ${isLiked ? 'liked' : ''}" onclick="likePost(${p.id})">
+            ${ICONS.heart}
+            <span class="count">${toLocaleNum(p.likes || 0)}</span>
+          </button>
+          <button class="action-btn ${commentsOpen ? 'comments-open' : ''}" onclick="toggleComments(${p.id})">
+            ${ICONS.comment}
+            <span class="count">${toLocaleNum((p.commentsList || []).length)}</span>
+          </button>
+          <button class="action-btn views" disabled>
+            ${ICONS.eye}
+            <span class="count">${toLocaleNum(p.views || 0)}</span>
+          </button>
+        </div>
+        <div class="comments-section ${commentsOpen ? 'open' : ''}">
+          ${comments.length ? comments.map(c => `
+            <div class="comment">
+              ${avatarHtml(c.author, 'sm')}
+              <div class="comment-body">
+                <div class="comment-header">
+                  <span class="comment-author">${escapeHtml(c.author)}${c.author === currentUser?.username ? ` (${t('comments.you')})` : ''}</span>
+                  <span class="comment-time">${timeAgo(c.time)}</span>
+                </div>
+                <div class="comment-text">${escapeHtml(c.text)}</div>
+              </div>
+            </div>
+          `).join('') : `
+            <div style="text-align:center; padding: 1rem; color: var(--muted); font-size: 0.82rem;">
+              ${t('comments.noComments')} — ${t('comments.beFirst')}
+            </div>
+          `}
+          ${currentUser ? `
+            <div class="comment-form">
+              ${avatarHtml(currentUser.username, 'sm')}
+              <div class="comment-form-inner">
+                <textarea id="comment-input-${p.id}" placeholder="${t('comments.placeholder')}"></textarea>
+                <div class="comment-form-actions">
+                  <button class="btn btn-primary btn-sm" onclick="addComment(${p.id})">
+                    ${ICONS.send}
+                    ${t('comments.submit')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ` : `
+            <div style="text-align:center; padding: 1rem; color: var(--muted); font-size: 0.82rem;">
+              ${t('errors.login')}
+            </div>
+          `}
         </div>
       </div>
-      <div class="post-title">${escapeHtml(p.title)}</div>
-      <div class="post-body">${escapeHtml(p.body)}</div>
-      <div class="post-footer">
-        <span onclick="likePost(${p.id})" class="${p.likedBy?.includes(currentUser?.username) ? 'liked' : ''}">❤️ ${p.likes || 0} لایک</span>
-        <span>💬 ${p.comments || 0} کامنت</span>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function getCategoryName(cat) {
-  const map = {
-    general: '💬 عمومی',
-    help: '🛠️ کمک فنی',
-    script: '📜 اسکریپت',
-    team: '🤝 هم‌تیمی',
-    money: '💰 درآمد',
-    showcase: '🎮 نمایش پروژه'
-  };
-  return map[cat] || cat;
+  return t('forum.tabs.' + cat);
 }
 
 function likePost(id) {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   const posts = DB.get('posts', []);
   const p = posts.find(x => x.id === id);
   if (!p) return;
@@ -1487,13 +2664,54 @@ function likePost(id) {
     p.likes = (p.likes || 0) + 1;
     updateUserStat(p.author, 'likes', 1);
     updateUserStat(p.author, 'helpful', 1);
+    addNotification(p.author, `${currentUser.username} ${t('notif.like')}`);
   }
   DB.set('posts', posts);
   renderPosts();
 }
 
+function addComment(postId) {
+  if (!currentUser) return showToast(t('errors.login'), 'error');
+  const input = document.getElementById('comment-input-' + postId);
+  const text = input.value.trim();
+  if (!text) return showToast(t('errors.fillAll'), 'error');
+
+  const posts = DB.get('posts', []);
+  const p = posts.find(x => x.id === postId);
+  if (!p) return;
+
+  p.commentsList = p.commentsList || [];
+  p.commentsList.push({
+    author: currentUser.username,
+    text,
+    time: Date.now()
+  });
+  p.comments = p.commentsList.length;
+  DB.set('posts', posts);
+
+  updateUserStat(currentUser.username, 'comments', 1);
+  addNotification(p.author, `${currentUser.username} ${t('notif.comment')}`);
+
+  input.value = '';
+  renderPosts();
+  showToast(t('success.commentAdded'), 'success');
+}
+
+function markPostViewed(postId) {
+  if (viewedPosts.includes(postId)) return;
+  viewedPosts.push(postId);
+  DB.set('viewedPosts', viewedPosts);
+
+  const posts = DB.get('posts', []);
+  const p = posts.find(x => x.id === postId);
+  if (p) {
+    p.views = (p.views || 0) + 1;
+    DB.set('posts', posts);
+  }
+}
+
 function openNewPostModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   openModal('postModal');
 }
 
@@ -1502,17 +2720,17 @@ function createPost() {
   const body = document.getElementById('postBody').value.trim();
   const category = document.getElementById('postCategory').value;
 
-  if (!title || !body) return showToast('❌ همه فیلدها را پر کن', 'error');
-  if (title.length < 5) return showToast('❌ عنوان حداقل ۵ کاراکتر', 'error');
+  if (!title || !body) return showToast(t('errors.fillAll'), 'error');
+  if (title.length < 5) return showToast(t('errors.shortTitle'), 'error');
 
   const posts = DB.get('posts', []);
   posts.unshift({
     id: Date.now(),
     title, body, category,
     author: currentUser.username,
-    likes: 0, comments: 0,
-    likedBy: [],
-    date: new Date().toLocaleDateString('fa-IR')
+    likes: 0, comments: 0, views: 0,
+    likedBy: [], commentsList: [],
+    date: Date.now()
   });
   DB.set('posts', posts);
   updateUserStat(currentUser.username, 'posts', 1);
@@ -1522,7 +2740,7 @@ function createPost() {
   closeModal('postModal');
   renderPosts();
   renderStats();
-  showToast('✅ موضوع ثبت شد', 'success');
+  showToast(t('success.postCreated'), 'success');
 }
 
 /* ============================================================
@@ -1530,39 +2748,37 @@ function createPost() {
    ============================================================ */
 function filterTutorials(level, btn) {
   tutorialFilter = level;
-  document.querySelectorAll('#page-tutorials .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#page-tutorials .tab').forEach(t2 => t2.classList.remove('active'));
   btn.classList.add('active');
   renderTutorials();
 }
 
 function renderTutorials() {
   const tuts = DB.get('tutorials', []);
-  const filtered = tutorialFilter === 'all' ? tuts : tuts.filter(t => t.level === tutorialFilter);
+  const filtered = tutorialFilter === 'all' ? tuts : tuts.filter(t2 => t2.level === tutorialFilter);
   const container = document.getElementById('tutorialsGrid');
 
   if (!filtered.length) {
-    container.innerHTML = emptyState('📚', 'هنوز آموزشی ثبت نشده', 'اولین آموزش رو تو اضافه کن!', 'openNewTutorialModal()', '➕ افزودن آموزش');
+    container.innerHTML = emptyState(ICONS.book, t('empty.noData'), t('empty.beFirst'), 'openNewTutorialModal()', t('tutorials.add'));
     return;
   }
 
-  const levelNames = { beginner: '🌱 مبتدی', intermediate: '⚡ متوسط', advanced: '🚀 پیشرفته' };
-
-  container.innerHTML = filtered.map(t => `
+  container.innerHTML = filtered.map(t2 => `
     <div class="card">
-      <div class="card-icon">📖</div>
-      <h3>${escapeHtml(t.title)}</h3>
-      <p>${escapeHtml(t.desc)}</p>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.8rem; flex-wrap: wrap; gap: 0.4rem;">
-        <span class="badge">${levelNames[t.level]}</span>
-        ${t.duration ? `<span style="color: var(--muted); font-size: 0.78rem;">⏱ ${t.duration}</span>` : ''}
+      <div class="card-icon">${ICONS.book}</div>
+      <h3>${escapeHtml(t2.title)}</h3>
+      <p>${escapeHtml(t2.desc)}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 0.7rem; flex-wrap: wrap; gap: 0.4rem;">
+        <span class="badge">${t('tutorials.levels.' + t2.level)}</span>
+        ${t2.duration ? `<span style="color: var(--muted); font-size: 0.75rem;">${escapeHtml(t2.duration)}</span>` : ''}
       </div>
-      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">👤 ${t.author}</p>
+      <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem;">${escapeHtml(t2.author)}</p>
     </div>
   `).join('');
 }
 
 function openNewTutorialModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   openModal('tutorialModal');
 }
 
@@ -1573,14 +2789,14 @@ function createTutorial() {
   const duration = document.getElementById('tutorialDuration').value.trim();
   const link = document.getElementById('tutorialLink').value.trim();
 
-  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
+  if (!title || !desc) return showToast(t('errors.fillAll'), 'error');
 
   const tuts = DB.get('tutorials', []);
   tuts.unshift({
     id: Date.now(),
     title, desc, level, duration, link,
     author: currentUser.username,
-    date: new Date().toLocaleDateString('fa-IR')
+    date: Date.now()
   });
   DB.set('tutorials', tuts);
   updateUserStat(currentUser.username, 'tutorials', 1);
@@ -1593,7 +2809,7 @@ function createTutorial() {
   renderTutorials();
   renderStats();
   renderFeatured();
-  showToast('✅ آموزش ثبت شد', 'success');
+  showToast(t('success.tutorialCreated'), 'success');
 }
 
 /* ============================================================
@@ -1608,28 +2824,26 @@ function renderProjects() {
 
   const container = document.getElementById('projectsGrid');
   if (!filtered.length) {
-    container.innerHTML = emptyState('🎮', 'هنوز پروژه‌ای ثبت نشده', 'اولین پروژه‌ت رو معرفی کن!', 'openNewProjectModal()', '➕ افزودن پروژه');
+    container.innerHTML = emptyState(ICONS.gamepad, t('empty.noData'), t('empty.beFirst'), 'openNewProjectModal()', t('showcase.add'));
     return;
   }
 
-  const statusNames = { released: '✅ منتشر شده', development: '🔧 در حال ساخت', concept: '💡 ایده' };
-
   container.innerHTML = filtered.map(p => `
     <div class="card">
-      <div class="card-icon success">🎮</div>
+      <div class="card-icon success">${ICONS.gamepad}</div>
       <h3>${escapeHtml(p.title)}</h3>
       <p>${escapeHtml(p.desc)}</p>
-      <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
-        <span class="badge cyan">${p.genre}</span>
-        <span class="badge green">${statusNames[p.status] || ''}</span>
+      <div style="margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
+        <span class="badge cyan">${escapeHtml(p.genre)}</span>
+        <span class="badge green">${t('projectModal.status' + (p.status === 'released' ? 'Released' : p.status === 'development' ? 'Dev' : 'Concept'))}</span>
       </div>
-      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">👤 ${p.author}</p>
+      <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem;">${escapeHtml(p.author)}</p>
     </div>
   `).join('');
 }
 
 function openNewProjectModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   openModal('projectModal');
 }
 
@@ -1640,14 +2854,14 @@ function createProject() {
   const status = document.getElementById('projectStatus').value;
   const link = document.getElementById('projectLink').value.trim() || '#';
 
-  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
+  if (!title || !desc) return showToast(t('errors.fillAll'), 'error');
 
   const projects = DB.get('projects', []);
   projects.unshift({
     id: Date.now(),
     title, desc, genre, status, link,
     author: currentUser.username,
-    date: new Date().toLocaleDateString('fa-IR')
+    date: Date.now()
   });
   DB.set('projects', projects);
   updateUserStat(currentUser.username, 'projects', 1);
@@ -1659,7 +2873,7 @@ function createProject() {
   renderProjects();
   renderStats();
   renderFeatured();
-  showToast('✅ پروژه ثبت شد', 'success');
+  showToast(t('success.projectCreated'), 'success');
 }
 
 /* ============================================================
@@ -1667,7 +2881,7 @@ function createProject() {
    ============================================================ */
 function filterJobs(type, btn) {
   jobFilter = type;
-  document.querySelectorAll('#jobsTabs .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#jobsTabs .tab').forEach(t2 => t2.classList.remove('active'));
   btn.classList.add('active');
   renderJobs();
 }
@@ -1678,29 +2892,29 @@ function renderJobs() {
   const container = document.getElementById('jobsGrid');
 
   if (!filtered.length) {
-    container.innerHTML = emptyState('💼', 'هنوز آگهی‌ای ثبت نشده', 'اولین آگهی استخدام یا همکاری رو ثبت کن!', 'openNewJobModal()', '➕ ثبت آگهی');
+    container.innerHTML = emptyState(ICONS.briefcase, t('empty.noData'), t('empty.beFirst'), 'openNewJobModal()', t('jobs.add'));
     return;
   }
 
   container.innerHTML = filtered.map(j => `
     <div class="card">
-      <div class="card-icon ${j.type === 'hiring' ? 'gold' : 'success'}">${j.type === 'hiring' ? '📢' : '🙋'}</div>
+      <div class="card-icon ${j.type === 'hiring' ? 'gold' : 'success'}">${ICONS.briefcase}</div>
       <h3>${escapeHtml(j.title)}</h3>
       <p>${escapeHtml(j.desc)}</p>
-      <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
-        <span class="badge ${j.type === 'hiring' ? '' : 'green'}">${j.type === 'hiring' ? 'استخدام' : 'آماده همکاری'}</span>
-        <span class="badge cyan">${j.tag}</span>
-        ${j.budget ? `<span class="badge gold">💰 ${j.budget}</span>` : ''}
+      <div style="margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.2rem;">
+        <span class="badge ${j.type === 'hiring' ? '' : 'green'}">${t('jobs.tabs.' + j.type)}</span>
+        <span class="badge cyan">${escapeHtml(j.tag)}</span>
+        ${j.budget ? `<span class="badge gold">${escapeHtml(j.budget)}</span>` : ''}
       </div>
-      <p style="color: var(--muted); font-size: 0.78rem; margin-top: 0.6rem;">
-        👤 ${j.author} · 📅 ${j.date}
+      <p style="color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem;">
+        ${escapeHtml(j.author)} · ${timeAgo(j.date)}
       </p>
     </div>
   `).join('');
 }
 
 function openNewJobModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   openModal('jobModal');
 }
 
@@ -1712,14 +2926,14 @@ function createJob() {
   const budget = document.getElementById('jobBudget').value.trim();
   const payType = document.getElementById('jobPayType').value;
 
-  if (!title || !desc) return showToast('❌ عنوان و توضیحات الزامی', 'error');
+  if (!title || !desc) return showToast(t('errors.fillAll'), 'error');
 
   const jobs = DB.get('jobs', []);
   jobs.unshift({
     id: Date.now(),
     title, desc, type, tag, budget, payType,
     author: currentUser.username,
-    date: new Date().toLocaleDateString('fa-IR')
+    date: Date.now()
   });
   DB.set('jobs', jobs);
   updateUserStat(currentUser.username, 'jobs', 1);
@@ -1730,19 +2944,23 @@ function createJob() {
   closeModal('jobModal');
   renderJobs();
   renderStats();
-  showToast('✅ آگهی ثبت شد', 'success');
+  showToast(t('success.jobCreated'), 'success');
 }
 
 /* ============================================================
-   FREELANCERS
+   FREELANCERS + RATING
    ============================================================ */
-const FREELANCER_SKILLS = ['همه', 'Lua', 'DataStore', 'UI', 'بیلد', 'انیمیشن', 'مدلینگ', 'GFX', 'صداگذاری', 'Multiplayer'];
-
 function renderFreelancerSkills() {
   const container = document.getElementById('freelancerSkills');
-  container.innerHTML = FREELANCER_SKILLS.map(s => `
-    <div class="chip ${freelancerFilter === s ? 'active' : ''}" onclick="filterFreelancers('${s}')">${s}</div>
-  `).join('');
+  const skills = FREELANCER_SKILLS_MAP[currentLang];
+  const current = freelancerFilter === 'all' && currentLang === 'fa' ? 'همه' :
+                  freelancerFilter === 'all' && currentLang === 'en' ? 'All' : freelancerFilter;
+
+  container.innerHTML = skills.map(s => {
+    const isAll = (s === 'همه' || s === 'All');
+    const isActive = (isAll && (freelancerFilter === 'all' || freelancerFilter === s)) || freelancerFilter === s;
+    return `<div class="chip ${isActive ? 'active' : ''}" onclick="filterFreelancers('${isAll ? 'all' : s}')">${escapeHtml(s)}</div>`;
+  }).join('');
 }
 
 function filterFreelancers(skill) {
@@ -1755,7 +2973,7 @@ function renderFreelancers() {
   const freelancers = DB.get('freelancers', []);
   let filtered = freelancers;
 
-  if (freelancerFilter !== 'همه') {
+  if (freelancerFilter !== 'all') {
     filtered = freelancers.filter(f =>
       f.skills.some(s => s.toLowerCase().includes(freelancerFilter.toLowerCase()))
     );
@@ -1763,37 +2981,120 @@ function renderFreelancers() {
 
   const container = document.getElementById('freelancersGrid');
   if (!filtered.length) {
-    container.innerHTML = emptyState('⚡', 'هنوز فریلنسری ثبت نشده', 'اولین پروفایل فریلنسری رو ایجاد کن!', 'openFreelancerProfileModal()', '➕ ایجاد پروفایل');
+    container.innerHTML = emptyState(ICONS.zap, t('empty.noData'), t('empty.beFirst'), 'openFreelancerProfileModal()', t('freelancers.add'));
     return;
   }
 
-  container.innerHTML = filtered.map(f => `
-    <div class="freelancer-card">
-      <div class="freelancer-header">
-        <div class="avatar">${f.author[0].toUpperCase()}</div>
-        <div style="flex: 1;">
-          <div style="font-weight: 700;">${f.author}</div>
-          <div style="color: var(--muted); font-size: 0.8rem;">${escapeHtml(f.title)}</div>
+  container.innerHTML = filtered.map(f => {
+    const rating = f.ratings && f.ratings.length
+      ? (f.ratings.reduce((a, b) => a + b.score, 0) / f.ratings.length).toFixed(1)
+      : null;
+    const ratingCount = f.ratings?.length || 0;
+    const canRate = currentUser && currentUser.username !== f.author;
+    const userRated = f.ratings?.some(r => r.by === currentUser?.username);
+
+    return `
+      <div class="freelancer-card">
+        <div class="freelancer-header">
+          ${avatarHtml(f.author)}
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 700; color: var(--text-strong);">${escapeHtml(f.author)}</div>
+            <div style="color: var(--muted); font-size: 0.78rem;">${escapeHtml(f.title)}</div>
+          </div>
+          <div style="text-align: ${currentLang === 'fa' ? 'left' : 'right'};">
+            ${rating
+              ? `<div class="rating-display"><span class="star filled">${ICONS.star}</span><strong>${toLocaleNum(rating)}</strong><span>(${toLocaleNum(ratingCount)})</span></div>`
+              : `<div style="color: var(--muted); font-size: 0.75rem;">${currentLang === 'fa' ? 'جدید' : 'New'}</div>`}
+            <div style="color: var(--muted); font-size: 0.7rem; margin-top: 0.1rem;">${escapeHtml(f.exp)}</div>
+          </div>
         </div>
-        <div style="text-align: left;">
-          <div class="rating-stars">⭐ ${f.rating || 'جدید'}</div>
-          <div style="color: var(--muted); font-size: 0.72rem;">${f.exp}</div>
+        <p style="color: var(--muted); font-size: 0.85rem;">${escapeHtml(f.bio)}</p>
+        <div class="freelancer-skills">
+          ${f.skills.map(s => `<span class="skill-tag">${escapeHtml(s.trim())}</span>`).join('')}
         </div>
+        <div class="freelancer-stats">
+          <span>${f.rate ? escapeHtml(f.rate) : (currentLang === 'fa' ? 'توافقی' : 'Negotiable')}</span>
+          ${f.contact ? `<span style="color: var(--accent); font-weight: 600;">${escapeHtml(f.contact)}</span>` : ''}
+        </div>
+        ${canRate ? `
+          <button class="btn btn-ghost btn-sm btn-block" onclick="openRatingModal('${escapeHtml(f.author)}')">
+            ${ICONS.star}
+            ${userRated ? (currentLang === 'fa' ? 'تغییر امتیاز' : 'Change Rating') : t('rating.title')}
+          </button>
+        ` : ''}
       </div>
-      <p style="color: var(--muted); font-size: 0.85rem;">${escapeHtml(f.bio)}</p>
-      <div class="freelancer-skills">
-        ${f.skills.map(s => `<span class="skill-tag">${escapeHtml(s.trim())}</span>`).join('')}
-      </div>
-      <div class="freelancer-stats">
-        <span>💰 ${f.rate || 'توافقی'}</span>
-        ${f.contact ? `<span style="color: var(--accent); font-weight: 600;">📩 ${escapeHtml(f.contact)}</span>` : ''}
-      </div>
+    `;
+  }).join('');
+}
+
+function openRatingModal(author) {
+  if (!currentUser) return showToast(t('errors.login'), 'error');
+  const freelancers = DB.get('freelancers', []);
+  const f = freelancers.find(x => x.author === author);
+  if (!f) return;
+
+  const existing = f.ratings?.find(r => r.by === currentUser.username);
+  let selected = existing?.score || 0;
+
+  const content = document.getElementById('ratingContent');
+  content.innerHTML = `
+    <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">
+      ${escapeHtml(author)} — ${escapeHtml(f.title)}
+    </p>
+    <div class="star-rating" id="ratingStars" style="justify-content: center; gap: 6px; margin: 1rem 0;">
+      ${[1,2,3,4,5].map(i => `
+        <span class="star ${i <= selected ? 'filled' : ''}" data-value="${i}" onclick="selectRating(${i})" style="width: 32px; height: 32px;">
+          ${i <= selected ? ICONS.star : ICONS.starOutline}
+        </span>
+      `).join('')}
     </div>
+    <div id="ratingValueText" style="text-align: center; color: var(--gold); font-weight: 700; margin-bottom: 1rem; min-height: 24px;">
+      ${selected ? toLocaleNum(selected) + ' / 5' : ''}
+    </div>
+    <button class="btn btn-primary btn-block" onclick="submitRating('${escapeHtml(author)}')">
+      ${t('rating.submit')}
+    </button>
+  `;
+  window._selectedRating = selected;
+  openModal('ratingModal');
+}
+
+function selectRating(value) {
+  window._selectedRating = value;
+  const container = document.getElementById('ratingStars');
+  container.innerHTML = [1,2,3,4,5].map(i => `
+    <span class="star ${i <= value ? 'filled' : ''}" data-value="${i}" onclick="selectRating(${i})" style="width: 32px; height: 32px;">
+      ${i <= value ? ICONS.star : ICONS.starOutline}
+    </span>
   `).join('');
+  document.getElementById('ratingValueText').textContent = toLocaleNum(value) + ' / 5';
+}
+
+function submitRating(author) {
+  const score = window._selectedRating;
+  if (!score) return showToast(t('rating.select'), 'error');
+
+  const freelancers = DB.get('freelancers', []);
+  const f = freelancers.find(x => x.author === author);
+  if (!f) return;
+
+  f.ratings = f.ratings || [];
+  const existing = f.ratings.findIndex(r => r.by === currentUser.username);
+  if (existing >= 0) {
+    f.ratings[existing].score = score;
+    f.ratings[existing].time = Date.now();
+  } else {
+    f.ratings.push({ by: currentUser.username, score, time: Date.now() });
+    addNotification(author, `${currentUser.username} ${currentLang === 'fa' ? 'به شما امتیاز داد' : 'rated you'} ${score}/5`);
+  }
+  DB.set('freelancers', freelancers);
+  closeModal('ratingModal');
+  renderFreelancers();
+  showToast(t('success.ratingAdded'), 'success');
 }
 
 function openFreelancerProfileModal() {
-  if (!currentUser) return showToast('❌ اول وارد شو', 'error');
+  if (!currentUser) return showToast(t('errors.login'), 'error');
   openModal('freelancerModal');
 }
 
@@ -1805,31 +3106,27 @@ function createFreelancer() {
   const bio = document.getElementById('flBio').value.trim();
   const contact = document.getElementById('flContact').value.trim();
 
-  if (!title || !skillsStr || !bio) return showToast('❌ همه فیلدهای ستاره‌دار الزامی', 'error');
+  if (!title || !skillsStr || !bio) return showToast(t('errors.fillAll'), 'error');
 
   const skills = skillsStr.split(',').map(s => s.trim()).filter(Boolean);
   const freelancers = DB.get('freelancers', []);
-  const existing = freelancers.findIndex(f => f.author === currentUser.username);
+  const existingIdx = freelancers.findIndex(f => f.author === currentUser.username);
 
-  const freelancer = {
+  const data = {
     id: Date.now(),
     author: currentUser.username,
     title, skills, rate, exp, bio, contact,
-    rating: 'جدید',
-    date: new Date().toLocaleDateString('fa-IR')
+    date: Date.now()
   };
 
-  if (existing >= 0) {
-    freelancer.rating = freelancers[existing].rating;
-    freelancers[existing] = freelancer;
-    showToast('✅ پروفایل به‌روز شد', 'success');
+  if (existingIdx >= 0) {
+    data.ratings = freelancers[existingIdx].ratings || [];
+    freelancers[existingIdx] = data;
   } else {
-    freelancers.unshift(freelancer);
-    showToast('✅ پروفایل ثبت شد', 'success');
+    data.ratings = [];
+    freelancers.unshift(data);
   }
-
   DB.set('freelancers', freelancers);
-  updateUserStat(currentUser.username, 'isFreelancer', 1);
 
   document.getElementById('flTitle').value = '';
   document.getElementById('flSkills').value = '';
@@ -1839,6 +3136,7 @@ function createFreelancer() {
   closeModal('freelancerModal');
   renderFreelancers();
   renderStats();
+  showToast(t('success.freelancerSaved'), 'success');
 }
 
 /* ============================================================
@@ -1846,7 +3144,7 @@ function createFreelancer() {
    ============================================================ */
 function filterLeaderboard(type, btn) {
   leaderboardType = type;
-  document.querySelectorAll('#lbTabs .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#lbTabs .tab').forEach(t2 => t2.classList.remove('active'));
   btn.classList.add('active');
   renderLeaderboard();
 }
@@ -1854,49 +3152,42 @@ function filterLeaderboard(type, btn) {
 function renderLeaderboard() {
   const users = DB.get('users', []);
   const freelancers = DB.get('freelancers', []);
-
   let data = [];
 
   if (leaderboardType === 'writers') {
-    data = users
-      .map(u => ({ name: u.username, score: u.posts || 0, extra: `${u.likes || 0} لایک` }))
-      .filter(u => u.score > 0)
-      .sort((a, b) => b.score - a.score);
+    data = users.map(u => ({ name: u.username, score: u.posts || 0, extra: `${toLocaleNum(u.likes || 0)} ❤` }))
+      .filter(u => u.score > 0).sort((a, b) => b.score - a.score);
   } else if (leaderboardType === 'helpful') {
-    data = users
-      .map(u => ({ name: u.username, score: u.helpful || 0, extra: `${u.posts || 0} مطلب` }))
-      .filter(u => u.score > 0)
-      .sort((a, b) => b.score - a.score);
+    data = users.map(u => ({ name: u.username, score: u.helpful || 0, extra: `${toLocaleNum(u.comments || 0)} 💬` }))
+      .filter(u => u.score > 0).sort((a, b) => b.score - a.score);
   } else if (leaderboardType === 'freelancers') {
-    data = freelancers
-      .map(f => ({ name: f.author, score: f.skills?.length || 0, extra: f.title }))
-      .sort((a, b) => b.score - a.score);
+    data = freelancers.map(f => {
+      const r = f.ratings?.length ? (f.ratings.reduce((a, b) => a + b.score, 0) / f.ratings.length).toFixed(1) : 0;
+      return { name: f.author, score: parseFloat(r) || 0, extra: f.title };
+    }).sort((a, b) => b.score - a.score);
   } else if (leaderboardType === 'projects') {
-    data = users
-      .map(u => ({ name: u.username, score: u.projects || 0, extra: `${u.tutorials || 0} آموزش` }))
-      .filter(u => u.score > 0)
-      .sort((a, b) => b.score - a.score);
+    data = users.map(u => ({ name: u.username, score: u.projects || 0, extra: `${toLocaleNum(u.tutorials || 0)} 📚` }))
+      .filter(u => u.score > 0).sort((a, b) => b.score - a.score);
   }
 
   const container = document.getElementById('leaderboardContent');
   if (!data.length) {
-    container.innerHTML = emptyState('🏆', 'هنوز داده‌ای وجود ندارد', 'با فعالیت در جامعه، در این لیست ظاهر شو!', null, null);
+    container.innerHTML = emptyState(ICONS.trophy, t('empty.noData'), t('empty.beFirst'), null, null);
     return;
   }
 
   container.innerHTML = data.slice(0, 20).map((item, i) => {
     const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
     const itemClass = i === 0 ? 'top-1' : i === 1 ? 'top-2' : i === 2 ? 'top-3' : '';
-    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
     return `
       <div class="leaderboard-item ${itemClass}">
-        <div class="rank-badge ${rankClass}">${medal}</div>
-        <div class="avatar sm ${rankClass}">${item.name[0].toUpperCase()}</div>
+        <div class="rank-badge ${rankClass}">${toLocaleNum(i + 1)}</div>
+        ${avatarHtml(item.name, 'sm ' + rankClass)}
         <div class="leaderboard-info">
-          <div class="leaderboard-name">${item.name}</div>
+          <div class="leaderboard-name">${escapeHtml(item.name)}</div>
           <div class="leaderboard-stats">${item.extra}</div>
         </div>
-        <div class="leaderboard-score">${toPersianNum(item.score)}</div>
+        <div class="leaderboard-score">${toLocaleNum(item.score)}</div>
       </div>
     `;
   }).join('');
@@ -1904,67 +3195,61 @@ function renderLeaderboard() {
 
 function renderHomeLeaderboard() {
   const users = DB.get('users', []);
-  const data = users
-    .map(u => ({ name: u.username, score: u.posts || 0, likes: u.likes || 0 }))
-    .filter(u => u.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+  const data = users.map(u => ({ name: u.username, score: u.posts || 0, likes: u.likes || 0 }))
+    .filter(u => u.score > 0).sort((a, b) => b.score - a.score).slice(0, 3);
 
   const container = document.getElementById('homeLeaderboard');
   if (!data.length) {
-    container.innerHTML = emptyState('🏆', 'هنوز کسی فعال نشده', 'اولین مطلب‌نویس جامعه باش!', 'openNewPostModal()', '✏️ نوشتن مطلب');
+    container.innerHTML = emptyState(ICONS.trophy, t('empty.noData'), t('empty.beFirst'), null, null);
     return;
   }
 
   container.innerHTML = data.map((item, i) => {
     const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : 'bronze';
-    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉';
     return `
       <div class="leaderboard-item top-${i + 1}">
-        <div class="rank-badge ${rankClass}">${medal}</div>
-        <div class="avatar sm ${rankClass}">${item.name[0].toUpperCase()}</div>
+        <div class="rank-badge ${rankClass}">${toLocaleNum(i + 1)}</div>
+        ${avatarHtml(item.name, 'sm ' + rankClass)}
         <div class="leaderboard-info">
-          <div class="leaderboard-name">${item.name}</div>
-          <div class="leaderboard-stats">${item.score} مطلب · ${item.likes} لایک</div>
+          <div class="leaderboard-name">${escapeHtml(item.name)}</div>
+          <div class="leaderboard-stats">${toLocaleNum(item.score)} · ${toLocaleNum(item.likes)} ❤</div>
         </div>
-        <div class="leaderboard-score">${toPersianNum(item.score)}</div>
+        <div class="leaderboard-score">${toLocaleNum(item.score)}</div>
       </div>
     `;
   }).join('');
 }
 
 /* ============================================================
-   HOME - FEATURED
+   HOME FEATURED
    ============================================================ */
 function renderFeatured() {
   const projects = DB.get('projects', []).slice(0, 3);
   const projEl = document.getElementById('featuredProjects');
-
   if (!projects.length) {
-    projEl.innerHTML = emptyState('🎮', 'هنوز پروژه‌ای نیست', 'اولین پروژه رو ثبت کن!', 'openNewProjectModal()', '➕ افزودن پروژه');
+    projEl.innerHTML = emptyState(ICONS.gamepad, t('empty.noData'), t('empty.beFirst'), 'openNewProjectModal()', t('showcase.add'));
   } else {
     projEl.innerHTML = projects.map(p => `
       <div class="card clickable" onclick="navigate('showcase')">
-        <div class="card-icon success">🎮</div>
+        <div class="card-icon success">${ICONS.gamepad}</div>
         <h3>${escapeHtml(p.title)}</h3>
         <p>${escapeHtml(p.desc)}</p>
-        <span class="badge cyan">${p.genre}</span>
+        <span class="badge cyan">${escapeHtml(p.genre)}</span>
       </div>
     `).join('');
   }
 
   const tuts = DB.get('tutorials', []).slice(0, 3);
   const tutEl = document.getElementById('featuredTutorials');
-
   if (!tuts.length) {
-    tutEl.innerHTML = emptyState('📚', 'هنوز آموزشی نیست', 'اولین آموزش رو ثبت کن!', 'openNewTutorialModal()', '➕ افزودن آموزش');
+    tutEl.innerHTML = emptyState(ICONS.book, t('empty.noData'), t('empty.beFirst'), 'openNewTutorialModal()', t('tutorials.add'));
   } else {
-    tutEl.innerHTML = tuts.map(t => `
+    tutEl.innerHTML = tuts.map(t2 => `
       <div class="card clickable" onclick="navigate('tutorials')">
-        <div class="card-icon">📖</div>
-        <h3>${escapeHtml(t.title)}</h3>
-        <p>${escapeHtml(t.desc)}</p>
-        ${t.duration ? `<span class="badge">⏱ ${t.duration}</span>` : ''}
+        <div class="card-icon">${ICONS.book}</div>
+        <h3>${escapeHtml(t2.title)}</h3>
+        <p>${escapeHtml(t2.desc)}</p>
+        ${t2.duration ? `<span class="badge">${escapeHtml(t2.duration)}</span>` : ''}
       </div>
     `).join('');
   }
@@ -1986,51 +3271,102 @@ function renderStats() {
   animateNumber('statJobs', jobs);
   animateNumber('statFreelancers', freelancers);
 
-  const total = users + posts + projects + jobs;
-  const footerEl = document.getElementById('footerStats');
-  if (footerEl) footerEl.textContent = `${toPersianNum(total)} فعالیت ثبت شده`;
+  const footer = document.getElementById('footerStats');
+  if (footer) {
+    const total = users + posts + projects + jobs;
+    footer.textContent = `${toLocaleNum(total)} ${currentLang === 'fa' ? 'فعالیت ثبت شده' : 'activities'}`;
+  }
 }
 
 function animateNumber(id, target) {
   const el = document.getElementById(id);
   if (!el) return;
   let current = 0;
-  if (target === 0) { el.textContent = '۰'; return; }
+  if (target === 0) { el.textContent = '0'; return; }
   const step = Math.max(1, Math.ceil(target / 20));
   clearInterval(el._timer);
   el._timer = setInterval(() => {
     current += step;
     if (current >= target) { current = target; clearInterval(el._timer); }
-    el.textContent = toPersianNum(current);
+    el.textContent = toLocaleNum(current);
   }, 40);
 }
 
 /* ============================================================
-   HELPERS
+   USER STATS
    ============================================================ */
-function toPersianNum(n) {
-  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+function updateUserStat(username, field, delta = 1) {
+  const users = DB.get('users', []);
+  const user = users.find(u => u.username === username);
+  if (user) {
+    user[field] = (user[field] || 0) + delta;
+    DB.set('users', users);
+  }
 }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+/* ============================================================
+   PROFILE + AVATAR UPLOAD
+   ============================================================ */
+function showProfile() {
+  if (!currentUser) return;
+  const users = DB.get('users', []);
+  const user = users.find(u => u.username === currentUser.username);
+  if (!user) return;
 
-function emptyState(emoji, title, desc, btnAction, btnText) {
-  return `
-    <div class="empty-state" style="grid-column: 1 / -1;">
-      <span class="emoji">${emoji}</span>
-      <h3>${title}</h3>
-      <p>${desc}</p>
-      ${btnAction ? `<button class="btn btn-primary" onclick="${btnAction}">${btnText}</button>` : ''}
+  const posts = DB.get('posts', []).filter(p => p.author === currentUser.username).length;
+  const projects = DB.get('projects', []).filter(p => p.author === currentUser.username).length;
+  const tutorials = DB.get('tutorials', []).filter(t2 => t2.author === currentUser.username).length;
+
+  const avatarContent = user.avatar
+    ? `<img src="${user.avatar}" alt="avatar">`
+    : escapeHtml(currentUser.username[0].toUpperCase());
+
+  document.getElementById('profileContent').innerHTML = `
+    <div class="profile-header">
+      <div class="avatar-upload" onclick="document.getElementById('avatarInput').click()">
+        <div class="avatar xl">${avatarContent}</div>
+        <div class="avatar-upload-overlay">${ICONS.camera}</div>
+        <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+      </div>
+      <div>
+        <h2 style="margin: 0; color: var(--text-strong);">${escapeHtml(currentUser.username)}</h2>
+        <p style="color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem;">
+          ${t('profile.memberSince')} ${new Date(user.joined).toLocaleDateString(currentLang === 'fa' ? 'fa-IR' : 'en-US')}
+        </p>
+      </div>
     </div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; margin-bottom: 1.3rem;">
+      <div class="stat-card"><div class="stat-number">${toLocaleNum(posts)}</div><div class="stat-label">${t('profile.posts')}</div></div>
+      <div class="stat-card"><div class="stat-number">${toLocaleNum(projects)}</div><div class="stat-label">${t('profile.projects')}</div></div>
+      <div class="stat-card"><div class="stat-number">${toLocaleNum(tutorials)}</div><div class="stat-label">${t('profile.tutorials')}</div></div>
+      <div class="stat-card"><div class="stat-number">${toLocaleNum(user.likes || 0)}</div><div class="stat-label">${t('profile.likes')}</div></div>
+    </div>
+    <button class="btn btn-danger btn-block" onclick="logout(); closeModal('profileModal')">
+      ${t('profile.logout')}
+    </button>
   `;
+  openModal('profileModal');
+}
+
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 500 * 1024) return showToast(currentLang === 'fa' ? 'حجم تصویر باید کمتر از ۵۰۰KB باشد' : 'Image must be under 500KB', 'error');
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const users = DB.get('users', []);
+    const user = users.find(u => u.username === currentUser.username);
+    if (user) {
+      user.avatar = e.target.result;
+      DB.set('users', users);
+      showProfile();
+      renderNavActions();
+      renderAll();
+      showToast(t('success.avatarUpdated'), 'success');
+    }
+  };
+  reader.readAsDataURL(file);
 }
 
 /* ============================================================
@@ -2052,8 +3388,31 @@ function renderAll() {
 /* ============================================================
    INIT
    ============================================================ */
-renderAuthState();
+applyTheme();
+applyLanguage();
+renderNavActions();
 renderAll();
+
+// Track post views via IntersectionObserver
+const viewObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const postId = parseInt(entry.target.dataset.postId);
+      if (postId) markPostViewed(postId);
+    }
+  });
+}, { threshold: 0.5 });
+
+const postsObserver = new MutationObserver(() => {
+  document.querySelectorAll('.post[data-post-id]').forEach(el => {
+    if (!el._observed) {
+      el._observed = true;
+      viewObserver.observe(el);
+    }
+  });
+});
+
+postsObserver.observe(document.getElementById('postsList'), { childList: true });
 
 // Enter key for auth
 document.getElementById('authPassword').addEventListener('keydown', e => {
@@ -2061,6 +3420,13 @@ document.getElementById('authPassword').addEventListener('keydown', e => {
 });
 document.getElementById('authUsername').addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('authPassword').focus();
+});
+
+// Close notif panel on outside click
+document.addEventListener('click', e => {
+  const panel = document.getElementById('notifPanel');
+  const notifBtn = e.target.closest('.notif-btn');
+  if (!panel.contains(e.target) && !notifBtn) closeNotifPanel();
 });
 </script>
 </body>
