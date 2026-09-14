@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Player | RobloxDevs IR</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: #0a0a0f; color: #e5e7eb;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .container { max-width: 1000px; width: 100%; }
+  h1 { font-size: 1.4rem; margin-bottom: 1rem; color: #fff; text-align: center; }
+  video {
+    width: 100%; border-radius: 16px;
+    background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .info {
+    margin-top: 1rem; padding: 1rem 1.3rem;
+    background: #16162a; border: 1px solid #2a2a40;
+    border-radius: 14px;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.8rem;
+    font-size: 0.85rem;
+  }
+  .info-item { display: flex; flex-direction: column; }
+  .info-label { color: #9ca3af; font-size: 0.75rem; }
+  .info-value { color: #fff; font-weight: 600; }
+  .error {
+    padding: 3rem 2rem; text-align: center;
+    background: #16162a; border-radius: 16px;
+    border: 1px dashed #ef4444;
+  }
+  .error h2 { color: #ef4444; margin-bottom: 0.5rem; }
+  .error p { color: #9ca3af; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem; padding: 0.7rem 1.3rem;
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    color: white; text-decoration: none;
+    border-radius: 10px; font-weight: 600;
+    font-size: 0.88rem; transition: transform 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+  <div class="container" id="app"></div>
+
+<script>
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const app = document.getElementById('app');
+
+  if (!id) {
+    app.innerHTML = `<div class="error"><h2>خطا</h2><p>شناسه ویدیو یافت نشد.</p><a href="index.html" class="btn">بازگشت به سایت</a></div>`;
+    return;
+  }
+
+  const uploads = JSON.parse(localStorage.getItem('rdi_videoUploads') || '[]');
+  const video = uploads.find(v => v.id === id);
+
+  if (!video) {
+    app.innerHTML = `<div class="error"><h2>ویدیو یافت نشد</h2><p>این ویدیو در مرورگر شما ذخیره نشده است. اگر از دستگاه دیگری باز می‌کنید، لینک کار نمی‌کند.</p><a href="index.html" class="btn">بازگشت به سایت</a></div>`;
+    return;
+  }
+
+  app.innerHTML = `
+    <h1>${video.name}</h1>
+    <video src="${video.data}" controls autoplay></video>
+    <div class="info">
+      <div class="info-item"><span class="info-label">نام</span><span class="info-value">${video.name}</span></div>
+      <div class="info-item"><span class="info-label">حجم</span><span class="info-value">${formatBytes(video.size)}</span></div>
+      <div class="info-item"><span class="info-label">فرمت</span><span class="info-value">${video.type}</span></div>
+      <div class="info-item"><span class="info-label">تاریخ آپلود</span><span class="info-value">${new Date(video.date).toLocaleDateString('fa-IR')}</span></div>
+    </div>
+    <a href="index.html" class="btn">بازگشت به سایت</a>
+  `;
+});
+</script>
+</body>
+</html>
