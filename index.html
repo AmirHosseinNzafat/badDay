@@ -21,6 +21,25 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+  <!-- ===== Notification Popup ===== -->
+<div class="notif-overlay" id="notifOverlay">
+  <div class="notif-box">
+    <div class="notif-icon">🎮</div>
+    <h3 class="notif-title">به دنیای روبلاکس‌سازان خوش اومدی!</h3>
+    <p class="notif-text">
+      می‌خوای وارد بخش <strong>بازی‌سازان روبلاکس ایران</strong> بشی؟
+    </p>
+    <div class="notif-buttons">
+      <button class="notif-btn notif-btn-yes" onclick="goToRoblox()">
+        ✨ بله، بریم!
+      </button>
+      <button class="notif-btn notif-btn-no" onclick="closeNotif()">
+        📖 خیر، همین‌جا بمونم
+      </button>
+    </div>
+    <button class="notif-close" onclick="closeNotif()" title="بستن">✕</button>
+  </div>
+</div>
 body{
   font-family:'Vazirmatn',sans-serif;
   background:var(--bg);
