@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کوروش - حماسه‌ای از معدن تا بهشت</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --bg2:#12121a;
+  --card:#1a1a24;
+  --text:#e8e8f0;
+  --muted:#8888a0;
+  --accent:#c41e3a;
+  --accent2:#8b0000;
+  --gold:#d4af37;
+  --border:#2a2a3a;
+  --shadow:0 8px 32px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Vazirmatn',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:2;
+  overflow-x:hidden;
+}
+
+/* Progress Bar */
+#progress{
+  position:fixed;top:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  width:0%;z-index:1000;transition:width .1s;
+}
+
+/* Header */
+header{
+  position:fixed;top:0;left:0;right:0;
+  background:rgba(10,10,15,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  z-index:999;
+  padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:.3s;
+}
+header h1{
+  font-size:1.5rem;font-weight:900;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+header nav{display:flex;gap:1.5rem}
+header nav a{
+  color:var(--muted);text-decoration:none;font-weight:500;
+  transition:.3s;font-size:.95rem;
+}
+header nav a:hover{color:var(--accent)}
+
+/* Hero */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:2rem;
+  position:relative;
+  background:
+    radial-gradient(ellipse at 30% 20%,rgba(196,30,58,.15),transparent 60%),
+    radial-gradient(ellipse at 70% 80%,rgba(139,0,0,.1),transparent 60%),
+    var(--bg);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.01) 2px,rgba(255,255,255,.01) 4px);
+  pointer-events:none;
+}
+.hero h2{
+  font-size:clamp(2.5rem,8vw,5rem);
+  font-weight:900;line-height:1.3;
+  margin-bottom:1rem;
+  background:linear-gradient(135deg,#fff,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:fadeUp 1.5s ease;
+}
+.hero p{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:var(--muted);max-width:700px;
+  animation:fadeUp 1.5s ease .3s both;
+}
+.hero .scroll-hint{
+  position:absolute;bottom:2rem;
+  color:var(--muted);font-size:.9rem;
+  animation:bounce 2s infinite;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+/* Layout */
+.container{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:3rem;
+  max-width:1400px;
+  margin:0 auto;
+  padding:4rem 2rem;
+}
+@media(max-width:900px){
+  .container{grid-template-columns:1fr;padding:2rem 1rem}
+}
+
+/* Sidebar TOC */
+.toc{
+  position:sticky;top:100px;
+  height:fit-content;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.5rem;
+  max-height:calc(100vh - 140px);
+  overflow-y:auto;
+}
+.toc h3{
+  font-size:1rem;color:var(--gold);
+  margin-bottom:1rem;
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--border);
+}
+.toc a{
+  display:block;color:var(--muted);
+  text-decoration:none;padding:.5rem .75rem;
+  border-radius:8px;font-size:.85rem;
+  transition:.2s;margin-bottom:.25rem;
+  border-right:3px solid transparent;
+}
+.toc a:hover,.toc a.active{
+  background:rgba(196,30,58,.1);
+  color:var(--text);
+  border-right-color:var(--accent);
+}
+
+/* Content */
+.content{max-width:800px}
+.content h2{
+  font-size:2rem;font-weight:800;
+  margin:3rem 0 1.5rem;
+  padding-bottom:.75rem;
+  border-bottom:2px solid var(--accent);
+  color:var(--gold);
+  scroll-margin-top:100px;
+}
+.content h2:first-child{margin-top:0}
+.content h3{
+  font-size:1.3rem;font-weight:700;
+  margin:2rem 0 1rem;
+  color:var(--accent);
+  scroll-margin-top:100px;
+}
+.content p{
+  margin-bottom:1.25rem;
+  color:#c8c8d8;
+  font-size:1.05rem;
+}
+.content p strong{color:var(--gold);font-weight:700}
+.content p em{color:var(--accent);font-style:normal;font-weight:600}
+.quote{
+  border-right:4px solid var(--accent);
+  background:rgba(196,30,58,.05);
+  padding:1rem 1.5rem;
+  margin:1.5rem 0;
+  border-radius:0 12px 12px 0;
+  font-style:italic;
+  color:var(--muted);
+}
+
+/* Character Cards */
+.characters{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.5rem;
+  margin:2rem 0;
+}
+.char-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.4s;
+  cursor:pointer;
+}
+.char-card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:var(--shadow);
+}
+.char-img{
+  height:220px;
+  background:linear-gradient(135deg,var(--bg2),var(--card));
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;
+  position:relative;
+  overflow:hidden;
+}
+.char-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
+}
+.char-info{padding:1rem}
+.char-info h4{font-size:1rem;margin-bottom:.25rem;color:var(--gold)}
+.char-info span{font-size:.8rem;color:var(--muted)}
+
+/* Chapters */
+.chapter{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem;
+  margin-bottom:2rem;
+  transition:.4s;
+}
+.chapter:hover{border-color:rgba(196,30,58,.4)}
+.chapter-num{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;font-weight:800;
+  padding:.25rem .75rem;border-radius:20px;
+  font-size:.8rem;margin-bottom:1rem;
+}
+
+/* Stats */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1rem;
+  margin:2rem 0;
+}
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.5rem 1rem;
+  text-align:center;
+  transition:.3s;
+}
+.stat:hover{border-color:var(--gold);transform:scale(1.05)}
+.stat-num{
+  font-size:2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{font-size:.85rem;color:var(--muted);margin-top:.25rem}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:4rem 2rem;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+}
+footer .heart{color:var(--accent)}
+
+/* Theme toggle */
+#themeToggle{
+  background:none;border:1px solid var(--border);
+  color:var(--text);padding:.5rem .75rem;
+  border-radius:8px;cursor:pointer;
+  font-family:inherit;font-size:.9rem;
+  transition:.3s;
+}
+#themeToggle:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Light theme */
+body.light{
+  --bg:#f5f5f0;
+  --bg2:#eaeae5;
+  --card:#ffffff;
+  --text:#1a1a24;
+  --muted:#666680;
+  --border:#d0d0d8;
+}
+body.light header{background:rgba(245,245,240,.9)}
+body.light .content p{color:#333344}
+
+/* Animations on scroll */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:all .8s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header>
+  <h1>کوروش</h1>
+  <nav>
+    <a href="#hero">شروع</a>
+    <a href="#characters">شخصیت‌ها</a>
+    <a href="#story">داستان</a>
+    <a href="#end">پایان</a>
+    <button id="themeToggle">🌙</button>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <h2>کوروش<br>حماسه‌ای از معدن تا بهشت</h2>
+  <p>داستان پسری که از سیاه‌چال معدن گورلاک تا قله بهشت رفت. از قاتل ۱۰۰,۰۰۰ نفر تا ناجی ۲۰۰,۰۰۰ نفر. از امیر تا کوروش. از جهنم تا آرامش.</p>
+  <div class="scroll-hint">↓ اسکرول کن ↓</div>
+</section>
+
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="toc">
+    <h3>فهرست</h3>
+    <a href="#part1">بخش اول: امیر</a>
+    <a href="#f1">۱. معدن گورلاک</a>
+    <a href="#f2">۲. دهکده گِلین‌ها</a>
+    <a href="#f3">۳. خارا و یلدا</a>
+    <a href="#f4">۴. پرشیانا</a>
+    <a href="#part2">بخش دوم: کوروش</a>
+    <a href="#f5">۵. شروع دوباره</a>
+    <a href="#f6">۶. مالفاس</a>
+    <a href="#f7">۷. ۲۰ سال صلح</a>
+    <a href="#part3">بخش سوم: ۴ معبد</a>
+    <a href="#f8">۸. معبد باد</a>
+    <a href="#f9">۹. معبد آتش</a>
+    <a href="#f10">۱۰. معبد آب</a>
+    <a href="#f11">۱۱. معبد خاک</a>
+    <a href="#part4">بخش چهارم: پایان</a>
+    <a href="#f12">۱۲. مرگ</a>
+    <a href="#f13">۱۳. جهنم</a>
+    <a href="#f14">۱۴. بهشت</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <section id="characters" class="reveal">
+      <h2>شخصیت‌های اصلی</h2>
+      <div class="characters">
+        <div class="char-card">
+          <div class="char-img">👤</div>
+          <div class="char-info">
+            <h4>کوروش (امیر)</h4>
+            <span>قهرمان اصلی</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">👹</div>
+          <div class="char-info">
+            <h4>گورلاک</h4>
+            <span>رئیس معدن</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">🧝‍♀️</div>
+          <div class="char-info">
+            <h4>ماکسیما</h4>
+            <span>عشق اصلی</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">👿</div>
+          <div class="char-info">
+            <h4>مالفاس</h4>
+            <span>شیطان درون</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">🧚</div>
+          <div class="char-info">
+            <h4>لیانا</h4>
+            <span>دختر گِلین</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">👼</div>
+          <div class="char-info">
+            <h4>نورا</h4>
+            <span>حامل فرشته</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">🧛</div>
+          <div class="char-info">
+            <h4>دلیله</h4>
+            <span>نیمه‌هیولا</span>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-img">✨</div>
+          <div class="char-info">
+            <h4>نفلیم</h4>
+            <span>الهه تعادل</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="part1" class="reveal">
+      <h2>بخش اول: زندگی اول - امیر آهنگر</h2>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-num">۱۰۰,۰۰۰</div><div class="stat-label">کشته‌شده</div></div>
+        <div class="stat"><div class="stat-num">۱۰۰۰</div><div class="stat-label">سال زندگی</div></div>
+        <div class="stat"><div class="stat-num">۲۰</div><div class="stat-label">فرزند</div></div>
+        <div class="stat"><div class="stat-num">۴</div><div class="stat-label">معبد</div></div>
+      </div>
+
+      <div id="f1" class="chapter">
+        <span class="chapter-num">فصل ۱</span>
+        <h3>معدن گورلاک</h3>
+        <p>همه چیز از یه معدن تاریک شروع شد. معدن شماره ۷، تحت کنترل گابلین‌ها به رهبری <strong>گورلاک</strong>. من اونجا یه برده بودم. یه پسر ۲۰ ساله به اسم <em>امیر آهنگر</em>. سرکارگر معدن.</p>
+        <div class="quote">گابلین‌ها با شلاق ما رو می‌زدن. هر روز مرگ رو می‌دیدیم. هر روز گرسنگی و تحقیر.</div>
+        <p>اما من فرق داشتم. من معدن رو منفجر کردم. گورلاک رو کشتم. نگهبان‌ها رو کشتم. برده‌ها رو آزاد کردم. و فرار کردم.</p>
+      </div>
+
+      <div id="f2" class="chapter">
+        <span class="chapter-num">فصل ۲</span>
+        <h3>دهکده گِلین‌ها - لیانا و کای</h3>
+        <p>به دهکده <strong>گِلین‌ها</strong> رسیدم. اونجا با <em>لیانا</em> و <em>کای</em> آشنا شدم. <strong>گالاموس</strong> رهبر دهکده بود. بهم اعتماد کردن، غذا دادن، جا دادن.</p>
+        <p>اما همه چی دروغ بود. گالاموس با <em>SAE</em> همکاری می‌کرد. لیانا و کای مجبور بودن بهم خیانت کنن. دهکده رو آتیش زدم.</p>
+      </div>
+
+      <div id="f3" class="chapter">
+        <span class="chapter-num">فصل ۳</span>
+        <h3>خارا و یلدا</h3>
+        <p>به <strong>خارا</strong> (شهر دورف‌ها) رفتم. اونجا با <em>یلدا</em> (دختر نیمه‌دورف) آشنا شدم. توی مسافرخونه «سنگ و سپر» کار می‌کرد.</p>
+      </div>
+
+      <div id="f4" class="chapter">
+        <span class="chapter-num">فصل ۴</span>
+        <h3>پرشیانا - ظهور و سقوط</h3>
+        <p>با ارتشم پرشیانا رو ساختم. از <strong>شهر آزاد</strong> شروع کردیم. معادن گابلین‌ها رو آزاد کردیم. برده‌ها رو نجات دادیم.</p>
+        <div class="quote">اما من... من توی این راه دیوونه شدم. ۱۰۰,۰۰۰ نفر رو کشتم. کل شهرها رو با دینامیت منفجر کردم. خودکشی کردم.</div>
+      </div>
+    </section>
+
+    <section id="part2" class="reveal">
+      <h2>بخش دوم: زندگی دوم - کوروش</h2>
+
+      <div id="f5" class="chapter">
+        <span class="chapter-num">فصل ۵</span>
+        <h3>شروع دوباره</h3>
+        <p><strong>نفلیم</strong> (الهه تعادل) منو برگردوند. گفت «برو و جبران کن.» با اسم <em>کوروش</em> برگشتم.</p>
+      </div>
+
+      <div id="f6" class="chapter">
+        <span class="chapter-num">فصل ۶</span>
+        <h3>مالفاس - شیطان درون</h3>
+        <p>توی یه معبد باستانی، صندوقی رو باز کردم و <strong>مالفاس</strong> (شیطان ۱۰۰۰ ساله) آزاد شد. باهاش معامله کردم. موهام سفید برفی شد. چشم چپم قرمز شیطانی.</p>
+      </div>
+
+      <div id="f7" class="chapter">
+        <span class="chapter-num">فصل ۷</span>
+        <h3>۲۰ سال صلح</h3>
+        <p>با <strong>ماکسیما</strong> ازدواج کردم. جزیره شخصی خودمون رو ساختیم - <em>کوروش توپیا</em>. <strong>۲۰ تا بچه</strong> داشتیم.</p>
+      </div>
+    </section>
+
+    <section id="part3" class="reveal">
+      <h2>بخش سوم: مأموریت نهایی - ۴ معبد</h2>
+
+      <div id="f8" class="chapter">
+        <span class="chapter-num">فصل ۸</span>
+        <h3>معبد باد - سیروکو</h3>
+        <p>نگهبان: <strong>سیروکو</strong>. با تکنیک «گسترش قلمرو - فضای بی‌نهایت» شکستش دادم. ۳ روز بیهوش شدم.</p>
+      </div>
+
+      <div id="f9" class="chapter">
+        <span class="chapter-num">فصل ۹</span>
+        <h3>معبد آتش - ایگنیس</h3>
+        <p>نگهبان: <strong>ایگنیس</strong> (الف آتشین). با مشت به تخم‌هاش شکستش دادم. <em>دلیله</em> انتقام مادرش رو گرفت.</p>
+      </div>
+
+      <div id="f10" class="chapter">
+        <span class="chapter-num">فصل ۱۰</span>
+        <h3>معبد آب - کراکن</h3>
+        <p>نگهبان: <strong>کراکن</strong> (هیولای دریایی ۲۰۰۰ ساله). با «مشت بتک ۶۰۰ هزار تن» شکستش دادم.</p>
+      </div>
+
+      <div id="f11" class="chapter">
+        <span class="chapter-num">فصل ۱۱</span>
+        <h3>معبد خاک - نورا</h3>
+        <p>نگهبان: <strong>نورا</strong> (حامل فرشته). آخرین نبرد: مشت به مشت. من برنده شدم. معبد خاک فعال شد.</p>
+      </div>
+    </section>
+
+    <section id="part4" class="reveal">
+      <h2>بخش چهارم: پایان</h2>
+
+      <div id="f12" class="chapter">
+        <span class="chapter-num">فصل ۱۲</span>
+        <h3>مرگ</h3>
+        <p>شکاف‌ها بسته شدن. دنیا برگشت به حالت ۲۰۲۴. من مُردم. استخون‌هام له شده بود.</p>
+      </div>
+
+      <div id="f13" class="chapter">
+        <span class="chapter-num">فصل ۱۳</span>
+        <h3>جهنم</h3>
+        <p>به جهنم رفتم. ۱۰۰۰ سال سوختم. تا اینکه خدا بخشیدم.</p>
+      </div>
+
+      <div id="f14" class="chapter">
+        <span class="chapter-num">فصل ۱۴</span>
+        <h3>بهشت</h3>
+        <p>وارد بهشت شدم. ماکسیما اونجا بود. ۲۰ تا بچه‌م. همه جوون. همه خوشحال.</p>
+        <div class="quote">تموم شد. ۱۰۰۰ سال زندگی. از برده معدن تا پادشاه پرشیانا. از قاتل ۱۰۰,۰۰۰ نفر تا ناجی ۲۰۰,۰۰۰ نفر. از جهنم تا بهشت. و حالا... آرومم.</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer id="end">
+  <p>داستان کوروش - حماسه‌ای از معدن تا بهشت</p>
+  <p style="margin-top:1rem">ساخته‌شده با <span class="heart">♥</span> در {تاریخ}</p>
+</footer>
+
+<script>
+// Progress bar
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progress.style.width = scrolled + '%';
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active TOC
+const tocLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('[id^="f"], [id^="part"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 150) current = s.id;
+  });
+  tocLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
