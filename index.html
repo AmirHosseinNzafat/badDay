@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>کوروش - حماسه‌ای از معدن تا بهشت</title>
+<meta name="description" content="داستان کوروش، از برده معدن گورلاک تا ناجی ۲۰۰,۰۰۰ نفر. حماسه‌ای از جهنم تا بهشت.">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -19,6 +20,7 @@
   --shadow:0 8px 32px rgba(0,0,0,.6);
 }
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   font-family:'Vazirmatn',sans-serif;
   background:var(--bg);
@@ -43,7 +45,6 @@ header{
   z-index:999;
   padding:1rem 2rem;
   display:flex;justify-content:space-between;align-items:center;
-  transition:.3s;
 }
 header h1{
   font-size:1.5rem;font-weight:900;
@@ -51,12 +52,15 @@ header h1{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
 }
-header nav{display:flex;gap:1.5rem}
+header nav{display:flex;gap:1.5rem;align-items:center}
 header nav a{
   color:var(--muted);text-decoration:none;font-weight:500;
   transition:.3s;font-size:.95rem;
 }
 header nav a:hover{color:var(--accent)}
+@media(max-width:700px){
+  header nav a:not(:last-child){display:none}
+}
 
 /* Hero */
 .hero{
@@ -70,12 +74,6 @@ header nav a:hover{color:var(--accent)}
     radial-gradient(ellipse at 30% 20%,rgba(196,30,58,.15),transparent 60%),
     radial-gradient(ellipse at 70% 80%,rgba(139,0,0,.1),transparent 60%),
     var(--bg);
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.01) 2px,rgba(255,255,255,.01) 4px);
-  pointer-events:none;
 }
 .hero h2{
   font-size:clamp(2.5rem,8vw,5rem);
@@ -123,6 +121,7 @@ header nav a:hover{color:var(--accent)}
   max-height:calc(100vh - 140px);
   overflow-y:auto;
 }
+@media(max-width:900px){.toc{position:static;max-height:none}}
 .toc h3{
   font-size:1rem;color:var(--gold);
   margin-bottom:1rem;
@@ -152,7 +151,6 @@ header nav a:hover{color:var(--accent)}
   color:var(--gold);
   scroll-margin-top:100px;
 }
-.content h2:first-child{margin-top:0}
 .content h3{
   font-size:1.3rem;font-weight:700;
   margin:2rem 0 1rem;
@@ -197,20 +195,29 @@ header nav a:hover{color:var(--accent)}
   box-shadow:var(--shadow);
 }
 .char-img{
-  height:220px;
+  height:250px;
   background:linear-gradient(135deg,var(--bg2),var(--card));
-  display:flex;align-items:center;justify-content:center;
-  font-size:4rem;
   position:relative;
   overflow:hidden;
 }
+.char-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:.6s;
+  filter:grayscale(30%) contrast(1.1);
+}
+.char-card:hover .char-img img{
+  transform:scale(1.08);
+  filter:grayscale(0%) contrast(1.2);
+}
 .char-img::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.7));
+  background:linear-gradient(180deg,transparent 50%,rgba(10,10,15,.95));
+  pointer-events:none;
 }
-.char-info{padding:1rem}
-.char-info h4{font-size:1rem;margin-bottom:.25rem;color:var(--gold)}
-.char-info span{font-size:.8rem;color:var(--muted)}
+.char-info{padding:1rem;position:relative;z-index:2;margin-top:-60px}
+.char-info h4{font-size:1.1rem;margin-bottom:.25rem;color:var(--gold)}
+.char-info span{font-size:.85rem;color:var(--muted)}
 
 /* Chapters */
 .chapter{
@@ -284,8 +291,9 @@ body.light{
 }
 body.light header{background:rgba(245,245,240,.9)}
 body.light .content p{color:#333344}
+body.light .char-img::after{background:linear-gradient(180deg,transparent 50%,rgba(255,255,255,.95))}
 
-/* Animations on scroll */
+/* Animations */
 .reveal{
   opacity:0;transform:translateY(30px);
   transition:all .8s cubic-bezier(.16,1,.3,1);
@@ -308,7 +316,6 @@ body.light .content p{color:#333344}
   </nav>
 </header>
 
-<!-- Hero -->
 <section class="hero" id="hero">
   <h2>کوروش<br>حماسه‌ای از معدن تا بهشت</h2>
   <p>داستان پسری که از سیاه‌چال معدن گورلاک تا قله بهشت رفت. از قاتل ۱۰۰,۰۰۰ نفر تا ناجی ۲۰۰,۰۰۰ نفر. از امیر تا کوروش. از جهنم تا آرامش.</p>
@@ -316,7 +323,6 @@ body.light .content p{color:#333344}
 </section>
 
 <div class="container">
-  <!-- Sidebar -->
   <aside class="toc">
     <h3>فهرست</h3>
     <a href="#part1">بخش اول: امیر</a>
@@ -339,63 +345,62 @@ body.light .content p{color:#333344}
     <a href="#f14">۱۴. بهشت</a>
   </aside>
 
-  <!-- Main Content -->
   <main class="content">
 
     <section id="characters" class="reveal">
       <h2>شخصیت‌های اصلی</h2>
       <div class="characters">
         <div class="char-card">
-          <div class="char-img">👤</div>
+          <div class="char-img"><img src="images/korush.jpg" alt="کوروش" onerror="this.style.display='none';this.parentElement.innerHTML='👤';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>کوروش (امیر)</h4>
             <span>قهرمان اصلی</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">👹</div>
+          <div class="char-img"><img src="images/gorlak.jpg" alt="گورلاک" onerror="this.style.display='none';this.parentElement.innerHTML='👹';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>گورلاک</h4>
             <span>رئیس معدن</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">🧝‍♀️</div>
+          <div class="char-img"><img src="images/maxima.jpg" alt="ماکسیما" onerror="this.style.display='none';this.parentElement.innerHTML='🧝‍♀️';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>ماکسیما</h4>
             <span>عشق اصلی</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">👿</div>
+          <div class="char-img"><img src="images/malfas.jpg" alt="مالفاس" onerror="this.style.display='none';this.parentElement.innerHTML='👿';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>مالفاس</h4>
             <span>شیطان درون</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">🧚</div>
+          <div class="char-img"><img src="images/liana.jpg" alt="لیانا" onerror="this.style.display='none';this.parentElement.innerHTML='🧚';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>لیانا</h4>
             <span>دختر گِلین</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">👼</div>
+          <div class="char-img"><img src="images/nora.jpg" alt="نورا" onerror="this.style.display='none';this.parentElement.innerHTML='👼';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>نورا</h4>
             <span>حامل فرشته</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">🧛</div>
+          <div class="char-img"><img src="images/dalileh.jpg" alt="دلیله" onerror="this.style.display='none';this.parentElement.innerHTML='🧛';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>دلیله</h4>
             <span>نیمه‌هیولا</span>
           </div>
         </div>
         <div class="char-card">
-          <div class="char-img">✨</div>
+          <div class="char-img"><img src="images/naflim.jpg" alt="نفلیم" onerror="this.style.display='none';this.parentElement.innerHTML='✨';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';this.parentElement.style.fontSize='4rem'"></div>
           <div class="char-info">
             <h4>نفلیم</h4>
             <span>الهه تعادل</span>
@@ -404,6 +409,7 @@ body.light .content p{color:#333344}
       </div>
     </section>
 
+    <section id="story">
     <section id="part1" class="reveal">
       <h2>بخش اول: زندگی اول - امیر آهنگر</h2>
 
@@ -515,17 +521,17 @@ body.light .content p{color:#333344}
         <div class="quote">تموم شد. ۱۰۰۰ سال زندگی. از برده معدن تا پادشاه پرشیانا. از قاتل ۱۰۰,۰۰۰ نفر تا ناجی ۲۰۰,۰۰۰ نفر. از جهنم تا بهشت. و حالا... آرومم.</div>
       </div>
     </section>
+    </section>
 
   </main>
 </div>
 
 <footer id="end">
   <p>داستان کوروش - حماسه‌ای از معدن تا بهشت</p>
-  <p style="margin-top:1rem">ساخته‌شده با <span class="heart">♥</span> در {تاریخ}</p>
+  <p style="margin-top:1rem">ساخته‌شده با <span class="heart">♥</span></p>
 </footer>
 
 <script>
-// Progress bar
 const progress = document.getElementById('progress');
 window.addEventListener('scroll', () => {
   const h = document.documentElement;
@@ -533,7 +539,6 @@ window.addEventListener('scroll', () => {
   progress.style.width = scrolled + '%';
 });
 
-// Reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('visible');
@@ -541,7 +546,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Active TOC
 const tocLinks = document.querySelectorAll('.toc a');
 const sections = document.querySelectorAll('[id^="f"], [id^="part"]');
 window.addEventListener('scroll', () => {
@@ -554,14 +558,12 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light');
   themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
 });
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
